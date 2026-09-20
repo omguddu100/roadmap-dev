@@ -1,0 +1,1938 @@
+{
+  "roadmap": [
+    {
+      "id": "phase1",
+      "num": "1",
+      "title": "JavaScript Fundamentals",
+      "goal": "Build a strong foundation in JavaScript syntax, data types, operators, control flow, functions, arrays and objects.",
+      "topics": [
+        {
+          "id": "js-basics",
+          "title": "JavaScript Basics & Syntax",
+          "priority": "Basic",
+          "theory": [
+            "What is JavaScript?",
+            "JavaScript runtime and execution environment",
+            "ECMAScript and JavaScript versions",
+            "Variables and declarations",
+            "var, let and const",
+            "Primitive data types",
+            "Reference data types",
+            "Dynamic typing",
+            "Comments and statements",
+            "Strict mode"
+          ],
+          "hands": [
+            "Create variables using var, let and const.",
+            "Practice all JavaScript primitive data types.",
+            "Create examples demonstrating dynamic typing.",
+            "Write small programs using strict mode."
+          ],
+          "interview": [
+            "What is JavaScript?",
+            "What is ECMAScript?",
+            "What are the primitive data types in JavaScript?",
+            "What is dynamic typing?",
+            "var vs let vs const?",
+            "What is strict mode?"
+          ]
+        },
+        {
+          "id": "js-operators",
+          "title": "Operators & Type Coercion",
+          "priority": "Basic",
+          "theory": [
+            "Arithmetic operators",
+            "Assignment operators",
+            "Comparison operators",
+            "Logical operators",
+            "Unary operators",
+            "Ternary operator",
+            "Nullish coalescing operator",
+            "Optional chaining",
+            "typeof",
+            "instanceof",
+            "Implicit type coercion",
+            "Explicit type conversion",
+            "== vs ==="
+          ],
+          "hands": [
+            "Predict the output of 30 type-coercion examples.",
+            "Practice == and ===.",
+            "Build examples using optional chaining and nullish coalescing.",
+            "Convert values between strings, numbers and booleans."
+          ],
+          "interview": [
+            "== vs ===?",
+            "What is type coercion?",
+            "What is the difference between null and undefined?",
+            "What does typeof return for null?",
+            "What is the difference between || and ???"
+          ]
+        },
+        {
+          "id": "js-control-flow",
+          "title": "Control Flow & Loops",
+          "priority": "Basic",
+          "theory": [
+            "if, else if and else",
+            "switch",
+            "for loop",
+            "while loop",
+            "do while loop",
+            "for...of",
+            "for...in",
+            "break and continue",
+            "Nested loops"
+          ],
+          "hands": [
+            "Solve 20 loop-based problems.",
+            "Practice nested loops.",
+            "Convert traditional loops to for...of.",
+            "Create programs using switch statements."
+          ],
+          "interview": [
+            "for...of vs for...in?",
+            "When should you use while instead of for?",
+            "What does break do?",
+            "What does continue do?"
+          ]
+        },
+        {
+          "id": "js-functions-basic",
+          "title": "Functions Fundamentals",
+          "priority": "Basic",
+          "theory": [
+            "Function declarations",
+            "Function expressions",
+            "Arrow functions",
+            "Parameters and arguments",
+            "Default parameters",
+            "Rest parameters",
+            "Return values",
+            "Callback functions",
+            "Anonymous functions"
+          ],
+          "hands": [
+            "Create functions using declaration, expression and arrow syntax.",
+            "Build reusable utility functions.",
+            "Practice default and rest parameters.",
+            "Create callback-based functions."
+          ],
+          "interview": [
+            "Function declaration vs function expression?",
+            "Arrow function vs normal function?",
+            "Parameter vs argument?",
+            "What is a callback function?",
+            "Can an arrow function be used as a constructor?"
+          ]
+        },
+        {
+          "id": "js-arrays-objects",
+          "title": "Arrays & Objects",
+          "priority": "Basic",
+          "theory": [
+            "Array creation and manipulation",
+            "Object creation",
+            "Properties and methods",
+            "Nested arrays and objects",
+            "Destructuring",
+            "Spread syntax",
+            "Rest syntax",
+            "Object.keys",
+            "Object.values",
+            "Object.entries"
+          ],
+          "hands": [
+            "Create and manipulate nested objects.",
+            "Transform arrays of objects.",
+            "Practice object and array destructuring.",
+            "Build a small data-processing utility."
+          ],
+          "interview": [
+            "Array vs object?",
+            "How does object property lookup work?",
+            "What is destructuring?",
+            "Spread vs rest?",
+            "What is the difference between copying an object and referencing it?"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "phase2",
+      "num": "2",
+      "title": "Scope, Execution Context & Hoisting",
+      "goal": "Understand how JavaScript code is executed and how variables and functions are resolved.",
+      "topics": [
+        {
+          "id": "js-execution-context",
+          "title": "Execution Context",
+          "priority": "Intermediate",
+          "theory": [
+            "Global execution context",
+            "Function execution context",
+            "Execution context creation",
+            "Execution context execution phase",
+            "Lexical environment",
+            "Variable environment",
+            "Environment records",
+            "Call stack"
+          ],
+          "hands": [
+            "Draw execution contexts for nested function calls.",
+            "Trace the call stack manually.",
+            "Predict variable availability at each execution stage."
+          ],
+          "interview": [
+            "What is an execution context?",
+            "What happens when a function is called?",
+            "What is the call stack?",
+            "What is a lexical environment?"
+          ]
+        },
+        {
+          "id": "js-scope",
+          "title": "Scope & Scope Chain",
+          "priority": "Intermediate",
+          "theory": [
+            "Global scope",
+            "Function scope",
+            "Block scope",
+            "Lexical scope",
+            "Scope chain",
+            "Nested scopes",
+            "Variable lookup"
+          ],
+          "hands": [
+            "Create nested scope examples.",
+            "Predict variable resolution in nested functions.",
+            "Compare var function scope with let and const block scope."
+          ],
+          "interview": [
+            "What is lexical scope?",
+            "What is the scope chain?",
+            "Function scope vs block scope?",
+            "How does JavaScript find a variable?"
+          ]
+        },
+        {
+          "id": "js-hoisting",
+          "title": "Hoisting & Temporal Dead Zone",
+          "priority": "Intermediate",
+          "theory": [
+            "Variable hoisting",
+            "Function hoisting",
+            "var initialization",
+            "let and const hoisting",
+            "Temporal Dead Zone",
+            "Function declaration hoisting",
+            "Function expression behavior"
+          ],
+          "hands": [
+            "Predict output for 30 hoisting examples.",
+            "Create TDZ examples.",
+            "Compare function declarations and function expressions before initialization."
+          ],
+          "interview": [
+            "What is hoisting?",
+            "Is let hoisted?",
+            "What is the Temporal Dead Zone?",
+            "Why can a function declaration be called before its definition?"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "phase3",
+      "num": "3",
+      "title": "Closures, Functions & Functional Programming",
+      "goal": "Master advanced function behavior and functional programming concepts used extensively in modern JavaScript.",
+      "topics": [
+        {
+          "id": "js-closures",
+          "title": "Closures",
+          "priority": "Intermediate",
+          "theory": [
+            "Closure definition",
+            "Lexical environment preservation",
+            "Private state",
+            "Data encapsulation",
+            "Closures in callbacks",
+            "Closures inside loops",
+            "Closures and memory"
+          ],
+          "code": "function counter() {\n  let count = 0;\n  return () => ++count;\n}\n\nconst increment = counter();\nincrement(); // 1\nincrement(); // 2",
+          "hands": [
+            "Build counter().",
+            "Build once().",
+            "Build memoize().",
+            "Create a closure-based private state implementation.",
+            "Solve closure output questions."
+          ],
+          "interview": [
+            "What is a closure?",
+            "Why does the returned function remember count?",
+            "Where are closures useful?",
+            "How can closures cause memory retention?"
+          ]
+        },
+        {
+          "id": "js-higher-order",
+          "title": "Higher-Order Functions",
+          "priority": "Intermediate",
+          "theory": [
+            "Functions as first-class values",
+            "Passing functions as arguments",
+            "Returning functions",
+            "Higher-order functions",
+            "Callbacks",
+            "Function composition"
+          ],
+          "hands": [
+            "Create custom map(), filter() and reduce().",
+            "Build reusable higher-order utilities.",
+            "Create a function composition utility."
+          ],
+          "interview": [
+            "What is a higher-order function?",
+            "What does first-class function mean?",
+            "What is function composition?"
+          ]
+        },
+        {
+          "id": "js-currying",
+          "title": "Currying & Partial Application",
+          "priority": "Intermediate",
+          "theory": [
+            "Currying",
+            "Partial application",
+            "Function factories",
+            "Closures and currying",
+            "Composition"
+          ],
+          "hands": [
+            "Implement a curry() function.",
+            "Create partially applied functions.",
+            "Build a reusable validation utility using currying."
+          ],
+          "interview": [
+            "What is currying?",
+            "Currying vs partial application?",
+            "Where can currying be useful?"
+          ]
+        },
+        {
+          "id": "js-iife",
+          "title": "IIFE & Module Patterns",
+          "priority": "Intermediate",
+          "theory": [
+            "Immediately Invoked Function Expression",
+            "Private scope",
+            "Module pattern",
+            "Revealing module pattern",
+            "Encapsulation"
+          ],
+          "hands": [
+            "Build a module using IIFE.",
+            "Create private and public methods.",
+            "Convert an IIFE module to ES modules."
+          ],
+          "interview": [
+            "What is an IIFE?",
+            "Why were IIFEs commonly used before ES modules?",
+            "What is the module pattern?"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "phase4",
+      "num": "4",
+      "title": "this, Prototypes & Object-Oriented JavaScript",
+      "goal": "Understand JavaScript's object model, this binding, prototypes and inheritance.",
+      "topics": [
+        {
+          "id": "js-this",
+          "title": "this Keyword & Binding",
+          "priority": "Intermediate",
+          "theory": [
+            "Global this",
+            "Function invocation",
+            "Method invocation",
+            "Constructor invocation",
+            "Explicit binding",
+            "Implicit binding",
+            "call()",
+            "apply()",
+            "bind()",
+            "Arrow function this"
+          ],
+          "hands": [
+            "Create examples for every this binding rule.",
+            "Implement custom versions of bind(), call() and apply().",
+            "Predict this in nested function scenarios."
+          ],
+          "interview": [
+            "What determines the value of this?",
+            "Arrow function vs normal function this?",
+            "call vs apply vs bind?",
+            "Why does this behave differently inside arrow functions?"
+          ]
+        },
+        {
+          "id": "js-prototypes",
+          "title": "Prototypes & Prototype Chain",
+          "priority": "Intermediate",
+          "theory": [
+            "prototype property",
+            "__proto__",
+            "Prototype chain",
+            "Property lookup",
+            "Object.prototype",
+            "Constructor functions",
+            "Object.create()"
+          ],
+          "hands": [
+            "Create objects using Object.create().",
+            "Build prototype-based inheritance.",
+            "Trace property lookup through a prototype chain."
+          ],
+          "interview": [
+            "What is a prototype?",
+            "prototype vs __proto__?",
+            "How does the prototype chain work?",
+            "How does JavaScript look up object properties?"
+          ]
+        },
+        {
+          "id": "js-classes",
+          "title": "Classes & Inheritance",
+          "priority": "Intermediate",
+          "theory": [
+            "class syntax",
+            "Constructor",
+            "Instance methods",
+            "Static methods",
+            "extends",
+            "super",
+            "Getters and setters",
+            "Private class fields",
+            "Classes and prototypes"
+          ],
+          "hands": [
+            "Build a class hierarchy.",
+            "Create static and instance methods.",
+            "Implement private fields.",
+            "Compare classes with prototype-based inheritance."
+          ],
+          "interview": [
+            "Are JavaScript classes truly class-based?",
+            "What happens internally when extends is used?",
+            "What is super?",
+            "Static method vs instance method?"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "phase5",
+      "num": "5",
+      "title": "Modern JavaScript ES6+",
+      "goal": "Master modern JavaScript syntax and language features used in production applications.",
+      "topics": [
+        {
+          "id": "js-es6",
+          "title": "ES6+ Core Features",
+          "priority": "Intermediate",
+          "theory": [
+            "let and const",
+            "Arrow functions",
+            "Template literals",
+            "Destructuring",
+            "Spread and rest",
+            "Default parameters",
+            "Enhanced object literals",
+            "Computed properties"
+          ],
+          "hands": [
+            "Refactor ES5 code into modern ES6+.",
+            "Build utilities using destructuring and spread.",
+            "Practice modern function syntax."
+          ],
+          "interview": [
+            "What major features were introduced in ES6?",
+            "Spread vs rest?",
+            "What are computed properties?"
+          ]
+        },
+        {
+          "id": "js-modules",
+          "title": "ES Modules",
+          "priority": "Intermediate",
+          "theory": [
+            "export",
+            "import",
+            "Named exports",
+            "Default exports",
+            "Dynamic imports",
+            "Module scope",
+            "Circular dependencies",
+            "Tree shaking concepts"
+          ],
+          "hands": [
+            "Split an application into ES modules.",
+            "Create reusable utility modules.",
+            "Implement dynamic imports."
+          ],
+          "interview": [
+            "Named export vs default export?",
+            "What is module scope?",
+            "What is dynamic import?",
+            "How do ES modules help tree shaking?"
+          ]
+        },
+        {
+          "id": "js-iterators-generators",
+          "title": "Iterators & Generators",
+          "priority": "Intermediate",
+          "theory": [
+            "Iterable protocol",
+            "Iterator protocol",
+            "Symbol.iterator",
+            "Generator functions",
+            "yield",
+            "Generator delegation"
+          ],
+          "hands": [
+            "Create a custom iterable.",
+            "Build a generator for pagination.",
+            "Create a generator-based sequence."
+          ],
+          "interview": [
+            "What is an iterable?",
+            "What is an iterator?",
+            "What is a generator?",
+            "When would you use generators?"
+          ]
+        },
+        {
+          "id": "js-symbols",
+          "title": "Symbols & Advanced Language Features",
+          "priority": "Intermediate",
+          "theory": [
+            "Symbol primitive",
+            "Well-known symbols",
+            "Symbol.iterator",
+            "Symbol.toPrimitive",
+            "Private-like object keys"
+          ],
+          "hands": [
+            "Create objects using Symbol keys.",
+            "Implement custom iteration using Symbol.iterator."
+          ],
+          "interview": [
+            "What is a Symbol?",
+            "Why are Symbols useful?",
+            "What are well-known Symbols?"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "phase6",
+      "num": "6",
+      "title": "Asynchronous JavaScript",
+      "goal": "Understand asynchronous programming, promises and async/await at a deep level.",
+      "topics": [
+        {
+          "id": "js-callbacks",
+          "title": "Callbacks & Callback Patterns",
+          "priority": "Intermediate",
+          "theory": [
+            "Synchronous vs asynchronous execution",
+            "Callbacks",
+            "Callback nesting",
+            "Callback hell",
+            "Error-first callbacks",
+            "Inversion of control"
+          ],
+          "hands": [
+            "Build an asynchronous callback workflow.",
+            "Refactor callback hell into Promises.",
+            "Implement error-first callback patterns."
+          ],
+          "interview": [
+            "What is callback hell?",
+            "Why can callbacks become difficult to maintain?",
+            "What is inversion of control?"
+          ]
+        },
+        {
+          "id": "js-promises",
+          "title": "Promises",
+          "priority": "Intermediate",
+          "theory": [
+            "Promise states",
+            "Pending, fulfilled and rejected",
+            "then()",
+            "catch()",
+            "finally()",
+            "Promise chaining",
+            "Promise resolution",
+            "Error propagation"
+          ],
+          "hands": [
+            "Create Promise-based utilities.",
+            "Build sequential Promise chains.",
+            "Handle Promise errors correctly.",
+            "Implement a simplified Promise."
+          ],
+          "interview": [
+            "What is a Promise?",
+            "What are the states of a Promise?",
+            "How does Promise chaining work?",
+            "How does Promise error propagation work?"
+          ]
+        },
+        {
+          "id": "js-promise-methods",
+          "title": "Promise Concurrency Methods",
+          "priority": "Intermediate",
+          "theory": [
+            "Promise.all()",
+            "Promise.allSettled()",
+            "Promise.race()",
+            "Promise.any()",
+            "Concurrency vs parallelism",
+            "Failure behavior of each method"
+          ],
+          "hands": [
+            "Build a dashboard using Promise.all().",
+            "Implement fallback logic using Promise.any().",
+            "Compare all(), allSettled(), race() and any()."
+          ],
+          "interview": [
+            "Promise.all vs Promise.allSettled?",
+            "Promise.race vs Promise.any?",
+            "When should Promise.all() not be used?"
+          ]
+        },
+        {
+          "id": "js-async-await",
+          "title": "async/await",
+          "priority": "Intermediate",
+          "theory": [
+            "async functions",
+            "await",
+            "Promise suspension",
+            "try/catch",
+            "Sequential vs concurrent async operations",
+            "Async error handling"
+          ],
+          "hands": [
+            "Convert Promise chains to async/await.",
+            "Build concurrent async operations.",
+            "Implement robust async error handling."
+          ],
+          "interview": [
+            "Does async/await block JavaScript?",
+            "Does async/await create a new thread?",
+            "How do you run multiple async operations concurrently?"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "phase7",
+      "num": "7",
+      "title": "Event Loop & JavaScript Runtime",
+      "goal": "Develop a deep understanding of how JavaScript executes synchronous and asynchronous code.",
+      "topics": [
+        {
+          "id": "js-event-loop",
+          "title": "Event Loop",
+          "priority": "Advanced",
+          "theory": [
+            "Call stack",
+            "Web APIs",
+            "Task queue",
+            "Microtask queue",
+            "Event loop",
+            "Rendering cycle",
+            "Single-threaded execution model"
+          ],
+          "hands": [
+            "Create 30 event-loop output problems.",
+            "Predict execution order before running code.",
+            "Trace call stack, microtask queue and task queue."
+          ],
+          "interview": [
+            "Explain the event loop.",
+            "Why does Promise.then() execute before setTimeout()?",
+            "What is the call stack?",
+            "What is the microtask queue?"
+          ]
+        },
+        {
+          "id": "js-microtasks-macrotasks",
+          "title": "Microtasks vs Tasks",
+          "priority": "Advanced",
+          "theory": [
+            "Promise callbacks",
+            "queueMicrotask()",
+            "setTimeout()",
+            "setInterval()",
+            "DOM events",
+            "Task prioritization concepts"
+          ],
+          "hands": [
+            "Create nested microtask and task examples.",
+            "Predict complex Promise and timer execution order.",
+            "Experiment with queueMicrotask()."
+          ],
+          "interview": [
+            "Microtask vs macrotask?",
+            "Which runs first: Promise or setTimeout?",
+            "Can microtasks starve rendering?"
+          ]
+        },
+        {
+          "id": "js-runtime",
+          "title": "JavaScript Runtime Environment",
+          "priority": "Advanced",
+          "theory": [
+            "JavaScript engine",
+            "Browser runtime",
+            "Node.js runtime",
+            "Web APIs",
+            "ECMAScript specification",
+            "JavaScript engine vs runtime"
+          ],
+          "hands": [
+            "Compare browser and Node.js execution environments.",
+            "Identify which APIs are JavaScript language features and which are runtime APIs."
+          ],
+          "interview": [
+            "Is the event loop part of JavaScript itself?",
+            "JavaScript engine vs runtime?",
+            "What does the browser provide beyond ECMAScript?"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "phase8",
+      "num": "8",
+      "title": "Arrays, Objects & Functional Data Transformation",
+      "goal": "Become highly proficient at manipulating real-world application data using JavaScript.",
+      "topics": [
+        {
+          "id": "js-array-methods",
+          "title": "Array Methods",
+          "priority": "Intermediate",
+          "theory": [
+            "map()",
+            "filter()",
+            "reduce()",
+            "forEach()",
+            "find()",
+            "findIndex()",
+            "some()",
+            "every()",
+            "includes()",
+            "flat()",
+            "flatMap()",
+            "sort()"
+          ],
+          "hands": [
+            "Solve 50 array transformation problems.",
+            "Implement map(), filter() and reduce() from scratch.",
+            "Transform nested API responses.",
+            "Group and aggregate large datasets."
+          ],
+          "interview": [
+            "map vs forEach?",
+            "reduce vs map?",
+            "find vs filter?",
+            "Does sort() mutate the original array?",
+            "How would you group an array of objects?"
+          ]
+        },
+        {
+          "id": "js-object-methods",
+          "title": "Object Utilities",
+          "priority": "Intermediate",
+          "theory": [
+            "Object.keys()",
+            "Object.values()",
+            "Object.entries()",
+            "Object.assign()",
+            "Object.create()",
+            "Object.freeze()",
+            "Object.seal()",
+            "Object.hasOwn()"
+          ],
+          "hands": [
+            "Build object transformation utilities.",
+            "Convert objects to arrays and arrays to objects.",
+            "Practice immutable object updates."
+          ],
+          "interview": [
+            "Object.freeze vs Object.seal?",
+            "Object.assign vs spread?",
+            "How do you check whether an object owns a property?"
+          ]
+        },
+        {
+          "id": "js-immutability",
+          "title": "Immutability & Copying",
+          "priority": "Intermediate",
+          "theory": [
+            "Mutable vs immutable operations",
+            "Reference copying",
+            "Shallow copy",
+            "Deep copy",
+            "Structured cloning",
+            "Object.freeze()",
+            "Immutable update patterns"
+          ],
+          "hands": [
+            "Implement shallow-copy examples.",
+            "Use structuredClone() for deep cloning.",
+            "Create immutable update utilities.",
+            "Identify mutation bugs in application code."
+          ],
+          "interview": [
+            "Shallow copy vs deep copy?",
+            "Why is immutability useful?",
+            "What are common ways to clone objects?",
+            "Why can JSON.parse(JSON.stringify()) be problematic?"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "phase9",
+      "num": "9",
+      "title": "DOM, Browser APIs & Web Platform",
+      "goal": "Master JavaScript APIs used to interact with browsers and web applications.",
+      "topics": [
+        {
+          "id": "js-dom",
+          "title": "DOM Manipulation",
+          "priority": "Intermediate",
+          "theory": [
+            "DOM tree",
+            "Selecting elements",
+            "Creating elements",
+            "Updating content",
+            "Attributes",
+            "Classes",
+            "Styles",
+            "DOM traversal"
+          ],
+          "hands": [
+            "Build a vanilla JavaScript todo application.",
+            "Create dynamic DOM elements.",
+            "Build a modal without a framework."
+          ],
+          "interview": [
+            "What is the DOM?",
+            "How does DOM manipulation work?",
+            "innerHTML vs textContent?",
+            "Why can excessive DOM manipulation hurt performance?"
+          ]
+        },
+        {
+          "id": "js-events",
+          "title": "DOM Events & Event Propagation",
+          "priority": "Intermediate",
+          "theory": [
+            "Event listeners",
+            "Event object",
+            "Capturing phase",
+            "Target phase",
+            "Bubbling phase",
+            "stopPropagation()",
+            "preventDefault()",
+            "Event delegation"
+          ],
+          "hands": [
+            "Build event delegation examples.",
+            "Create nested event propagation examples.",
+            "Implement a dynamic list using event delegation."
+          ],
+          "interview": [
+            "Event bubbling vs capturing?",
+            "What is event delegation?",
+            "stopPropagation vs preventDefault?",
+            "Why is event delegation useful?"
+          ]
+        },
+        {
+          "id": "js-browser-storage",
+          "title": "Browser Storage",
+          "priority": "Intermediate",
+          "theory": [
+            "localStorage",
+            "sessionStorage",
+            "Cookies",
+            "Storage limitations",
+            "Serialization",
+            "Storage security considerations"
+          ],
+          "hands": [
+            "Build a preference manager using localStorage.",
+            "Create session-based UI state.",
+            "Implement safe serialization and parsing."
+          ],
+          "interview": [
+            "localStorage vs sessionStorage?",
+            "Cookies vs localStorage?",
+            "What are security risks of storing sensitive data in browser storage?"
+          ]
+        },
+        {
+          "id": "js-fetch",
+          "title": "Fetch API & HTTP Requests",
+          "priority": "Intermediate",
+          "theory": [
+            "fetch()",
+            "Request",
+            "Response",
+            "Headers",
+            "HTTP methods",
+            "JSON handling",
+            "Network errors",
+            "AbortController"
+          ],
+          "hands": [
+            "Build a CRUD application using fetch().",
+            "Implement request cancellation.",
+            "Create reusable API utilities.",
+            "Handle loading, success and error states."
+          ],
+          "interview": [
+            "How does fetch() work?",
+            "Does fetch reject on HTTP 404?",
+            "How do you cancel fetch requests?",
+            "How do you handle API errors?"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "phase10",
+      "num": "10",
+      "title": "Memory Management & Garbage Collection",
+      "goal": "Understand JavaScript memory behavior and diagnose memory leaks in production applications.",
+      "topics": [
+        {
+          "id": "js-memory-model",
+          "title": "JavaScript Memory Model",
+          "priority": "Advanced",
+          "theory": [
+            "Stack memory",
+            "Heap memory",
+            "Primitive values",
+            "Reference values",
+            "Object allocation",
+            "Reachability"
+          ],
+          "hands": [
+            "Trace references between nested objects.",
+            "Create examples showing stack and heap behavior.",
+            "Analyze object references using DevTools."
+          ],
+          "interview": [
+            "Stack vs heap?",
+            "Where are objects stored?",
+            "What does reachability mean?"
+          ]
+        },
+        {
+          "id": "js-garbage-collection",
+          "title": "Garbage Collection",
+          "priority": "Advanced",
+          "theory": [
+            "Garbage collection",
+            "Mark-and-sweep concepts",
+            "Reachability",
+            "Unreachable objects",
+            "Memory reclamation"
+          ],
+          "hands": [
+            "Create objects that become unreachable.",
+            "Inspect memory snapshots using browser DevTools."
+          ],
+          "interview": [
+            "How does garbage collection work?",
+            "When can an object be garbage collected?",
+            "What is mark-and-sweep?"
+          ]
+        },
+        {
+          "id": "js-memory-leaks",
+          "title": "Memory Leaks",
+          "priority": "Advanced",
+          "theory": [
+            "Global variable leaks",
+            "Detached DOM nodes",
+            "Event listener leaks",
+            "Timer leaks",
+            "Closure retention",
+            "Large object retention",
+            "Subscription-like resource leaks"
+          ],
+          "hands": [
+            "Create and fix event listener leaks.",
+            "Create and fix timer leaks.",
+            "Find detached DOM nodes.",
+            "Use memory snapshots to identify retained objects."
+          ],
+          "interview": [
+            "What causes JavaScript memory leaks?",
+            "How can closures cause memory retention?",
+            "How do you debug memory leaks?",
+            "What is a detached DOM node?"
+          ]
+        },
+        {
+          "id": "js-weakmap-weakset",
+          "title": "WeakMap, WeakSet & Weak References",
+          "priority": "Advanced",
+          "theory": [
+            "WeakMap",
+            "WeakSet",
+            "Weak references",
+            "Garbage collection interaction",
+            "WeakRef",
+            "FinalizationRegistry"
+          ],
+          "hands": [
+            "Build metadata storage using WeakMap.",
+            "Compare Map with WeakMap.",
+            "Experiment with object lifetime in a controlled example."
+          ],
+          "interview": [
+            "Map vs WeakMap?",
+            "Why can't WeakMap keys be primitives?",
+            "When would WeakMap be useful?"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "phase11",
+      "num": "11",
+      "title": "Advanced JavaScript Language Features",
+      "goal": "Master advanced language capabilities that appear in framework internals, libraries and complex applications.",
+      "topics": [
+        {
+          "id": "js-property-descriptors",
+          "title": "Property Descriptors",
+          "priority": "Advanced",
+          "theory": [
+            "Writable",
+            "Enumerable",
+            "Configurable",
+            "Value descriptors",
+            "Getter descriptors",
+            "Setter descriptors",
+            "Object.defineProperty()",
+            "Object.getOwnPropertyDescriptor()"
+          ],
+          "hands": [
+            "Create read-only properties.",
+            "Create custom getters and setters.",
+            "Inspect descriptors of built-in objects."
+          ],
+          "interview": [
+            "What is a property descriptor?",
+            "What does writable mean?",
+            "What is the difference between enumerable and configurable?"
+          ]
+        },
+        {
+          "id": "js-proxy-reflect",
+          "title": "Proxy & Reflect",
+          "priority": "Advanced",
+          "theory": [
+            "Proxy objects",
+            "Proxy traps",
+            "get",
+            "set",
+            "has",
+            "deleteProperty",
+            "Reflect API",
+            "Metaprogramming"
+          ],
+          "hands": [
+            "Create a validation Proxy.",
+            "Create a logging Proxy.",
+            "Build a reactive-style object experiment."
+          ],
+          "interview": [
+            "What is Proxy?",
+            "What is metaprogramming?",
+            "Proxy vs Reflect?",
+            "Where could Proxy be useful?"
+          ]
+        },
+        {
+          "id": "js-advanced-objects",
+          "title": "Advanced Object Behavior",
+          "priority": "Advanced",
+          "theory": [
+            "Getters and setters",
+            "Computed properties",
+            "Property keys",
+            "Own properties",
+            "Enumerability",
+            "Object extensibility",
+            "Object.freeze",
+            "Object.seal",
+            "Object.preventExtensions"
+          ],
+          "hands": [
+            "Create advanced configuration objects.",
+            "Build immutable configuration objects.",
+            "Inspect property behavior with descriptors."
+          ],
+          "interview": [
+            "freeze vs seal vs preventExtensions?",
+            "How are object properties enumerated?",
+            "What is an own property?"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "phase12",
+      "num": "12",
+      "title": "JavaScript Performance Optimization",
+      "goal": "Learn how to write efficient JavaScript and diagnose runtime performance problems.",
+      "topics": [
+        {
+          "id": "js-debounce-throttle",
+          "title": "Debouncing & Throttling",
+          "priority": "Advanced",
+          "theory": [
+            "Debouncing",
+            "Throttling",
+            "Event frequency",
+            "Timers",
+            "Search optimization",
+            "Scroll optimization",
+            "Resize optimization"
+          ],
+          "hands": [
+            "Implement debounce().",
+            "Implement throttle().",
+            "Build a debounced search.",
+            "Optimize scroll event handling."
+          ],
+          "interview": [
+            "Debounce vs throttle?",
+            "When would you use debounce?",
+            "When would you use throttle?"
+          ]
+        },
+        {
+          "id": "js-memoization",
+          "title": "Memoization & Caching",
+          "priority": "Advanced",
+          "theory": [
+            "Memoization",
+            "Caching",
+            "Pure functions",
+            "Cache invalidation",
+            "Reference-based caching"
+          ],
+          "hands": [
+            "Implement memoize().",
+            "Create a cache utility.",
+            "Measure performance before and after memoization."
+          ],
+          "interview": [
+            "What is memoization?",
+            "When can memoization hurt performance?",
+            "Memoization vs caching?"
+          ]
+        },
+        {
+          "id": "js-render-performance",
+          "title": "Runtime & Rendering Performance",
+          "priority": "Advanced",
+          "theory": [
+            "Main thread",
+            "Long tasks",
+            "Layout and paint",
+            "DOM performance",
+            "RequestAnimationFrame",
+            "Event loop impact",
+            "Task scheduling"
+          ],
+          "hands": [
+            "Identify a long-running JavaScript task.",
+            "Optimize a large DOM operation.",
+            "Use requestAnimationFrame() for animation work.",
+            "Profile JavaScript execution using DevTools."
+          ],
+          "interview": [
+            "What blocks the main thread?",
+            "What is a long task?",
+            "requestAnimationFrame vs setTimeout?",
+            "How would you optimize expensive JavaScript?"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "phase13",
+      "num": "13",
+      "title": "JavaScript Design Patterns & Architecture",
+      "goal": "Learn reusable JavaScript architecture patterns for maintainable production applications.",
+      "topics": [
+        {
+          "id": "js-module-pattern",
+          "title": "Module Pattern",
+          "priority": "Advanced",
+          "theory": [
+            "Module pattern",
+            "Revealing module pattern",
+            "Encapsulation",
+            "Private state",
+            "ES modules"
+          ],
+          "hands": [
+            "Build a reusable module.",
+            "Create private and public APIs.",
+            "Refactor module-pattern code into ES modules."
+          ],
+          "interview": [
+            "What is the module pattern?",
+            "Why is encapsulation useful?",
+            "How do ES modules improve the module pattern?"
+          ]
+        },
+        {
+          "id": "js-factory-pattern",
+          "title": "Factory & Builder Patterns",
+          "priority": "Advanced",
+          "theory": [
+            "Factory pattern",
+            "Factory functions",
+            "Constructor functions",
+            "Builder pattern",
+            "Object creation abstraction"
+          ],
+          "hands": [
+            "Create a factory for different user types.",
+            "Build a configurable object builder.",
+            "Compare factory functions with classes."
+          ],
+          "interview": [
+            "What is the Factory pattern?",
+            "Factory function vs constructor?",
+            "When would you use a factory?"
+          ]
+        },
+        {
+          "id": "js-observer-pattern",
+          "title": "Observer & Pub/Sub Patterns",
+          "priority": "Advanced",
+          "theory": [
+            "Observer pattern",
+            "Publisher and subscriber",
+            "Event emitter",
+            "Loose coupling",
+            "Event-driven architecture"
+          ],
+          "hands": [
+            "Implement EventEmitter.",
+            "Build a Pub/Sub utility.",
+            "Create an event-driven application."
+          ],
+          "interview": [
+            "What is the Observer pattern?",
+            "Observer vs Pub/Sub?",
+            "How would you implement an EventEmitter?"
+          ]
+        },
+        {
+          "id": "js-strategy-facade",
+          "title": "Strategy, Adapter & Facade Patterns",
+          "priority": "Advanced",
+          "theory": [
+            "Strategy pattern",
+            "Adapter pattern",
+            "Facade pattern",
+            "Composition",
+            "Abstraction"
+          ],
+          "hands": [
+            "Implement a strategy-based validation system.",
+            "Create an API adapter.",
+            "Create a facade around multiple utilities."
+          ],
+          "interview": [
+            "What is the Strategy pattern?",
+            "What problem does an Adapter solve?",
+            "What is a Facade?"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "phase14",
+      "num": "14",
+      "title": "Practical JavaScript Coding & Polyfills",
+      "goal": "Develop the implementation skills expected in senior frontend coding interviews.",
+      "topics": [
+        {
+          "id": "js-polyfills",
+          "title": "JavaScript Polyfills",
+          "priority": "Advanced",
+          "theory": [
+            "What is a polyfill?",
+            "Prototype methods",
+            "Compatibility",
+            "Feature detection",
+            "Built-in method implementation"
+          ],
+          "hands": [
+            "Implement Array.prototype.map.",
+            "Implement Array.prototype.filter.",
+            "Implement Array.prototype.reduce.",
+            "Implement Function.prototype.bind.",
+            "Implement Promise.all."
+          ],
+          "interview": [
+            "What is a polyfill?",
+            "Implement map() from scratch.",
+            "Implement bind() from scratch.",
+            "Implement Promise.all()."
+          ]
+        },
+        {
+          "id": "js-utility-implementation",
+          "title": "Utility Function Implementation",
+          "priority": "Advanced",
+          "theory": [
+            "Debounce",
+            "Throttle",
+            "Memoization",
+            "Deep clone",
+            "Flatten array",
+            "Group by",
+            "Once",
+            "Pipe",
+            "Compose"
+          ],
+          "hands": [
+            "Implement debounce().",
+            "Implement throttle().",
+            "Implement memoize().",
+            "Implement deepClone().",
+            "Implement flatten().",
+            "Implement groupBy().",
+            "Implement once().",
+            "Implement pipe() and compose()."
+          ],
+          "interview": [
+            "Implement debounce.",
+            "Implement throttle.",
+            "Implement deep clone.",
+            "Implement groupBy.",
+            "Implement flatten array."
+          ]
+        },
+        {
+          "id": "js-event-emitter",
+          "title": "EventEmitter Implementation",
+          "priority": "Advanced",
+          "theory": [
+            "Publish-subscribe",
+            "Event registration",
+            "Event removal",
+            "Event emission",
+            "Multiple listeners",
+            "One-time listeners"
+          ],
+          "hands": [
+            "Implement on().",
+            "Implement off().",
+            "Implement emit().",
+            "Implement once().",
+            "Add wildcard event support."
+          ],
+          "interview": [
+            "How would you implement EventEmitter?",
+            "How would you remove listeners?",
+            "How would you prevent memory leaks in an EventEmitter?"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "phase15",
+      "num": "15",
+      "title": "Senior JavaScript Interview Preparation",
+      "goal": "Convert JavaScript knowledge into strong senior-level interview performance through output questions, coding, debugging and architecture discussions.",
+      "topics": [
+        {
+          "id": "js-output-questions",
+          "title": "JavaScript Output-Based Questions",
+          "priority": "Advanced",
+          "theory": [
+            "Hoisting output questions",
+            "Closure output questions",
+            "this output questions",
+            "Prototype output questions",
+            "Promise output questions",
+            "Event loop output questions",
+            "Type coercion output questions",
+            "Scope output questions"
+          ],
+          "hands": [
+            "Solve 100 JavaScript output questions.",
+            "Predict the output before running every example.",
+            "Explain the execution sequence verbally."
+          ],
+          "interview": [
+            "Predict complex closure output.",
+            "Predict Promise and timer execution order.",
+            "Predict this binding.",
+            "Explain why the output occurs."
+          ]
+        },
+        {
+          "id": "js-machine-coding",
+          "title": "JavaScript Machine Coding",
+          "priority": "Advanced",
+          "theory": [
+            "Problem decomposition",
+            "API design",
+            "Reusable utilities",
+            "Edge cases",
+            "Error handling",
+            "Performance considerations",
+            "Clean code"
+          ],
+          "hands": [
+            "Build a Todo manager.",
+            "Build an EventEmitter.",
+            "Build a debounce utility.",
+            "Build a cache manager.",
+            "Build a task scheduler.",
+            "Build a promise queue.",
+            "Build an autocomplete utility."
+          ],
+          "interview": [
+            "Design and implement an EventEmitter.",
+            "Design a task scheduler.",
+            "Implement a concurrency limiter.",
+            "Implement a cache with expiration."
+          ]
+        },
+        {
+          "id": "js-debugging",
+          "title": "JavaScript Debugging",
+          "priority": "Advanced",
+          "theory": [
+            "Breakpoints",
+            "Call stack inspection",
+            "Scope inspection",
+            "Network debugging",
+            "Memory profiling",
+            "Performance profiling",
+            "Runtime errors"
+          ],
+          "hands": [
+            "Debug intentionally broken JavaScript applications.",
+            "Find a memory leak.",
+            "Find an asynchronous race condition.",
+            "Identify an unnecessary expensive operation."
+          ],
+          "interview": [
+            "How do you debug a production JavaScript issue?",
+            "How do you find a memory leak?",
+            "How do you debug asynchronous code?",
+            "How do you profile JavaScript performance?"
+          ]
+        },
+        {
+          "id": "js-senior-scenarios",
+          "title": "Senior-Level JavaScript Scenarios",
+          "priority": "Advanced",
+          "theory": [
+            "Large-scale JavaScript architecture",
+            "Performance trade-offs",
+            "Memory management",
+            "Async architecture",
+            "Event-driven architecture",
+            "Reusable library design",
+            "Error handling strategy",
+            "Maintainability"
+          ],
+          "hands": [
+            "Design a client-side caching system.",
+            "Design a JavaScript event system.",
+            "Design a task scheduler.",
+            "Design a reusable data-fetching utility.",
+            "Optimize a slow JavaScript application."
+          ],
+          "interview": [
+            "How would you design a reusable JavaScript library?",
+            "How would you handle thousands of asynchronous operations?",
+            "How would you prevent memory leaks in a long-running application?",
+            "How would you optimize a CPU-intensive JavaScript operation?",
+            "How would you design an event-driven frontend architecture?"
+          ]
+        }
+      ]
+    }
+  ],
+  "topicReferences": {
+    "js-basics": [
+      {
+        "title": "MDN — JavaScript Guide",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide",
+        "description": "Comprehensive JavaScript fundamentals and language guide."
+      },
+      {
+        "title": "MDN — JavaScript Reference",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference",
+        "description": "Complete JavaScript language and API reference."
+      }
+    ],
+    "js-operators": [
+      {
+        "title": "MDN — Expressions and Operators",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_operators",
+        "description": "Learn JavaScript operators, expressions and type conversion."
+      }
+    ],
+    "js-control-flow": [
+      {
+        "title": "MDN — Control Flow and Error Handling",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Control_flow_and_error_handling",
+        "description": "Learn conditionals, loops and JavaScript control flow."
+      }
+    ],
+    "js-functions-basic": [
+      {
+        "title": "MDN — Functions",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Functions",
+        "description": "Learn JavaScript functions, parameters, callbacks and function behavior."
+      }
+    ],
+    "js-arrays-objects": [
+      {
+        "title": "MDN — Indexed Collections",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Indexed_collections",
+        "description": "Learn JavaScript arrays and indexed collections."
+      },
+      {
+        "title": "MDN — Working with Objects",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Working_with_objects",
+        "description": "Learn JavaScript objects, properties and object behavior."
+      }
+    ],
+    "js-execution-context": [
+      {
+        "title": "MDN — JavaScript Execution Model",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Execution_model",
+        "description": "Learn execution contexts, jobs and the JavaScript runtime model."
+      }
+    ],
+    "js-scope": [
+      {
+        "title": "MDN — Closures",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Closures",
+        "description": "Learn lexical scoping and scope behavior."
+      }
+    ],
+    "js-hoisting": [
+      {
+        "title": "MDN — var",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/var",
+        "description": "Learn var declarations, scope and hoisting behavior."
+      },
+      {
+        "title": "MDN — let",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let",
+        "description": "Learn let declarations and Temporal Dead Zone behavior."
+      }
+    ],
+    "js-closures": [
+      {
+        "title": "MDN — Closures",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Closures",
+        "description": "Deep dive into closures, lexical environments and practical patterns."
+      }
+    ],
+    "js-higher-order": [
+      {
+        "title": "MDN — Functions",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Functions",
+        "description": "Learn first-class and higher-order function concepts."
+      }
+    ],
+    "js-currying": [
+      {
+        "title": "MDN — Closures",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Closures",
+        "description": "Closures provide the foundation for currying and function factories."
+      }
+    ],
+    "js-iife": [
+      {
+        "title": "MDN — Function Expressions",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/function",
+        "description": "Learn function expressions and patterns including IIFEs."
+      }
+    ],
+    "js-this": [
+      {
+        "title": "MDN — this",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this",
+        "description": "Comprehensive reference for the JavaScript this keyword."
+      },
+      {
+        "title": "MDN — Function bind",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind",
+        "description": "Learn explicit function binding with bind()."
+      }
+    ],
+    "js-prototypes": [
+      {
+        "title": "MDN — Inheritance and the Prototype Chain",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Inheritance_and_the_prototype_chain",
+        "description": "Deep dive into JavaScript prototypes and inheritance."
+      }
+    ],
+    "js-classes": [
+      {
+        "title": "MDN — Classes",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes",
+        "description": "Learn JavaScript classes, inheritance, constructors and private fields."
+      }
+    ],
+    "js-es6": [
+      {
+        "title": "MDN — JavaScript Guide",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide",
+        "description": "Comprehensive guide to modern JavaScript language features."
+      }
+    ],
+    "js-modules": [
+      {
+        "title": "MDN — JavaScript Modules",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules",
+        "description": "Learn import, export, dynamic imports and JavaScript modules."
+      }
+    ],
+    "js-iterators-generators": [
+      {
+        "title": "MDN — Iteration Protocols",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols",
+        "description": "Learn iterable and iterator protocols."
+      },
+      {
+        "title": "MDN — Generator Function",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function*",
+        "description": "Learn generator functions and yield."
+      }
+    ],
+    "js-symbols": [
+      {
+        "title": "MDN — Symbol",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol",
+        "description": "Learn Symbol primitives and well-known Symbols."
+      }
+    ],
+    "js-callbacks": [
+      {
+        "title": "MDN — Asynchronous JavaScript",
+        "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Async_JS",
+        "description": "Learn callbacks and asynchronous JavaScript."
+      }
+    ],
+    "js-promises": [
+      {
+        "title": "MDN — Promise",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise",
+        "description": "Learn Promise states, chaining and error handling."
+      }
+    ],
+    "js-promise-methods": [
+      {
+        "title": "MDN — Promise Concurrency",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise",
+        "description": "Learn Promise.all, allSettled, race and any."
+      }
+    ],
+    "js-async-await": [
+      {
+        "title": "MDN — async function",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function",
+        "description": "Learn async functions and await."
+      }
+    ],
+    "js-event-loop": [
+      {
+        "title": "MDN — JavaScript Execution Model",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Execution_model",
+        "description": "Understand the JavaScript execution model and event-driven behavior."
+      }
+    ],
+    "js-microtasks-macrotasks": [
+      {
+        "title": "MDN — Microtask Guide",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/API/HTML_DOM_API/Microtask_guide",
+        "description": "Learn microtasks and their scheduling behavior."
+      }
+    ],
+    "js-runtime": [
+      {
+        "title": "MDN — JavaScript Technologies Overview",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
+        "description": "Understand JavaScript as a language and its runtime environments."
+      }
+    ],
+    "js-array-methods": [
+      {
+        "title": "MDN — Array",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array",
+        "description": "Complete reference for JavaScript array methods."
+      }
+    ],
+    "js-object-methods": [
+      {
+        "title": "MDN — Object",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object",
+        "description": "Complete reference for JavaScript Object methods."
+      }
+    ],
+    "js-immutability": [
+      {
+        "title": "MDN — structuredClone",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/API/Window/structuredClone",
+        "description": "Learn the structured clone algorithm for deep copying supported data."
+      }
+    ],
+    "js-dom": [
+      {
+        "title": "MDN — DOM",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model",
+        "description": "Learn the Document Object Model and DOM manipulation."
+      }
+    ],
+    "js-events": [
+      {
+        "title": "MDN — Event Bubbling",
+        "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Scripting/Event_bubbling",
+        "description": "Learn event propagation, bubbling, capturing and delegation."
+      }
+    ],
+    "js-browser-storage": [
+      {
+        "title": "MDN — Web Storage API",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API",
+        "description": "Learn localStorage and sessionStorage."
+      },
+      {
+        "title": "MDN — HTTP Cookies",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Cookies",
+        "description": "Learn how browser cookies work."
+      }
+    ],
+    "js-fetch": [
+      {
+        "title": "MDN — Fetch API",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API",
+        "description": "Learn modern JavaScript HTTP requests using fetch()."
+      },
+      {
+        "title": "MDN — AbortController",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/API/AbortController",
+        "description": "Learn how to cancel asynchronous operations."
+      }
+    ],
+    "js-memory-model": [
+      {
+        "title": "MDN — Memory Management",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Memory_management",
+        "description": "Learn JavaScript memory allocation and garbage collection concepts."
+      }
+    ],
+    "js-garbage-collection": [
+      {
+        "title": "MDN — Memory Management",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Memory_management",
+        "description": "Learn garbage collection and memory reclamation."
+      }
+    ],
+    "js-memory-leaks": [
+      {
+        "title": "Chrome DevTools — Memory",
+        "url": "https://developer.chrome.com/docs/devtools/memory-problems/",
+        "description": "Learn how to diagnose JavaScript memory problems and leaks."
+      }
+    ],
+    "js-weakmap-weakset": [
+      {
+        "title": "MDN — WeakMap",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakMap",
+        "description": "Learn WeakMap and weakly held object references."
+      },
+      {
+        "title": "MDN — WeakSet",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakSet",
+        "description": "Learn WeakSet and weak object references."
+      }
+    ],
+    "js-property-descriptors": [
+      {
+        "title": "MDN — Object.defineProperty",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty",
+        "description": "Learn JavaScript property descriptors and property definition."
+      }
+    ],
+    "js-proxy-reflect": [
+      {
+        "title": "MDN — Proxy",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy",
+        "description": "Learn JavaScript Proxy and metaprogramming."
+      },
+      {
+        "title": "MDN — Reflect",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Reflect",
+        "description": "Learn the Reflect API for object operations."
+      }
+    ],
+    "js-advanced-objects": [
+      {
+        "title": "MDN — Working with Objects",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Working_with_objects",
+        "description": "Learn advanced JavaScript object behavior."
+      }
+    ],
+    "js-debounce-throttle": [
+      {
+        "title": "MDN — setTimeout",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/API/Window/setTimeout",
+        "description": "Understand timers used to implement debounce and throttle patterns."
+      }
+    ],
+    "js-memoization": [
+      {
+        "title": "MDN — Closures",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Closures",
+        "description": "Closures provide the foundation for implementing memoization."
+      }
+    ],
+    "js-render-performance": [
+      {
+        "title": "MDN — Performance API",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/API/Performance_API",
+        "description": "Learn browser performance measurement APIs."
+      },
+      {
+        "title": "Chrome DevTools — Performance",
+        "url": "https://developer.chrome.com/docs/devtools/performance/",
+        "description": "Profile JavaScript execution and browser rendering performance."
+      }
+    ],
+    "js-module-pattern": [
+      {
+        "title": "MDN — JavaScript Modules",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules",
+        "description": "Learn modern JavaScript module architecture."
+      }
+    ],
+    "js-factory-pattern": [
+      {
+        "title": "MDN — Object Constructors",
+        "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Advanced_JavaScript_objects/Object_prototypes",
+        "description": "Learn JavaScript object creation and prototype-based patterns."
+      }
+    ],
+    "js-observer-pattern": [
+      {
+        "title": "MDN — EventTarget",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/API/EventTarget",
+        "description": "Learn browser event subscription and event-driven programming."
+      }
+    ],
+    "js-strategy-facade": [
+      {
+        "title": "MDN — JavaScript Guide",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide",
+        "description": "Use the JavaScript guide as a foundation for implementing application design patterns."
+      }
+    ],
+    "js-polyfills": [
+      {
+        "title": "MDN — Array",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array",
+        "description": "Reference for built-in Array methods commonly implemented as interview polyfills."
+      },
+      {
+        "title": "MDN — Function.bind",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind",
+        "description": "Reference for Function.prototype.bind."
+      }
+    ],
+    "js-utility-implementation": [
+      {
+        "title": "MDN — JavaScript Guide",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide",
+        "description": "Core JavaScript reference for implementing reusable utilities."
+      }
+    ],
+    "js-event-emitter": [
+      {
+        "title": "MDN — EventTarget",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/API/EventTarget",
+        "description": "Learn event listener and event dispatch concepts."
+      }
+    ],
+    "js-output-questions": [
+      {
+        "title": "MDN — JavaScript Guide",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide",
+        "description": "Use the complete JavaScript guide to understand output-based interview problems."
+      }
+    ],
+    "js-machine-coding": [
+      {
+        "title": "MDN — JavaScript Reference",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference",
+        "description": "Reference for implementing JavaScript machine-coding exercises."
+      }
+    ],
+    "js-debugging": [
+      {
+        "title": "Chrome DevTools",
+        "url": "https://developer.chrome.com/docs/devtools/",
+        "description": "Learn JavaScript debugging, profiling, memory inspection and network debugging."
+      }
+    ],
+    "js-senior-scenarios": [
+      {
+        "title": "MDN — JavaScript Guide",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide",
+        "description": "Comprehensive JavaScript reference for advanced engineering scenarios."
+      },
+      {
+        "title": "Chrome DevTools",
+        "url": "https://developer.chrome.com/docs/devtools/",
+        "description": "Tools for investigating real-world JavaScript performance and runtime behavior."
+      }
+    ]
+  }
+}

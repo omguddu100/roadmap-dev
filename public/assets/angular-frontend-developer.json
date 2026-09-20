@@ -1,0 +1,796 @@
+{
+  "roadmap": [
+    {
+      "id": "phase2",
+      "num": "1",
+      "title": "Modern Angular Core",
+      "goal": "Build production-ready Angular applications using standalone architecture and modern template APIs.",
+      "topics": [
+        {
+          "id": "ng-architecture",
+          "title": "Angular Architecture & Standalone Components",
+          "priority": "Basic",
+          "theory": [
+            "Angular application architecture",
+            "Standalone components, directives and pipes",
+            "bootstrapApplication and provider configuration",
+            "Feature-based architecture",
+            "Core, shared and feature boundaries"
+          ],
+          "code": "@Component({\n  standalone: true,\n  imports: [RouterOutlet],\n  template: '<router-outlet />'\n})\nexport class AppComponent {}",
+          "hands": [
+            "Create a standalone Angular app with feature folders.",
+            "Build reusable components without NgModule-centric architecture."
+          ],
+          "interview": [
+            "Standalone vs NgModule?",
+            "Why are standalone components useful for lazy loading and tree-shaking?"
+          ]
+        },
+        {
+          "id": "ng-components",
+          "title": "Components, Templates & Communication",
+          "priority": "Basic",
+          "theory": [
+            "Component metadata",
+            "Inputs and outputs",
+            "Lifecycle hooks",
+            "Content projection",
+            "ViewChild / ContentChild",
+            "Signal-based inputs and modern component communication",
+            "Built-in control flow: @if, @for, @switch"
+          ],
+          "code": "@if (user) {\n  <p>{{ user.name }}</p>\n}\n\n@for (item of items; track item.id) {\n  <div>{{ item.name }}</div>\n} @empty {\n  <p>No items</p>\n}",
+          "hands": [
+            "Build a reusable data table and modal.",
+            "Create parent-child communication and content projection examples."
+          ],
+          "interview": [
+            "Input vs service communication?",
+            "Why is track important for large lists?",
+            "When do you use ngAfterViewInit?"
+          ]
+        },
+        {
+          "id": "ng-directives-pipes",
+          "title": "Directives & Pipes",
+          "priority": "Basic",
+          "theory": [
+            "Attribute directives",
+            "HostBinding and HostListener",
+            "Custom directives",
+            "Pure vs impure pipes",
+            "Custom formatting pipes",
+            "Avoid expensive work in templates"
+          ],
+          "hands": [
+            "Build appPermission, appAutoFocus and appDebounceClick.",
+            "Create a pure custom pipe and demonstrate an impure-pipe performance issue."
+          ],
+          "interview": [
+            "Why can an impure pipe be expensive?",
+            "Directive vs component?"
+          ]
+        },
+        {
+          "id": "ng-di",
+          "title": "Dependency Injection",
+          "priority": "Basic",
+          "theory": [
+            "Dependency Injection and inversion of control",
+            "providedIn: root",
+            "Hierarchical injectors",
+            "inject()",
+            "InjectionToken",
+            "Value, class and factory providers"
+          ],
+          "code": "@Injectable({ providedIn: 'root' })\nexport class UserService {}\n\nconst config = inject(APP_CONFIG);",
+          "hands": [
+            "Create a configurable API service using InjectionToken.",
+            "Demonstrate root and component-level provider scope."
+          ],
+          "interview": [
+            "How does Angular DI hierarchy work?",
+            "What does providedIn:'root' mean?",
+            "When would you use an InjectionToken?"
+          ]
+        },
+        {
+          "id": "ng-routing",
+          "title": "Routing, Guards, Resolvers & Lazy Loading",
+          "priority": "Basic",
+          "theory": [
+            "Routes and RouterOutlet",
+            "Route and query parameters",
+            "Child routes",
+            "CanActivate / CanMatch concepts",
+            "Resolvers",
+            "Lazy-loaded routes",
+            "Preloading strategies"
+          ],
+          "hands": [
+            "Build /auth, /dashboard, /users/:id and /settings.",
+            "Implement role-based route protection and lazy-loaded features."
+          ],
+          "interview": [
+            "Guard vs resolver?",
+            "How does lazy loading improve the initial bundle?",
+            "When should a resolver be avoided?"
+          ]
+        },
+        {
+          "id": "ng-forms",
+          "title": "Forms — Template-driven vs Reactive",
+          "priority": "Basic",
+          "theory": [
+            "Template-driven forms and ngModel",
+            "Reactive Forms: FormControl, FormGroup, FormArray",
+            "Validators and custom validators",
+            "Dynamic forms",
+            "setValue vs patchValue",
+            "Signal Forms as a modern/experimental direction in Angular versions that support them"
+          ],
+          "code": "profileForm = new FormGroup({\n  name: new FormControl('', { nonNullable: true }),\n  email: new FormControl('', { nonNullable: true })\n});",
+          "hands": [
+            "Build a dynamic form from JSON.",
+            "Implement cross-field validation and a FormArray of addresses."
+          ],
+          "interview": [
+            "Reactive vs template-driven?",
+            "setValue vs patchValue?",
+            "How would you design a JSON-driven dynamic form?"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "phase3",
+      "num": "2",
+      "title": "Advanced Angular & State Management",
+      "goal": "Master RxJS, Signals, change detection, authentication flows and scalable state architecture.",
+      "topics": [
+        {
+          "id": "rx-observable",
+          "title": "RxJS Observables & Subjects",
+          "priority": "Intermediate",
+          "theory": [
+            "Observable lifecycle",
+            "Cold vs hot observables",
+            "Subject, BehaviorSubject and ReplaySubject",
+            "Subscription management",
+            "AsyncPipe and reactive templates",
+            "takeUntilDestroyed"
+          ],
+          "hands": [
+            "Create a service exposing readonly state.",
+            "Refactor manual subscriptions to AsyncPipe or takeUntilDestroyed."
+          ],
+          "interview": [
+            "Observable vs Promise?",
+            "Subject vs BehaviorSubject?",
+            "How do you prevent subscription leaks?"
+          ]
+        },
+        {
+          "id": "rx-operators",
+          "title": "RxJS Operators — The Interview Core",
+          "priority": "Intermediate",
+          "theory": [
+            "Transformation: map, switchMap, mergeMap, concatMap, exhaustMap",
+            "Filtering: filter, debounceTime, distinctUntilChanged, take",
+            "Combination: forkJoin, combineLatest, zip, withLatestFrom",
+            "Errors: catchError, retry",
+            "Lifecycle: takeUntilDestroyed"
+          ],
+          "code": "search$.pipe(\n  debounceTime(300),\n  distinctUntilChanged(),\n  switchMap(term => api.search(term)),\n  catchError(() => of([]))\n);",
+          "hands": [
+            "Build typeahead search with cancellation.",
+            "Implement independent dashboard API loading and per-widget errors."
+          ],
+          "interview": [
+            "switchMap vs mergeMap vs concatMap vs exhaustMap?",
+            "forkJoin vs combineLatest?",
+            "Why can switchMap be dangerous for writes?"
+          ]
+        },
+        {
+          "id": "signals",
+          "title": "Angular Signals",
+          "priority": "Intermediate",
+          "theory": [
+            "signal()",
+            "computed()",
+            "effect()",
+            "Writable vs readonly signals",
+            "Signal inputs",
+            "toSignal / toObservable interop",
+            "Signals for local and UI state"
+          ],
+          "code": "count = signal(0);\ndouble = computed(() => this.count() * 2);\n\nincrement() {\n  this.count.update(v => v + 1);\n}",
+          "hands": [
+            "Convert a BehaviorSubject-based local state service to Signals.",
+            "Build a filterable dashboard using signals and computed state."
+          ],
+          "interview": [
+            "Signals vs RxJS?",
+            "When should you not replace an Observable with a Signal?",
+            "What is computed() for? What should effects be used for?"
+          ]
+        },
+        {
+          "id": "change-detection",
+          "title": "Change Detection, OnPush & Zoneless Concepts",
+          "priority": "Intermediate",
+          "theory": [
+            "Change detection tree",
+            "Default vs OnPush",
+            "markForCheck and detectChanges",
+            "Immutable updates",
+            "Signals and fine-grained reactivity",
+            "Zone.js concepts",
+            "Zoneless Angular concepts in modern versions"
+          ],
+          "hands": [
+            "Diagnose unnecessary rendering in a large table.",
+            "Optimize a component tree with OnPush and reactive state."
+          ],
+          "interview": [
+            "Why is a component rendering repeatedly?",
+            "OnPush vs default?",
+            "What changes when Angular runs without Zone.js?"
+          ]
+        },
+        {
+          "id": "http-auth",
+          "title": "HTTP Client, Interceptors & JWT Refresh",
+          "priority": "Intermediate",
+          "theory": [
+            "HttpClient request/response lifecycle",
+            "JWT attachment",
+            "Centralized error handling",
+            "Refresh tokens",
+            "Retrying failed requests",
+            "Concurrent 401 handling",
+            "RBAC and authorization"
+          ],
+          "code": "Request\n  ↓\nInterceptor\n  ↓\n401?\n  ↓\nSingle refresh operation\n  ↓\nRetry pending requests",
+          "hands": [
+            "Build login + access token + refresh token flow.",
+            "Handle five simultaneous 401 responses without triggering five refresh calls."
+          ],
+          "interview": [
+            "How do you prevent concurrent refresh-token calls?",
+            "Where should authorization decisions ultimately be enforced?"
+          ]
+        },
+        {
+          "id": "state-architecture",
+          "title": "State Management & Facade Architecture",
+          "priority": "Intermediate",
+          "theory": [
+            "Local signal state",
+            "Observable async state",
+            "Service/facade pattern",
+            "When centralized store is justified",
+            "NgRx concepts",
+            "Server state vs client/UI state"
+          ],
+          "hands": [
+            "Create a UsersFacade with loading, data and error state.",
+            "Document why a feature does or does not need a global store."
+          ],
+          "interview": [
+            "When would you use NgRx?",
+            "Signals vs store?",
+            "How do you avoid a giant global state?"
+          ]
+        },
+        {
+          "id": "modern-angular",
+          "title": "Modern Angular: @defer, SSR/Hydration, AI Tooling",
+          "priority": "Intermediate",
+          "theory": [
+            "Deferrable views with @defer",
+            "SSR and hydration concepts",
+            "Incremental hydration where supported",
+            "Angular CLI AI/MCP tooling where supported by the target version",
+            "Accessibility primitives and modern Angular tooling"
+          ],
+          "code": "@defer (on viewport) {\n  <app-heavy-chart />\n} @placeholder {\n  <p>Loading chart...</p>\n}",
+          "hands": [
+            "Defer a heavy chart and compare loading behavior.",
+            "Explore the Angular CLI MCP workflow in a version that supports it."
+          ],
+          "interview": [
+            "@defer vs lazy-loaded route?",
+            "What is hydration?",
+            "How can AI/MCP tooling help an Angular team without replacing engineering judgment?"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "phase4",
+      "num": "3",
+      "title": "Tooling, Testing & Performance",
+      "goal": "Learn to ship, test, measure and optimize production Angular applications.",
+      "topics": [
+        {
+          "id": "cli-build",
+          "title": "Angular CLI & Build Tooling",
+          "priority": "Advanced",
+          "theory": [
+            "ng new, generate, serve, build, test, lint",
+            "Workspace and configuration",
+            "Environment/build configurations",
+            "Bundle analysis",
+            "Vite / Webpack basics",
+            "ESBuild, tree shaking, code splitting, source maps"
+          ],
+          "hands": [
+            "Create production and development build configurations.",
+            "Inspect generated bundles and identify a large dependency."
+          ],
+          "interview": [
+            "What is tree shaking?",
+            "Code splitting vs lazy loading?",
+            "What does a bundler actually do?"
+          ]
+        },
+        {
+          "id": "testing-unit",
+          "title": "Unit Testing with Jest / Jasmine & Modern Test Runners",
+          "priority": "Advanced",
+          "theory": [
+            "TestBed",
+            "Component tests",
+            "Service tests",
+            "Pipe and directive tests",
+            "Mocks and spies",
+            "HTTP testing",
+            "Jest/Jasmine concepts",
+            "Vitest in modern Angular setups where applicable"
+          ],
+          "hands": [
+            "Test login service, guard, interceptor, reactive form and component behavior.",
+            "Mock HTTP responses and test success/error paths."
+          ],
+          "interview": [
+            "Mock vs spy?",
+            "Unit vs integration test?",
+            "What should not be tested?",
+            "How do modern Angular projects choose a test runner?"
+          ]
+        },
+        {
+          "id": "testing-rtl",
+          "title": "Angular Testing Library & Behavior-focused Testing",
+          "priority": "Advanced",
+          "theory": [
+            "User-centric queries",
+            "DOM assertions",
+            "User interaction",
+            "Testing visible behavior",
+            "Avoiding implementation-detail tests"
+          ],
+          "hands": [
+            "Test a login form from the user's perspective.",
+            "Test loading, success, empty and error states."
+          ],
+          "interview": [
+            "Why test behavior instead of private component variables?",
+            "How would you test accessibility-related behavior?"
+          ]
+        },
+        {
+          "id": "web-vitals",
+          "title": "Core Web Vitals & Browser Performance",
+          "priority": "Advanced",
+          "theory": [
+            "LCP — loading performance",
+            "INP — interaction responsiveness",
+            "CLS — visual stability",
+            "Network waterfall",
+            "Main-thread work",
+            "Image and font optimization"
+          ],
+          "hands": [
+            "Measure a dashboard before and after optimization.",
+            "Find a slow interaction and identify its main-thread cause."
+          ],
+          "interview": [
+            "What affects LCP?",
+            "What causes CLS?",
+            "How do you investigate poor INP?"
+          ]
+        },
+        {
+          "id": "ng-performance",
+          "title": "Angular Performance Optimization",
+          "priority": "Advanced",
+          "theory": [
+            "Lazy routes",
+            "@defer",
+            "OnPush",
+            "Signals",
+            "Virtual scrolling",
+            "Pagination",
+            "Memoization",
+            "Track identity",
+            "Avoid expensive template calls",
+            "Caching",
+            "SSR/SSG when appropriate"
+          ],
+          "hands": [
+            "Optimize a 10,000-row table.",
+            "Reduce duplicate API calls in a dashboard and document before/after behavior."
+          ],
+          "interview": [
+            "A table with 10,000 records is slow — what do you check first?",
+            "How do you identify a memory leak?",
+            "When is caching harmful?"
+          ]
+        },
+        {
+          "id": "accessibility",
+          "title": "Accessibility & Production Quality",
+          "priority": "Advanced",
+          "theory": [
+            "Semantic HTML",
+            "Keyboard navigation",
+            "Focus management",
+            "ARIA",
+            "WCAG basics",
+            "Responsive design",
+            "Error and empty states",
+            "Cross-browser considerations"
+          ],
+          "hands": [
+            "Make a modal keyboard accessible.",
+            "Audit a form and data table for keyboard and screen-reader usability."
+          ],
+          "interview": [
+            "What makes a component accessible?",
+            "ARIA vs semantic HTML?",
+            "How do you preserve focus after navigation or modal interactions?"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "phase5",
+      "num": "4",
+      "title": "Interview Preparation & Practical Assessment",
+      "goal": "Turn knowledge into interview performance: conceptual answers, coding, debugging, system design and project storytelling.",
+      "topics": [
+        {
+          "id": "interview-angular",
+          "title": "Top Angular Conceptual Questions",
+          "priority": "Advanced",
+          "theory": [
+            "Standalone architecture",
+            "DI hierarchy",
+            "Lifecycle",
+            "Reactive forms",
+            "Routing",
+            "Guards",
+            "Interceptors",
+            "Lazy loading",
+            "RxJS operators",
+            "Signals",
+            "Change detection",
+            "Performance"
+          ],
+          "hands": [
+            "Practice 30 Angular questions without notes.",
+            "For every answer include definition → example → trade-off."
+          ],
+          "interview": [
+            "Signals vs RxJS?",
+            "switchMap vs mergeMap?",
+            "OnPush?",
+            "Guard vs resolver?",
+            "How do you handle JWT refresh concurrency?"
+          ]
+        },
+        {
+          "id": "live-coding",
+          "title": "Live Coding & Scenario Assessment",
+          "priority": "Advanced",
+          "theory": [
+            "Frontend coding differs from algorithm-only coding: prioritize correctness, state, UX, error handling and maintainability.",
+            "Practice incremental implementation and explain decisions while coding."
+          ],
+          "hands": [
+            "Debounced search",
+            "Dynamic reactive form",
+            "Paginated/filterable table",
+            "Permission directive",
+            "Reusable modal",
+            "Dashboard with independent API states",
+            "Auth interceptor",
+            "JWT refresh flow"
+          ],
+          "interview": [
+            "Explain your assumptions before coding.",
+            "Handle loading, empty and error states.",
+            "Refactor duplication after the first working version."
+          ]
+        },
+        {
+          "id": "system-design",
+          "title": "Frontend System Design",
+          "priority": "Advanced",
+          "theory": [
+            "Feature-based architecture",
+            "Core/shared/features",
+            "Component boundaries",
+            "State ownership",
+            "API contracts",
+            "Caching",
+            "Authentication",
+            "RBAC",
+            "Performance",
+            "Testing",
+            "Observability",
+            "Micro Frontend considerations"
+          ],
+          "code": "Application\n ├── Core\n │   ├── Auth / HTTP / Config\n │   └── Cross-cutting services\n ├── Shared\n │   └── UI / utilities\n └── Features\n     ├── Users\n     ├── Orders\n     └── Reports",
+          "hands": [
+            "Design a scalable Angular analytics dashboard.",
+            "Explain why each state belongs locally, in a facade, or in a centralized store."
+          ],
+          "interview": [
+            "Design an enterprise Angular dashboard.",
+            "How would you scale a component library?",
+            "When would Micro Frontends be justified?"
+          ]
+        },
+        {
+          "id": "project-story",
+          "title": "How to Explain Your Past Projects",
+          "priority": "Advanced",
+          "theory": [
+            "Use Problem → Architecture → Responsibility → Challenge → Solution → Result.",
+            "Focus on your decisions and trade-offs, not only the technology list.",
+            "Be precise about what you personally implemented."
+          ],
+          "code": "Problem\n  ↓\nArchitecture\n  ↓\nYour Responsibility\n  ↓\nTechnical Challenge\n  ↓\nSolution\n  ↓\nResult",
+          "hands": [
+            "Prepare 3 project stories: dashboard/performance, authentication/RBAC, reusable component architecture.",
+            "Prepare one failure/lesson-learned story and one difficult production debugging story."
+          ],
+          "interview": [
+            "Tell me about your project.",
+            "What was the hardest technical problem?",
+            "Why did you choose RxJS/Signals?",
+            "What would you change now?"
+          ]
+        },
+        {
+          "id": "practical-assessment",
+          "title": "Mock Interview Assessment",
+          "priority": "Advanced",
+          "theory": [
+            "30 min JavaScript",
+            "45 min Angular",
+            "30 min live coding",
+            "30 min frontend system design",
+            "15 min project discussion"
+          ],
+          "hands": [
+            "Record yourself answering without notes.",
+            "After each mock, write the three weakest answers and revisit them."
+          ],
+          "interview": [
+            "Can you explain a concept simply?",
+            "Can you code while communicating?",
+            "Can you defend an architecture choice with trade-offs?"
+          ]
+        }
+      ]
+    }
+  ],
+  "topicReferences": {
+    "ng-architecture": [
+      {
+        "title": "Angular Docs — Standalone Components",
+        "url": "https://angular.dev/guide/components",
+        "description": "Learn about standalone architecture."
+      }
+    ],
+    "ng-components": [
+      {
+        "title": "Angular Docs — Components",
+        "url": "https://angular.dev/guide/components",
+        "description": "Component communication and templates."
+      },
+      {
+        "title": "Angular Docs — Control Flow",
+        "url": "https://angular.dev/guide/templates/control-flow",
+        "description": "New built-in control flow in Angular."
+      }
+    ],
+    "ng-directives-pipes": [
+      {
+        "title": "Angular Docs — Directives",
+        "url": "https://angular.dev/guide/directives",
+        "description": "Attribute and structural directives."
+      },
+      {
+        "title": "Angular Docs — Pipes",
+        "url": "https://angular.dev/guide/pipes",
+        "description": "Formatting data with pipes."
+      }
+    ],
+    "ng-di": [
+      {
+        "title": "Angular Docs — Dependency Injection",
+        "url": "https://angular.dev/guide/di",
+        "description": "DI system and hierarchical injectors."
+      }
+    ],
+    "ng-routing": [
+      {
+        "title": "Angular Docs — Routing",
+        "url": "https://angular.dev/guide/routing",
+        "description": "Router setup, lazy loading, and guards."
+      }
+    ],
+    "ng-forms": [
+      {
+        "title": "Angular Docs — Reactive Forms",
+        "url": "https://angular.dev/guide/forms/reactive-forms",
+        "description": "Building forms and custom validators."
+      }
+    ],
+    "rx-observable": [
+      {
+        "title": "RxJS Docs — Observables",
+        "url": "https://rxjs.dev/guide/observable",
+        "description": "Understanding Observables."
+      },
+      {
+        "title": "RxJS Docs — Subject",
+        "url": "https://rxjs.dev/guide/subject",
+        "description": "Subjects and multicasting."
+      }
+    ],
+    "rx-operators": [
+      {
+        "title": "RxJS Docs — Operators",
+        "url": "https://rxjs.dev/guide/operators",
+        "description": "Higher-order mapping operators and more."
+      }
+    ],
+    "signals": [
+      {
+        "title": "Angular Docs — Signals",
+        "url": "https://angular.dev/guide/signals",
+        "description": "Official Angular documentation for Signals."
+      }
+    ],
+    "change-detection": [
+      {
+        "title": "Angular Docs — Change Detection",
+        "url": "https://angular.dev/best-practices/skipping-default-change-detection",
+        "description": "OnPush and change detection optimization."
+      }
+    ],
+    "http-auth": [
+      {
+        "title": "Angular Docs — HttpClient",
+        "url": "https://angular.dev/guide/http",
+        "description": "Making HTTP requests and interceptors."
+      }
+    ],
+    "state-architecture": [
+      {
+        "title": "NgRx Docs",
+        "url": "https://ngrx.io/",
+        "description": "State management using NgRx."
+      }
+    ],
+    "modern-angular": [
+      {
+        "title": "Angular Docs — Deferrable Views",
+        "url": "https://angular.dev/guide/defer",
+        "description": "@defer block documentation."
+      },
+      {
+        "title": "Angular Docs — SSR and Hydration",
+        "url": "https://angular.dev/guide/hydration",
+        "description": "Server-side rendering and hydration."
+      }
+    ],
+    "cli-build": [
+      {
+        "title": "Angular Docs — CLI",
+        "url": "https://angular.dev/tools/cli",
+        "description": "Angular CLI commands and configuration."
+      }
+    ],
+    "testing-unit": [
+      {
+        "title": "Angular Docs — Testing",
+        "url": "https://angular.dev/guide/testing",
+        "description": "Unit testing components and services."
+      },
+      {
+        "title": "Jest Docs",
+        "url": "https://jestjs.io/",
+        "description": "Jest testing framework."
+      }
+    ],
+    "testing-rtl": [
+      {
+        "title": "Testing Library — Angular",
+        "url": "https://testing-library.com/docs/angular-testing-library/intro/",
+        "description": "Behavior-focused testing for Angular."
+      }
+    ],
+    "web-vitals": [
+      {
+        "title": "web.dev — Web Vitals",
+        "url": "https://web.dev/vitals/",
+        "description": "Core Web Vitals overview."
+      }
+    ],
+    "ng-performance": [
+      {
+        "title": "Angular Docs — Performance",
+        "url": "https://angular.dev/best-practices/runtime-performance",
+        "description": "Optimizing Angular application performance."
+      }
+    ],
+    "accessibility": [
+      {
+        "title": "Angular Docs — Accessibility",
+        "url": "https://angular.dev/best-practices/a11y",
+        "description": "Building accessible Angular apps."
+      }
+    ],
+    "interview-js": [
+      {
+        "title": "MDN — JavaScript",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
+        "description": "Comprehensive JavaScript reference."
+      }
+    ],
+    "interview-angular": [
+      {
+        "title": "Angular Docs",
+        "url": "https://angular.dev/",
+        "description": "Official Angular documentation."
+      }
+    ],
+    "live-coding": [
+      {
+        "title": "web.dev",
+        "url": "https://web.dev/",
+        "description": "Best practices for modern web development."
+      }
+    ],
+    "system-design": [
+      {
+        "title": "Patterns.dev",
+        "url": "https://www.patterns.dev/",
+        "description": "Modern web app design patterns."
+      }
+    ],
+    "project-story": [
+      {
+        "title": "STAR Method",
+        "url": "https://en.wikipedia.org/wiki/Situation,_task,_action,_result",
+        "description": "How to explain projects and behavior."
+      }
+    ],
+    "practical-assessment": [
+      {
+        "title": "Angular Docs",
+        "url": "https://angular.dev/",
+        "description": "Review official docs before assessments."
+      }
+    ]
+  }
+}

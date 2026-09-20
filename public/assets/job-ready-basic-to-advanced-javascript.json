@@ -1,0 +1,1798 @@
+{
+  "roadmap": [
+    {
+      "id": "phase1",
+      "num": "1",
+      "title": "Basic to Advanced JavaScript Fundamentals",
+      "goal": "Build the JavaScript depth required to reason about Angular, RxJS and browser behavior.",
+      "topics": [
+        {
+          "id": "js-execution",
+          "title": "Execution Context, Scope & Hoisting",
+          "priority": "Basic",
+          "theory": [
+            "Global and function execution contexts",
+            "Call stack, lexical environment and scope chain",
+            "var, let and const",
+            "Hoisting and Temporal Dead Zone (TDZ)",
+            "Strict mode and this",
+            "Global scope, function scope and block scope"
+          ],
+          "hands": [
+            "Predict the output of nested function and scope examples.",
+            "Create examples showing var, let, const and TDZ behavior.",
+            "Draw the execution context and scope chain for nested functions."
+          ],
+          "interview": [
+            "What is an execution context?",
+            "Is let hoisted? Yes, but access before initialization is blocked by the TDZ.",
+            "Explain the difference between function scope and block scope.",
+            "What happens when JavaScript executes a function?"
+          ]
+        },
+        {
+          "id": "js-closures",
+          "title": "Closures",
+          "priority": "Basic",
+          "theory": [
+            "A closure is a function retaining access to variables from its lexical scope after the outer function has returned.",
+            "Data encapsulation and private state",
+            "Callbacks, factories and memoization",
+            "Closure behavior inside loops",
+            "Closures and memory retention"
+          ],
+          "code": "function counter() {\n  let count = 0;\n  return () => ++count;\n}\nconst increment = counter();\nincrement(); // 1\nincrement(); // 2",
+          "hands": [
+            "Build counter(), once(), memoize() and a factory function.",
+            "Explain why the returned function still accesses count.",
+            "Create a closure-based private state implementation."
+          ],
+          "interview": [
+            "What is a closure?",
+            "Where are closures useful in real applications?",
+            "How can closures contribute to memory retention?",
+            "Explain closures using a real Angular example."
+          ]
+        },
+        {
+          "id": "js-event-loop",
+          "title": "Event Loop & Asynchronous JavaScript",
+          "priority": "Basic",
+          "theory": [
+            "Call Stack, Web APIs and Event Loop",
+            "Microtask vs macrotask queues",
+            "Promise callbacks, setTimeout and DOM events",
+            "Callbacks, Promises and async/await",
+            "Promise.all, allSettled, race and any",
+            "Rendering and browser task scheduling"
+          ],
+          "code": "console.log(\"A\");\n\nsetTimeout(() => console.log(\"B\"), 0);\nPromise.resolve().then(() => console.log(\"C\"));\n\nconsole.log(\"D\");\n\n// Output:\n// A\n// D\n// C\n// B",
+          "hands": [
+            "Create 20 event-loop examples and predict output before executing them.",
+            "Build a dashboard that concurrently loads users, products and orders.",
+            "Create examples involving nested promises, timers and async/await."
+          ],
+          "interview": [
+            "Why does Promise run before setTimeout(..., 0)?",
+            "Does async/await create a new thread?",
+            "When would you use Promise.all()?",
+            "What is the difference between microtasks and macrotasks?"
+          ]
+        },
+        {
+          "id": "js-prototypes",
+          "title": "Prototypes, this & Inheritance",
+          "priority": "Basic",
+          "theory": [
+            "prototype and __proto__",
+            "Prototype chain",
+            "Constructor functions",
+            "Object.create",
+            "Classes as syntax over the prototype system",
+            "this binding and arrow functions",
+            "call, apply and bind"
+          ],
+          "hands": [
+            "Implement inheritance with Object.create.",
+            "Compare class syntax with constructor/prototype syntax.",
+            "Create examples using call(), apply() and bind()."
+          ],
+          "interview": [
+            "Is JavaScript class-based or prototype-based?",
+            "Arrow function vs normal function for this?",
+            "How does property lookup work through the prototype chain?",
+            "What is the difference between call, apply and bind?"
+          ]
+        },
+        {
+          "id": "js-memory",
+          "title": "Memory Management",
+          "priority": "Basic",
+          "theory": [
+            "Stack and heap",
+            "Garbage collection and reachability",
+            "Retained objects",
+            "Common frontend memory leaks",
+            "Timers, event listeners, subscriptions and closures",
+            "WeakMap and WeakSet"
+          ],
+          "hands": [
+            "Create and fix examples involving timers and event listeners.",
+            "Use browser DevTools memory tools to inspect retained objects.",
+            "Find and fix a simulated memory leak in an Angular application."
+          ],
+          "interview": [
+            "What causes a frontend memory leak?",
+            "How do you clean up timers and subscriptions?",
+            "Why can a closure retain a large object?",
+            "What is the difference between WeakMap and Map?"
+          ]
+        },
+        {
+          "id": "js-coding",
+          "title": "JavaScript Practical Coding",
+          "priority": "Basic",
+          "theory": [
+            "Array methods: map, filter, reduce, forEach, find, some, every",
+            "Debounce and throttle",
+            "Shallow vs deep copy",
+            "Immutability and Object.freeze",
+            "Async error handling",
+            "Optional chaining and nullish coalescing",
+            "Destructuring and spread/rest operators"
+          ],
+          "hands": [
+            "Implement debounce(), throttle(), memoize() and a simple EventEmitter.",
+            "Solve data transformation scenarios using map/filter/reduce.",
+            "Implement deepClone() for common object types.",
+            "Implement a simple Promise utility."
+          ],
+          "interview": [
+            "Debounce vs throttle?",
+            "map vs forEach?",
+            "How would you safely clone nested data?",
+            "What is the difference between == and ===?",
+            "What is immutability and why is it useful?"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "phase2",
+      "num": "2",
+      "title": "TypeScript Mastery",
+      "goal": "Develop strong type-system knowledge required for large-scale Angular applications.",
+      "topics": [
+        {
+          "id": "ts-basics",
+          "title": "TypeScript Fundamentals",
+          "priority": "Intermediate",
+          "theory": [
+            "Primitive types",
+            "Arrays, tuples and enums",
+            "Type aliases and interfaces",
+            "Union and intersection types",
+            "Literal types",
+            "Type inference",
+            "any, unknown, never and void"
+          ],
+          "hands": [
+            "Convert a JavaScript utility library to TypeScript.",
+            "Create interfaces for API request and response models.",
+            "Replace unnecessary any types with safe alternatives."
+          ],
+          "interview": [
+            "interface vs type?",
+            "unknown vs any?",
+            "What is never?",
+            "What is structural typing?"
+          ]
+        },
+        {
+          "id": "ts-generics",
+          "title": "Generics & Advanced Types",
+          "priority": "Intermediate",
+          "theory": [
+            "Generic functions",
+            "Generic interfaces",
+            "Generic constraints",
+            "keyof and typeof",
+            "Indexed access types",
+            "Conditional types",
+            "Mapped types",
+            "Utility types"
+          ],
+          "hands": [
+            "Create a generic ApiResponse<T> type.",
+            "Build a reusable generic table configuration.",
+            "Create typed API service utilities.",
+            "Implement reusable Pick, Omit and Partial patterns."
+          ],
+          "interview": [
+            "Why are generics useful?",
+            "Explain keyof.",
+            "What are mapped types?",
+            "What is a generic constraint?"
+          ]
+        },
+        {
+          "id": "ts-advanced",
+          "title": "Advanced TypeScript Patterns",
+          "priority": "Intermediate",
+          "theory": [
+            "Discriminated unions",
+            "Type guards",
+            "User-defined type predicates",
+            "Function overloads",
+            "Readonly types",
+            "Template literal types",
+            "Declaration merging",
+            "Module augmentation"
+          ],
+          "hands": [
+            "Build a type-safe state machine.",
+            "Create discriminated API response types.",
+            "Implement custom type guards.",
+            "Create strongly typed event handlers."
+          ],
+          "interview": [
+            "What is a discriminated union?",
+            "What is a type predicate?",
+            "When should function overloads be used?",
+            "Compile-time type checking vs runtime validation?"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "phase3",
+      "num": "3",
+      "title": "HTML, CSS & Browser Fundamentals",
+      "goal": "Master the platform underneath Angular instead of depending only on framework abstractions.",
+      "topics": [
+        {
+          "id": "html",
+          "title": "Semantic HTML & Accessibility",
+          "priority": "Intermediate",
+          "theory": [
+            "Semantic HTML",
+            "Forms and native validation",
+            "Labels and form controls",
+            "ARIA fundamentals",
+            "Keyboard navigation",
+            "Accessibility tree",
+            "SEO fundamentals"
+          ],
+          "hands": [
+            "Build an accessible form without Angular.",
+            "Create keyboard-accessible modal, dropdown and tabs.",
+            "Audit an existing page for accessibility problems."
+          ],
+          "interview": [
+            "Why is semantic HTML important?",
+            "What is ARIA?",
+            "How do you make a modal accessible?",
+            "What is keyboard accessibility?"
+          ]
+        },
+        {
+          "id": "css-layout",
+          "title": "CSS Layout & Responsive Design",
+          "priority": "Intermediate",
+          "theory": [
+            "Box model",
+            "Flexbox",
+            "CSS Grid",
+            "Positioning",
+            "Responsive design",
+            "Media queries",
+            "Container queries",
+            "CSS variables"
+          ],
+          "hands": [
+            "Build a responsive dashboard.",
+            "Recreate a complex layout using Grid and Flexbox.",
+            "Create a responsive sidebar and mobile navigation."
+          ],
+          "interview": [
+            "Flexbox vs Grid?",
+            "Explain CSS specificity.",
+            "What creates a stacking context?",
+            "How would you design responsive layouts?"
+          ]
+        },
+        {
+          "id": "css-architecture",
+          "title": "CSS Architecture & Design Systems",
+          "priority": "Intermediate",
+          "theory": [
+            "Component-based styling",
+            "Design tokens",
+            "CSS variables",
+            "Utility-first CSS",
+            "BEM concepts",
+            "Theme architecture",
+            "Dark mode",
+            "Component variants"
+          ],
+          "hands": [
+            "Create a reusable design system.",
+            "Build light and dark themes.",
+            "Create reusable button, input, modal and card components."
+          ],
+          "interview": [
+            "How would you structure CSS for a large application?",
+            "How do design tokens work?",
+            "How would you implement theming?",
+            "How do you prevent CSS from becoming difficult to maintain?"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "phase4",
+      "num": "4",
+      "title": "Browser, Web Platform & HTTP",
+      "goal": "Understand how frontend applications communicate with and execute inside the browser.",
+      "topics": [
+        {
+          "id": "browser-dom",
+          "title": "DOM, BOM & Rendering",
+          "priority": "Intermediate",
+          "theory": [
+            "DOM tree",
+            "BOM",
+            "Events and event propagation",
+            "Capturing and bubbling",
+            "Event delegation",
+            "Reflow and repaint",
+            "Rendering pipeline"
+          ],
+          "hands": [
+            "Build a vanilla JavaScript event delegation example.",
+            "Measure DOM rendering performance.",
+            "Create and optimize a large dynamic list."
+          ],
+          "interview": [
+            "Event bubbling vs capturing?",
+            "What is event delegation?",
+            "Reflow vs repaint?",
+            "Explain the browser rendering pipeline."
+          ]
+        },
+        {
+          "id": "http",
+          "title": "HTTP, REST & API Communication",
+          "priority": "Intermediate",
+          "theory": [
+            "HTTP methods",
+            "HTTP status codes",
+            "Headers",
+            "Cookies",
+            "Caching",
+            "REST APIs",
+            "Pagination",
+            "File upload and download",
+            "Idempotency"
+          ],
+          "hands": [
+            "Build a CRUD application using a REST API.",
+            "Implement pagination, sorting and filtering.",
+            "Handle loading, success and error states consistently."
+          ],
+          "interview": [
+            "PUT vs PATCH?",
+            "What is idempotency?",
+            "401 vs 403?",
+            "How does browser caching work?",
+            "How should frontend applications handle API errors?"
+          ]
+        },
+        {
+          "id": "web-security",
+          "title": "Frontend Web Security",
+          "priority": "Intermediate",
+          "theory": [
+            "XSS",
+            "CSRF",
+            "CORS",
+            "Content Security Policy",
+            "Secure cookies",
+            "Authentication vs authorization",
+            "Token storage risks",
+            "Input validation and sanitization"
+          ],
+          "hands": [
+            "Create an XSS demonstration in a safe local project.",
+            "Configure a frontend authentication flow.",
+            "Implement route-level authorization."
+          ],
+          "interview": [
+            "What is XSS?",
+            "What is CSRF?",
+            "Why does CORS exist?",
+            "Authentication vs authorization?",
+            "Where should authentication tokens be stored?"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "phase5",
+      "num": "5",
+      "title": "Angular Fundamentals to Advanced",
+      "goal": "Become highly proficient in modern Angular and understand the framework internals instead of only using APIs.",
+      "topics": [
+        {
+          "id": "angular-fundamentals",
+          "title": "Angular Core Fundamentals",
+          "priority": "Intermediate",
+          "theory": [
+            "Standalone components",
+            "Components and templates",
+            "Data binding",
+            "Input and output communication",
+            "Dependency injection",
+            "Services",
+            "Pipes",
+            "Directives",
+            "Angular project structure"
+          ],
+          "hands": [
+            "Build a multi-page Angular CRUD application.",
+            "Create reusable components and services.",
+            "Build custom directives and pipes."
+          ],
+          "interview": [
+            "What is a standalone component?",
+            "How does dependency injection work?",
+            "Component vs directive?",
+            "How does parent-child communication work?"
+          ]
+        },
+        {
+          "id": "angular-lifecycle",
+          "title": "Lifecycle, Change Detection & Rendering",
+          "priority": "Intermediate",
+          "theory": [
+            "Angular component lifecycle",
+            "Change detection",
+            "OnPush strategy",
+            "Signals",
+            "Computed values",
+            "Effects",
+            "Zone-based and zoneless concepts",
+            "Template rendering"
+          ],
+          "hands": [
+            "Build the same screen using traditional bindings and signals.",
+            "Optimize a slow component using OnPush and immutable data.",
+            "Create a signal-based feature."
+          ],
+          "interview": [
+            "Explain Angular change detection.",
+            "What is OnPush?",
+            "Signals vs RxJS?",
+            "When should computed() be used?",
+            "When can effects() become problematic?"
+          ]
+        },
+        {
+          "id": "angular-routing",
+          "title": "Angular Router",
+          "priority": "Intermediate",
+          "theory": [
+            "Routes and route configuration",
+            "Lazy loading",
+            "Route parameters",
+            "Query parameters",
+            "Nested routes",
+            "Route guards",
+            "Resolvers",
+            "Preloading strategies"
+          ],
+          "hands": [
+            "Build a lazy-loaded admin application.",
+            "Implement authentication and authorization guards.",
+            "Implement route-level permission checks."
+          ],
+          "interview": [
+            "How does lazy loading work?",
+            "Guard vs resolver?",
+            "Can a frontend guard provide real security?",
+            "How would you design permission-based routing?"
+          ]
+        },
+        {
+          "id": "angular-forms",
+          "title": "Angular Forms",
+          "priority": "Intermediate",
+          "theory": [
+            "Reactive forms",
+            "Template-driven forms",
+            "FormControl and FormGroup",
+            "FormArray",
+            "Custom validators",
+            "Async validators",
+            "Cross-field validation",
+            "ControlValueAccessor"
+          ],
+          "hands": [
+            "Build a dynamic user-management form.",
+            "Create reusable custom form controls.",
+            "Implement complex cross-field validation.",
+            "Create a dynamic FormArray-based form."
+          ],
+          "interview": [
+            "Reactive vs template-driven forms?",
+            "How does ControlValueAccessor work?",
+            "How do you create async validators?",
+            "How would you validate dependent fields?"
+          ]
+        },
+        {
+          "id": "angular-http",
+          "title": "HttpClient, Interceptors & API Architecture",
+          "priority": "Intermediate",
+          "theory": [
+            "HttpClient",
+            "HTTP interceptors",
+            "Authentication headers",
+            "Global error handling",
+            "Request retry strategies",
+            "API models",
+            "HTTP cancellation",
+            "Caching"
+          ],
+          "hands": [
+            "Build a reusable API service layer.",
+            "Implement authentication token handling.",
+            "Create global HTTP error handling.",
+            "Implement request cancellation."
+          ],
+          "interview": [
+            "How do Angular interceptors work?",
+            "Where should API logic live?",
+            "How do you handle expired tokens?",
+            "How do you prevent duplicate API requests?"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "phase6",
+      "num": "6",
+      "title": "RxJS & Reactive Programming",
+      "goal": "Master RxJS deeply enough to design predictable asynchronous Angular applications.",
+      "topics": [
+        {
+          "id": "rxjs-core",
+          "title": "RxJS Fundamentals",
+          "priority": "Intermediate",
+          "theory": [
+            "Observable",
+            "Observer",
+            "Subscription",
+            "Cold vs hot observables",
+            "Subject",
+            "BehaviorSubject",
+            "ReplaySubject",
+            "AsyncSubject"
+          ],
+          "hands": [
+            "Create custom Observables.",
+            "Compare Subject and BehaviorSubject.",
+            "Build a real-time notification stream."
+          ],
+          "interview": [
+            "Observable vs Promise?",
+            "Cold vs hot observable?",
+            "Subject vs BehaviorSubject?",
+            "What causes an Observable to execute?"
+          ]
+        },
+        {
+          "id": "rxjs-operators",
+          "title": "RxJS Operators",
+          "priority": "Intermediate",
+          "theory": [
+            "map",
+            "filter",
+            "tap",
+            "switchMap",
+            "mergeMap",
+            "concatMap",
+            "exhaustMap",
+            "combineLatest",
+            "forkJoin",
+            "withLatestFrom",
+            "catchError",
+            "retry",
+            "shareReplay"
+          ],
+          "hands": [
+            "Implement search using switchMap.",
+            "Build concurrent API loading using forkJoin.",
+            "Build sequential requests using concatMap.",
+            "Prevent duplicate form submissions using exhaustMap.",
+            "Create dependent API calls using switchMap."
+          ],
+          "interview": [
+            "switchMap vs mergeMap?",
+            "concatMap vs exhaustMap?",
+            "forkJoin vs combineLatest?",
+            "When does switchMap cancel work?",
+            "What problems can shareReplay introduce?"
+          ]
+        },
+        {
+          "id": "rxjs-memory",
+          "title": "RxJS Subscription & Memory Management",
+          "priority": "Intermediate",
+          "theory": [
+            "Subscription lifecycle",
+            "Unsubscription",
+            "takeUntilDestroyed",
+            "AsyncPipe",
+            "Nested subscriptions",
+            "Multicasting",
+            "Memory leaks"
+          ],
+          "hands": [
+            "Refactor nested subscriptions into operator chains.",
+            "Convert manual subscriptions to AsyncPipe.",
+            "Build examples using takeUntilDestroyed()."
+          ],
+          "interview": [
+            "How do RxJS subscriptions cause memory leaks?",
+            "AsyncPipe vs manual subscribe?",
+            "Why should nested subscriptions usually be avoided?",
+            "How do you cancel an Observable?"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "phase7",
+      "num": "7",
+      "title": "State Management & Application Architecture",
+      "goal": "Learn how to structure large frontend applications with predictable state and clear boundaries.",
+      "topics": [
+        {
+          "id": "state-fundamentals",
+          "title": "State Management Fundamentals",
+          "priority": "Advanced",
+          "theory": [
+            "Local component state",
+            "Shared state",
+            "Server state",
+            "Derived state",
+            "State normalization",
+            "Immutable updates",
+            "State ownership"
+          ],
+          "hands": [
+            "Build a feature without global state.",
+            "Refactor shared state into a centralized store.",
+            "Separate server state from UI state."
+          ],
+          "interview": [
+            "When should state be global?",
+            "What state should remain local?",
+            "What is derived state?",
+            "Why should state updates be predictable?"
+          ]
+        },
+        {
+          "id": "signals-state",
+          "title": "Angular Signals for State",
+          "priority": "Advanced",
+          "theory": [
+            "Writable signals",
+            "Computed signals",
+            "Effects",
+            "Signal inputs",
+            "Signal-based component state",
+            "Derived state",
+            "Signals and RxJS interoperability"
+          ],
+          "hands": [
+            "Build a shopping cart using signals.",
+            "Create a filterable data table using computed signals.",
+            "Integrate signals with HTTP and RxJS."
+          ],
+          "interview": [
+            "Why were signals introduced?",
+            "Signals vs BehaviorSubject?",
+            "Computed vs effect?",
+            "When should RxJS still be preferred?"
+          ]
+        },
+        {
+          "id": "ngrx",
+          "title": "NgRx & Redux Architecture",
+          "priority": "Advanced",
+          "theory": [
+            "Actions",
+            "Reducers",
+            "Selectors",
+            "Effects",
+            "Entity state",
+            "Feature stores",
+            "Normalized state",
+            "Redux principles"
+          ],
+          "hands": [
+            "Build an enterprise CRUD feature using NgRx.",
+            "Implement selectors for derived data.",
+            "Create effects for API communication.",
+            "Normalize a large entity collection."
+          ],
+          "interview": [
+            "Why use NgRx?",
+            "Reducer vs effect?",
+            "What makes a good selector?",
+            "When is NgRx unnecessary?"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "phase8",
+      "num": "8",
+      "title": "Frontend Architecture & Design Patterns",
+      "goal": "Develop senior-level skills for designing maintainable enterprise frontend systems.",
+      "topics": [
+        {
+          "id": "frontend-architecture",
+          "title": "Large-Scale Frontend Architecture",
+          "priority": "Intermediate",
+          "theory": [
+            "Feature-based architecture",
+            "Domain-driven frontend structure",
+            "Separation of concerns",
+            "Dependency inversion",
+            "Shared vs feature modules",
+            "Core infrastructure",
+            "Reusable libraries",
+            "Application boundaries"
+          ],
+          "hands": [
+            "Design an enterprise Angular application from scratch.",
+            "Split an application into independent business domains.",
+            "Define boundaries between shared, core and feature code."
+          ],
+          "interview": [
+            "How would you structure a large Angular application?",
+            "What belongs in shared vs core?",
+            "How do you prevent circular dependencies?",
+            "How do you decide component boundaries?"
+          ]
+        },
+        {
+          "id": "design-patterns",
+          "title": "Frontend Design Patterns",
+          "priority": "Intermediate",
+          "theory": [
+            "Facade pattern",
+            "Adapter pattern",
+            "Strategy pattern",
+            "Factory pattern",
+            "Observer pattern",
+            "Repository pattern",
+            "Dependency injection",
+            "Composition over inheritance"
+          ],
+          "hands": [
+            "Implement a facade for a complex feature.",
+            "Create a strategy-based form validation system.",
+            "Build an adapter for inconsistent API responses."
+          ],
+          "interview": [
+            "What is the Facade pattern?",
+            "When would you use Strategy?",
+            "Composition vs inheritance?",
+            "Which design patterns have you used in frontend applications?"
+          ]
+        },
+        {
+          "id": "reusable-components",
+          "title": "Reusable Component & Design System Architecture",
+          "priority": "Intermediate",
+          "theory": [
+            "Component API design",
+            "Content projection",
+            "Dynamic components",
+            "Reusable tables",
+            "Reusable forms",
+            "Modal architecture",
+            "Design tokens",
+            "Component documentation"
+          ],
+          "hands": [
+            "Build a reusable enterprise data table.",
+            "Build a reusable modal system.",
+            "Build a reusable form-field component.",
+            "Create a small internal component library."
+          ],
+          "interview": [
+            "How do you design reusable components?",
+            "What makes a component too generic?",
+            "How do you avoid prop/input explosion?",
+            "How would you design an enterprise data table?"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "phase9",
+      "num": "9",
+      "title": "Frontend Performance & Scalability",
+      "goal": "Learn how to diagnose and optimize real production applications.",
+      "topics": [
+        {
+          "id": "performance-core",
+          "title": "Web Performance Fundamentals",
+          "priority": "Intermediate",
+          "theory": [
+            "Core Web Vitals",
+            "Largest Contentful Paint",
+            "Interaction to Next Paint",
+            "Cumulative Layout Shift",
+            "First Contentful Paint",
+            "JavaScript execution cost",
+            "Network waterfalls",
+            "Main-thread blocking"
+          ],
+          "hands": [
+            "Profile a slow application.",
+            "Measure page-load performance before and after optimization.",
+            "Identify long-running main-thread tasks."
+          ],
+          "interview": [
+            "What are Core Web Vitals?",
+            "How would you diagnose a slow Angular application?",
+            "What causes long tasks?",
+            "How do you reduce main-thread work?"
+          ]
+        },
+        {
+          "id": "angular-performance",
+          "title": "Angular Performance Optimization",
+          "priority": "Intermediate",
+          "theory": [
+            "Lazy loading",
+            "OnPush",
+            "Signals",
+            "TrackBy and stable identity",
+            "Virtual scrolling",
+            "Deferrable views",
+            "Bundle optimization",
+            "Change detection optimization"
+          ],
+          "hands": [
+            "Optimize a large data table.",
+            "Implement lazy-loaded routes.",
+            "Use deferred loading for expensive UI.",
+            "Reduce unnecessary component rendering."
+          ],
+          "interview": [
+            "How do you optimize a large Angular application?",
+            "How does trackBy improve rendering?",
+            "When should virtual scrolling be used?",
+            "How do you identify unnecessary change detection?"
+          ]
+        },
+        {
+          "id": "performance-network",
+          "title": "Network & Bundle Optimization",
+          "priority": "Intermediate",
+          "theory": [
+            "Code splitting",
+            "Tree shaking",
+            "Lazy loading",
+            "Caching",
+            "Compression",
+            "CDN",
+            "Image optimization",
+            "Preloading and prefetching"
+          ],
+          "hands": [
+            "Analyze and reduce bundle size.",
+            "Implement route-level code splitting.",
+            "Optimize image-heavy pages.",
+            "Design a caching strategy."
+          ],
+          "interview": [
+            "What is tree shaking?",
+            "What is code splitting?",
+            "Preload vs prefetch?",
+            "How would you reduce initial bundle size?"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "phase10",
+      "num": "10",
+      "title": "Testing & Code Quality",
+      "goal": "Build confidence in production code through unit, integration and end-to-end testing.",
+      "topics": [
+        {
+          "id": "unit-testing",
+          "title": "Unit Testing",
+          "priority": "Advanced",
+          "theory": [
+            "Unit testing principles",
+            "Test isolation",
+            "Mocks and spies",
+            "Test doubles",
+            "Arrange-Act-Assert",
+            "Testing services",
+            "Testing components"
+          ],
+          "hands": [
+            "Write tests for services and utility functions.",
+            "Test Angular components.",
+            "Test HTTP services.",
+            "Test RxJS behavior."
+          ],
+          "interview": [
+            "What makes a good unit test?",
+            "Mock vs spy?",
+            "What should not be unit tested?",
+            "How do you test asynchronous code?"
+          ]
+        },
+        {
+          "id": "integration-testing",
+          "title": "Integration & Component Testing",
+          "priority": "Advanced",
+          "theory": [
+            "Component integration testing",
+            "HTTP testing",
+            "Router testing",
+            "Form testing",
+            "Dependency mocking",
+            "Test isolation vs realism"
+          ],
+          "hands": [
+            "Test a complete Angular feature.",
+            "Test routing and guards.",
+            "Test forms and validation.",
+            "Test API success and error scenarios."
+          ],
+          "interview": [
+            "Unit vs integration testing?",
+            "How would you test route guards?",
+            "How do you test HTTP failures?",
+            "What should integration tests cover?"
+          ]
+        },
+        {
+          "id": "e2e-testing",
+          "title": "End-to-End Testing",
+          "priority": "Advanced",
+          "theory": [
+            "End-to-end testing",
+            "User journeys",
+            "Test data",
+            "Selectors",
+            "Flaky tests",
+            "Authentication flows",
+            "CI execution"
+          ],
+          "hands": [
+            "Create E2E tests for login and checkout.",
+            "Create tests for critical business workflows.",
+            "Run E2E tests in CI."
+          ],
+          "interview": [
+            "What should be covered by E2E tests?",
+            "Why do E2E tests become flaky?",
+            "How do you design stable selectors?",
+            "How do you balance unit and E2E testing?"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "phase11",
+      "num": "11",
+      "title": "Git, CI/CD & Production Engineering",
+      "goal": "Become capable of owning frontend delivery from development through production.",
+      "topics": [
+        {
+          "id": "git",
+          "title": "Git & Team Collaboration",
+          "priority": "Advanced",
+          "theory": [
+            "Branches",
+            "Merge and rebase",
+            "Cherry-pick",
+            "Revert",
+            "Reset",
+            "Conflict resolution",
+            "Pull requests",
+            "Code review"
+          ],
+          "hands": [
+            "Resolve complex merge conflicts.",
+            "Practice revert, reset and cherry-pick.",
+            "Create feature branches and clean PRs.",
+            "Review another developer's PR."
+          ],
+          "interview": [
+            "Merge vs rebase?",
+            "Reset vs revert?",
+            "When would you cherry-pick?",
+            "How do you handle a bad production commit?"
+          ]
+        },
+        {
+          "id": "cicd",
+          "title": "CI/CD & Deployment",
+          "priority": "Advanced",
+          "theory": [
+            "CI/CD concepts",
+            "Build pipelines",
+            "Environment configuration",
+            "Secrets",
+            "Artifact generation",
+            "Deployment strategies",
+            "Rollback"
+          ],
+          "hands": [
+            "Create a frontend CI pipeline.",
+            "Run lint, tests and build automatically.",
+            "Deploy an Angular application.",
+            "Create separate development, UAT and production configurations."
+          ],
+          "interview": [
+            "What happens in a frontend CI pipeline?",
+            "How should environment variables be managed?",
+            "How would you roll back a broken frontend deployment?",
+            "What checks should run before deployment?"
+          ]
+        },
+        {
+          "id": "production-debugging",
+          "title": "Production Debugging & Observability",
+          "priority": "Advanced",
+          "theory": [
+            "Logging",
+            "Error tracking",
+            "Source maps",
+            "Performance monitoring",
+            "Network debugging",
+            "Browser DevTools",
+            "Production incident analysis"
+          ],
+          "hands": [
+            "Debug a simulated production error.",
+            "Analyze browser network failures.",
+            "Track and reproduce a frontend performance issue.",
+            "Create an incident debugging checklist."
+          ],
+          "interview": [
+            "How do you debug a production-only issue?",
+            "What information should frontend errors capture?",
+            "How do source maps help debugging?",
+            "How would you investigate a sudden increase in frontend errors?"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "phase12",
+      "num": "12",
+      "title": "Frontend System Design",
+      "goal": "Develop the architecture and trade-off reasoning expected from Senior Frontend and Architect-level interviews.",
+      "topics": [
+        {
+          "id": "system-design-basics",
+          "title": "Frontend System Design Fundamentals",
+          "priority": "Advanced",
+          "theory": [
+            "Functional requirements",
+            "Non-functional requirements",
+            "Scalability",
+            "Reliability",
+            "Performance",
+            "Security",
+            "Maintainability",
+            "Trade-offs"
+          ],
+          "hands": [
+            "Design a large e-commerce frontend.",
+            "Design an enterprise admin dashboard.",
+            "Design a multi-tenant SaaS frontend.",
+            "Document architecture decisions."
+          ],
+          "interview": [
+            "How would you design a large frontend application?",
+            "How do you identify architectural boundaries?",
+            "How do you make frontend architecture scalable?",
+            "How do you evaluate architectural trade-offs?"
+          ]
+        },
+        {
+          "id": "advanced-system-design",
+          "title": "Advanced Frontend System Design",
+          "priority": "Advanced",
+          "theory": [
+            "Micro-frontends",
+            "Monorepos",
+            "Module federation concepts",
+            "Design systems",
+            "Shared dependencies",
+            "Independent deployment",
+            "Cross-application communication",
+            "Frontend platform architecture"
+          ],
+          "hands": [
+            "Design a micro-frontend architecture.",
+            "Design a monorepo for multiple frontend applications.",
+            "Design a shared component and utility library.",
+            "Define communication between independent frontend domains."
+          ],
+          "interview": [
+            "When would you use micro-frontends?",
+            "What problems do micro-frontends introduce?",
+            "Monorepo vs polyrepo?",
+            "How would multiple frontend applications share authentication?",
+            "How would you prevent shared libraries from becoming a bottleneck?"
+          ]
+        },
+        {
+          "id": "architecture-case-study",
+          "title": "Enterprise Architecture Case Studies",
+          "priority": "Advanced",
+          "theory": [
+            "Role and permission management",
+            "Multi-tenant applications",
+            "Large data tables",
+            "Workflow applications",
+            "Real-time applications",
+            "Offline-first applications",
+            "Internationalization",
+            "Feature flags"
+          ],
+          "hands": [
+            "Design a complete enterprise ERP frontend.",
+            "Design a role and permission system.",
+            "Design a workflow management application.",
+            "Design a real-time dashboard.",
+            "Design a multi-tenant frontend with configurable branding."
+          ],
+          "interview": [
+            "How would you design permission-based UI?",
+            "How would you architect a configurable enterprise application?",
+            "How would you handle 100,000+ records in a frontend?",
+            "How would you design a real-time dashboard?",
+            "How would you design a frontend for multiple tenants?"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "phase13",
+      "num": "13",
+      "title": "Senior Frontend Interview Preparation",
+      "goal": "Convert technical knowledge into strong interview performance through coding, debugging, architecture and communication practice.",
+      "topics": [
+        {
+          "id": "js-interview",
+          "title": "JavaScript Interview Problems",
+          "priority": "Advanced",
+          "theory": [
+            "Output-based questions",
+            "Closures",
+            "Promises",
+            "Event loop",
+            "this",
+            "Prototypes",
+            "Async programming",
+            "Memory management"
+          ],
+          "hands": [
+            "Solve 50 JavaScript output questions.",
+            "Solve 30 asynchronous JavaScript problems.",
+            "Implement 15 common JavaScript utilities.",
+            "Explain every solution verbally."
+          ],
+          "interview": [
+            "Explain the event loop from memory.",
+            "Implement debounce without searching.",
+            "Implement Promise.all.",
+            "Explain closure using a production example.",
+            "Explain prototype inheritance."
+          ]
+        },
+        {
+          "id": "angular-interview",
+          "title": "Angular Interview Preparation",
+          "priority": "Advanced",
+          "theory": [
+            "Angular architecture",
+            "Standalone components",
+            "Signals",
+            "RxJS",
+            "Dependency injection",
+            "Change detection",
+            "Router",
+            "Forms",
+            "HTTP",
+            "Performance"
+          ],
+          "hands": [
+            "Build an Angular feature within 60 minutes.",
+            "Debug broken Angular code.",
+            "Refactor poorly structured Angular code.",
+            "Explain your architecture decisions."
+          ],
+          "interview": [
+            "Explain Angular change detection.",
+            "Signals vs RxJS?",
+            "Explain dependency injection.",
+            "How would you optimize Angular?",
+            "How would you structure an enterprise Angular application?"
+          ]
+        },
+        {
+          "id": "coding-interview",
+          "title": "Frontend Coding & Problem Solving",
+          "priority": "Advanced",
+          "theory": [
+            "Arrays",
+            "Strings",
+            "Hash maps",
+            "Stacks and queues",
+            "Recursion",
+            "Trees",
+            "Searching",
+            "Sorting",
+            "Big O complexity"
+          ],
+          "hands": [
+            "Solve 100 frontend-oriented coding problems.",
+            "Practice 2 timed coding problems per week.",
+            "Explain time and space complexity for every solution.",
+            "Implement common data structures from scratch."
+          ],
+          "interview": [
+            "Explain Big O of your solution.",
+            "How would you optimize this algorithm?",
+            "Can you solve the problem without extra memory?",
+            "What trade-off did you make?"
+          ]
+        },
+        {
+          "id": "system-design-interview",
+          "title": "Frontend System Design Interview",
+          "priority": "Advanced",
+          "theory": [
+            "Requirement clarification",
+            "Architecture diagrams",
+            "Data flow",
+            "State management",
+            "API boundaries",
+            "Caching",
+            "Performance",
+            "Security",
+            "Scalability",
+            "Trade-offs"
+          ],
+          "hands": [
+            "Practice designing 10 frontend systems.",
+            "Present each architecture in 30-45 minutes.",
+            "Draw component, state and data-flow diagrams.",
+            "Explain trade-offs and alternatives."
+          ],
+          "interview": [
+            "Design an e-commerce frontend.",
+            "Design a Google Docs-like collaborative application.",
+            "Design an enterprise dashboard.",
+            "Design a notification system.",
+            "Design a large-scale permission-management application."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "phase14",
+      "num": "14",
+      "title": "Capstone Projects & Real-World Engineering",
+      "goal": "Combine all skills into production-style applications that demonstrate Senior Frontend capability.",
+      "topics": [
+        {
+          "id": "capstone-crud",
+          "title": "Enterprise CRUD Application",
+          "priority": "Advanced",
+          "theory": [
+            "Authentication",
+            "Authorization",
+            "Role-based permissions",
+            "CRUD",
+            "Forms",
+            "Tables",
+            "Pagination",
+            "Filtering",
+            "Sorting",
+            "API integration"
+          ],
+          "hands": [
+            "Build a complete enterprise admin application.",
+            "Implement authentication and permission-based navigation.",
+            "Build reusable tables and forms.",
+            "Add loading, error and empty states."
+          ],
+          "interview": [
+            "Explain the architecture.",
+            "Explain your permission model.",
+            "Explain your reusable component strategy.",
+            "Explain how you would scale the application."
+          ]
+        },
+        {
+          "id": "capstone-real-time",
+          "title": "Real-Time Dashboard",
+          "priority": "Advanced",
+          "theory": [
+            "WebSockets",
+            "Real-time state",
+            "RxJS streams",
+            "Performance",
+            "Data visualization",
+            "Connection recovery",
+            "Error handling"
+          ],
+          "hands": [
+            "Build a real-time monitoring dashboard.",
+            "Stream live data into Angular.",
+            "Handle reconnect and connection failures.",
+            "Optimize rendering for high-frequency updates."
+          ],
+          "interview": [
+            "WebSocket vs polling?",
+            "How would you handle reconnection?",
+            "How would you prevent excessive rendering?",
+            "How would you scale a real-time frontend?"
+          ]
+        },
+        {
+          "id": "capstone-enterprise",
+          "title": "Enterprise SaaS Application",
+          "priority": "Advanced",
+          "theory": [
+            "Multi-tenancy",
+            "Role-based access",
+            "Feature flags",
+            "Configurable branding",
+            "Audit logs",
+            "Internationalization",
+            "Design system",
+            "Scalable architecture"
+          ],
+          "hands": [
+            "Build a multi-tenant SaaS application.",
+            "Implement configurable permissions.",
+            "Implement tenant-level settings.",
+            "Create a reusable enterprise design system.",
+            "Add automated testing and CI/CD."
+          ],
+          "interview": [
+            "How would you architect the application for 100+ teams?",
+            "How would you isolate tenant data at the frontend?",
+            "How would you manage permissions?",
+            "How would you design the shared component system?",
+            "What would you change if the application grew 10x?"
+          ]
+        }
+      ]
+    }
+  ],
+  "topicReferences": {
+    "js-execution": [
+      {
+        "title": "MDN — JavaScript Execution Model",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Execution_model",
+        "description": "Learn how JavaScript execution, jobs, execution contexts and the runtime model work."
+      },
+      {
+        "title": "MDN — var",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/var",
+        "description": "Learn about var declarations, scope and hoisting."
+      }
+    ],
+    "js-closures": [
+      {
+        "title": "MDN — Closures",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Closures",
+        "description": "Learn how closures work and how lexical environments are preserved."
+      },
+      {
+        "title": "MDN — Functions",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Functions",
+        "description": "Learn about functions in JavaScript."
+      }
+    ],
+    "js-event-loop": [
+      {
+        "title": "MDN — JavaScript Execution Model",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Execution_model",
+        "description": "Understand JavaScript jobs, execution contexts and the event-driven runtime model."
+      },
+      {
+        "title": "web.dev — Optimize Long Tasks",
+        "url": "https://web.dev/articles/optimize-long-tasks",
+        "description": "Learn how long-running JavaScript tasks affect responsiveness."
+      }
+    ],
+    "js-prototypes": [
+      {
+        "title": "MDN — Inheritance and the Prototype Chain",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Inheritance_and_the_prototype_chain",
+        "description": "Deep dive into JavaScript prototypes and inheritance."
+      }
+    ],
+    "js-memory": [
+      {
+        "title": "MDN — Memory Management",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Memory_management",
+        "description": "Learn about memory allocation, garbage collection and memory management."
+      }
+    ],
+    "js-coding": [
+      {
+        "title": "MDN — Array",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array",
+        "description": "Array methods and reference documentation."
+      }
+    ],
+    "ts-basics": [
+      {
+        "title": "TypeScript — Handbook",
+        "url": "https://www.typescriptlang.org/docs/handbook/intro.html",
+        "description": "Official TypeScript handbook covering the language fundamentals."
+      }
+    ],
+    "ts-generics": [
+      {
+        "title": "TypeScript — Generics",
+        "url": "https://www.typescriptlang.org/docs/handbook/2/generics.html",
+        "description": "Official guide to generic types and constraints."
+      },
+      {
+        "title": "TypeScript — Utility Types",
+        "url": "https://www.typescriptlang.org/docs/handbook/utility-types.html",
+        "description": "Reference for built-in TypeScript utility types."
+      }
+    ],
+    "ts-advanced": [
+      {
+        "title": "TypeScript — Narrowing",
+        "url": "https://www.typescriptlang.org/docs/handbook/2/narrowing.html",
+        "description": "Learn type guards, narrowing and type predicates."
+      },
+      {
+        "title": "TypeScript — Conditional Types",
+        "url": "https://www.typescriptlang.org/docs/handbook/2/conditional-types.html",
+        "description": "Learn advanced conditional type patterns."
+      }
+    ],
+    "html": [
+      {
+        "title": "MDN — HTML",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/HTML",
+        "description": "Reference and learning material for semantic HTML and web forms."
+      },
+      {
+        "title": "MDN — Accessibility",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/Accessibility",
+        "description": "Learn accessibility fundamentals for web applications."
+      }
+    ],
+    "css-layout": [
+      {
+        "title": "MDN — CSS Layout",
+        "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout",
+        "description": "Learn modern CSS layout using Flexbox, Grid and responsive techniques."
+      }
+    ],
+    "css-architecture": [
+      {
+        "title": "MDN — CSS Custom Properties",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties",
+        "description": "Learn CSS variables and reusable design-token patterns."
+      }
+    ],
+    "browser-dom": [
+      {
+        "title": "MDN — DOM",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model",
+        "description": "Learn the browser DOM and how web documents are represented."
+      },
+      {
+        "title": "MDN — Event Bubbling",
+        "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Scripting/Event_bubbling",
+        "description": "Understand event propagation, bubbling and delegation."
+      }
+    ],
+    "http": [
+      {
+        "title": "MDN — HTTP",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP",
+        "description": "Learn HTTP requests, responses, headers, caching and status codes."
+      }
+    ],
+    "web-security": [
+      {
+        "title": "OWASP — Cross Site Scripting Prevention",
+        "url": "https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html",
+        "description": "Learn practical defenses against XSS."
+      },
+      {
+        "title": "MDN — CORS",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS",
+        "description": "Understand browser cross-origin request rules."
+      }
+    ],
+    "angular-fundamentals": [
+      {
+        "title": "Angular — Components",
+        "url": "https://angular.dev/guide/components",
+        "description": "Official Angular documentation for components and templates."
+      },
+      {
+        "title": "Angular — Dependency Injection",
+        "url": "https://angular.dev/guide/di",
+        "description": "Learn Angular dependency injection and providers."
+      }
+    ],
+    "angular-lifecycle": [
+      {
+        "title": "Angular — Lifecycle",
+        "url": "https://angular.dev/guide/components/lifecycle",
+        "description": "Learn Angular component lifecycle and rendering behavior."
+      },
+      {
+        "title": "Angular — Signals",
+        "url": "https://angular.dev/guide/signals",
+        "description": "Learn Angular signals, computed state and effects."
+      }
+    ],
+    "angular-routing": [
+      {
+        "title": "Angular — Routing",
+        "url": "https://angular.dev/guide/routing",
+        "description": "Official Angular routing documentation."
+      }
+    ],
+    "angular-forms": [
+      {
+        "title": "Angular — Reactive Forms",
+        "url": "https://angular.dev/guide/forms/reactive-forms",
+        "description": "Learn Angular reactive forms, validation and form state."
+      }
+    ],
+    "angular-http": [
+      {
+        "title": "Angular — HTTP Client",
+        "url": "https://angular.dev/guide/http",
+        "description": "Learn HttpClient, interceptors and HTTP communication in Angular."
+      }
+    ],
+    "rxjs-core": [
+      {
+        "title": "RxJS — Documentation",
+        "url": "https://rxjs.dev/",
+        "description": "Official RxJS documentation covering Observables, Subjects and operators."
+      }
+    ],
+    "rxjs-operators": [
+      {
+        "title": "RxJS — Operators",
+        "url": "https://rxjs.dev/guide/operators",
+        "description": "Learn RxJS transformation, filtering, combination and error-handling operators."
+      }
+    ],
+    "rxjs-memory": [
+      {
+        "title": "Angular — Unsubscribing from Observables",
+        "url": "https://angular.dev/ecosystem/rxjs-interop/take-until-destroyed",
+        "description": "Learn Angular's takeUntilDestroyed utility for subscription lifecycle management."
+      }
+    ],
+    "state-fundamentals": [
+      {
+        "title": "Angular — Managing State",
+        "url": "https://angular.dev/guide/signals",
+        "description": "Learn modern Angular state patterns using signals."
+      }
+    ],
+    "signals-state": [
+      {
+        "title": "Angular — Signals",
+        "url": "https://angular.dev/guide/signals",
+        "description": "Official documentation for Angular signal-based reactive state."
+      }
+    ],
+    "ngrx": [
+      {
+        "title": "NgRx",
+        "url": "https://ngrx.io/",
+        "description": "Official NgRx documentation for reactive state management."
+      }
+    ],
+    "frontend-architecture": [
+      {
+        "title": "Angular — Style Guide",
+        "url": "https://angular.dev/style-guide",
+        "description": "Official Angular guidance for structuring and maintaining applications."
+      }
+    ],
+    "design-patterns": [
+      {
+        "title": "Refactoring Guru — Design Patterns",
+        "url": "https://refactoring.guru/design-patterns",
+        "description": "Reference for common software design patterns and their use cases."
+      }
+    ],
+    "reusable-components": [
+      {
+        "title": "Angular — Content Projection",
+        "url": "https://angular.dev/guide/components/content-projection",
+        "description": "Learn how to design flexible reusable Angular components."
+      }
+    ],
+    "performance-core": [
+      {
+        "title": "web.dev — Learn Performance",
+        "url": "https://web.dev/learn/performance",
+        "description": "Learn modern web performance principles and optimization techniques."
+      },
+      {
+        "title": "web.dev — Core Web Vitals",
+        "url": "https://web.dev/articles/vitals",
+        "description": "Understand the key metrics used to evaluate web user experience."
+      }
+    ],
+    "angular-performance": [
+      {
+        "title": "Angular — Performance",
+        "url": "https://angular.dev/best-practices/runtime-performance",
+        "description": "Official Angular guidance for runtime performance optimization."
+      }
+    ],
+    "performance-network": [
+      {
+        "title": "web.dev — Learn Performance",
+        "url": "https://web.dev/learn/performance",
+        "description": "Learn loading performance, caching, code splitting and optimization."
+      }
+    ],
+    "unit-testing": [
+      {
+        "title": "Angular — Testing",
+        "url": "https://angular.dev/guide/testing",
+        "description": "Official Angular testing documentation."
+      }
+    ],
+    "integration-testing": [
+      {
+        "title": "Angular — Testing",
+        "url": "https://angular.dev/guide/testing",
+        "description": "Learn Angular component, service and integration testing."
+      }
+    ],
+    "e2e-testing": [
+      {
+        "title": "Playwright",
+        "url": "https://playwright.dev/",
+        "description": "Documentation for modern end-to-end browser testing."
+      }
+    ],
+    "git": [
+      {
+        "title": "Git Documentation",
+        "url": "https://git-scm.com/doc",
+        "description": "Official Git documentation for version control and collaboration."
+      }
+    ],
+    "cicd": [
+      {
+        "title": "GitLab CI/CD",
+        "url": "https://docs.gitlab.com/ci/",
+        "description": "Learn how to build automated CI/CD pipelines."
+      }
+    ],
+    "production-debugging": [
+      {
+        "title": "Chrome DevTools",
+        "url": "https://developer.chrome.com/docs/devtools/",
+        "description": "Learn browser tools for debugging, profiling and performance analysis."
+      }
+    ],
+    "system-design-basics": [
+      {
+        "title": "web.dev — Learn Performance",
+        "url": "https://web.dev/learn/performance",
+        "description": "Useful foundation for frontend performance considerations in system design."
+      }
+    ],
+    "advanced-system-design": [
+      {
+        "title": "Angular — Monorepo",
+        "url": "https://angular.dev/ecosystem",
+        "description": "Explore Angular ecosystem concepts relevant to large frontend applications."
+      }
+    ],
+    "architecture-case-study": [
+      {
+        "title": "Angular — Style Guide",
+        "url": "https://angular.dev/style-guide",
+        "description": "Official Angular recommendations for maintainable application architecture."
+      }
+    ],
+    "js-interview": [
+      {
+        "title": "MDN — JavaScript Guide",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide",
+        "description": "Comprehensive JavaScript learning and reference material."
+      }
+    ],
+    "angular-interview": [
+      {
+        "title": "Angular — Documentation",
+        "url": "https://angular.dev/",
+        "description": "Official Angular documentation for framework concepts and APIs."
+      }
+    ],
+    "coding-interview": [
+      {
+        "title": "MDN — JavaScript Guide",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide",
+        "description": "Reference for JavaScript concepts used in frontend coding interviews."
+      }
+    ],
+    "system-design-interview": [
+      {
+        "title": "web.dev",
+        "url": "https://web.dev/",
+        "description": "Practical web platform and performance material useful for frontend system design."
+      }
+    ],
+    "capstone-crud": [
+      {
+        "title": "Angular — Documentation",
+        "url": "https://angular.dev/",
+        "description": "Official Angular documentation for building production applications."
+      }
+    ],
+    "capstone-real-time": [
+      {
+        "title": "MDN — WebSocket API",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API",
+        "description": "Learn browser WebSocket APIs for real-time communication."
+      },
+      {
+        "title": "RxJS",
+        "url": "https://rxjs.dev/",
+        "description": "Reactive programming library useful for managing real-time frontend streams."
+      }
+    ],
+    "capstone-enterprise": [
+      {
+        "title": "Angular — Documentation",
+        "url": "https://angular.dev/",
+        "description": "Official Angular documentation for enterprise frontend development."
+      },
+      {
+        "title": "Angular — Style Guide",
+        "url": "https://angular.dev/style-guide",
+        "description": "Guidance for maintaining scalable Angular codebases."
+      }
+    ]
+  }
+}

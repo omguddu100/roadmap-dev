@@ -1,0 +1,444 @@
+<div class="h-screen flex flex-col bg-white dark:bg-slate-900 overflow-hidden font-sans text-gray-900 dark:text-gray-100 transition-colors duration-300">
+  <!-- Top Bar (Spans full width) -->
+  <header class="bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 text-white py-3.5 px-6 flex justify-between items-center shrink-0 shadow-lg border-b border-white/10 relative z-20 transition-all duration-500">
+    <div class="flex-1 flex items-center gap-3">
+      <a routerLink="/" class="text-white/60 hover:text-white mr-2 transition-colors bg-white/5 hover:bg-white/10 p-2 rounded-xl backdrop-blur-sm" title="Back to Dashboard">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+      </a>
+    </div>
+    <h1 class="text-[17px] font-black flex items-center gap-3 justify-center flex-1 whitespace-nowrap tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-blue-200 to-indigo-200">
+      {{ pageTitle() }}
+    </h1>
+    <div class="flex-1 flex justify-end gap-3">
+      <button (click)="themeService.toggle()" class="bg-white/5 hover:bg-white/20 p-2.5 rounded-xl backdrop-blur-sm transition-all duration-300 text-indigo-200 border border-white/5" title="Toggle Theme">
+        @if(themeService.isDark()) {
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+        } @else {
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+        }
+      </button>
+      <button (click)="toggleFullScreen()" class="bg-white/5 hover:bg-white/20 p-2.5 rounded-xl backdrop-blur-sm transition-all duration-300 text-indigo-200 border border-white/5" title="Fullscreen">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"></path></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Split View -->
+  <div class="flex-1 flex flex-col md:flex-row overflow-hidden relative">
+    <!-- Left Sidebar -->
+    <div class="w-full md:w-[320px] shrink-0 border-r border-gray-200 dark:border-slate-800 h-full bg-white dark:bg-slate-900 z-10 shadow-[4px_0_24px_rgba(0,0,0,0.02)] transition-colors duration-300 flex flex-col"
+         [class.max-md:hidden]="currentTopicId() !== null">
+      <!-- Sidebar Header (Search & Actions) -->
+      <div class="p-4 border-b border-gray-100 dark:border-slate-800 flex flex-col gap-3">
+        
+        <!-- Toggle Button -->
+        <button (click)="showFilters.set(!showFilters())" class="flex items-center justify-between w-full bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 px-3 py-2 rounded-lg text-sm font-semibold text-gray-700 dark:text-slate-200 hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors shadow-sm">
+          <div class="flex items-center gap-2">
+            <svg class="w-4 h-4 text-gray-500 dark:text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"></path></svg>
+            Filters & Actions
+          </div>
+          <svg class="w-4 h-4 text-gray-400 transform transition-transform" [class.rotate-180]="showFilters()" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+        </button>
+
+        @if(showFilters()) {
+          <div class="flex flex-col gap-4 animate-fade-in mt-1">
+            <!-- Search -->
+            <div class="relative">
+              <svg class="absolute left-3 top-2.5 w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+              <input type="text" [ngModel]="searchQuery()" (ngModelChange)="searchQuery.set($event)" placeholder="Search topics, questions..." class="w-full pl-9 pr-3 py-2 text-sm border border-gray-200 dark:border-slate-700 dark:bg-slate-800 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-shadow outline-none" />
+            </div>
+            
+            <!-- Filters Stack -->
+            <div class="flex flex-col gap-3">
+              <!-- Phase Filter Dropdown -->
+              <div class="relative">
+                <select [ngModel]="selectedPhaseFilter()" (ngModelChange)="selectedPhaseFilter.set($event)"
+                        class="w-full appearance-none pl-3 pr-8 py-2 text-sm border border-gray-200 dark:border-slate-700 dark:bg-slate-800 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-shadow outline-none cursor-pointer">
+                  <option value="All">All Phases</option>
+                  @for (phase of roadmapData(); track phase.id) {
+                    <option [value]="phase.id">{{ phase.num }}. {{ phase.title }}</option>
+                  }
+                </select>
+                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-gray-400">
+                  <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </div>
+              </div>
+
+              <!-- Priority Filter Dropdown -->
+              <div class="relative">
+                <select [ngModel]="selectedPriorityFilter()" (ngModelChange)="selectedPriorityFilter.set($event)"
+                        class="w-full appearance-none pl-3 pr-8 py-2 text-sm border border-gray-200 dark:border-slate-700 dark:bg-slate-800 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-shadow outline-none cursor-pointer">
+                  <option value="All">All Priorities</option>
+                  @for (priority of availablePriorities(); track priority) {
+                    <option [value]="priority">{{ formatPriority(priority) }}</option>
+                  }
+                </select>
+                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-gray-400">
+                  <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </div>
+              </div>
+            </div>
+
+            <!-- Actions -->
+            <div class="flex flex-col gap-2">
+              <div class="flex gap-2">
+                <button (click)="expandAll()" class="flex-1 bg-blue-600 text-white py-1.5 px-3 rounded text-sm font-medium hover:bg-blue-700 transition-colors shadow-sm">Expand</button>
+                <button (click)="collapseAll()" class="flex-1 bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 text-gray-700 dark:text-slate-300 py-1.5 px-3 rounded text-sm font-medium hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors shadow-sm">Collapse</button>
+                <button (click)="resetProgress()" class="flex-1 bg-red-50 dark:bg-red-900/30 text-red-600 dark:text-red-400 border border-red-100 dark:border-red-800/50 py-1.5 px-3 rounded text-sm font-medium hover:bg-red-100 dark:hover:bg-red-900/50 transition-colors shadow-sm">Reset</button>
+              </div>
+              <button (click)="downloadRoadmapJson()" class="w-full flex items-center justify-center gap-2 bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-400 border border-green-200 dark:border-green-800/50 py-1.5 px-3 rounded text-sm font-medium hover:bg-green-100 dark:hover:bg-green-900/50 transition-colors shadow-sm">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                Download JSON
+              </button>
+            </div>
+          </div>
+        }
+      </div>
+      
+      <!-- Sidebar Phases List -->
+      <div class="flex-1 overflow-y-auto p-4 space-y-3 custom-scrollbar">
+        @for (phase of filteredRoadmap(); track phase.id) {
+          <div class="rounded-xl border border-gray-100 dark:border-slate-700 shadow-sm overflow-hidden bg-white dark:bg-slate-800 transition-colors duration-300">
+            <!-- Phase Header -->
+            <div class="flex items-center justify-between p-3 cursor-pointer hover:bg-gray-50 dark:hover:bg-slate-700/50 transition-colors" (click)="togglePhase(phase.id)">
+              <div class="flex items-center gap-3">
+                <div class="w-6 h-6 rounded bg-blue-600 text-white flex items-center justify-center text-xs font-bold shadow-sm">{{ phase.num }}</div>
+                <span class="font-semibold text-sm text-gray-900 dark:text-white">{{ phase.title }}</span>
+              </div>
+              <svg class="w-4 h-4 text-gray-400 transform transition-transform" [class.rotate-180]="expandedPhases().has(phase.id)" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+            </div>
+            
+            @if (expandedPhases().has(phase.id)) {
+              <div class="py-2 bg-white dark:bg-slate-800 relative">
+                <!-- vertical timeline line -->
+                <div class="absolute left-[22px] top-0 bottom-0 w-[2px] bg-gray-100 dark:bg-slate-700 z-0"></div>
+                
+                @for (topic of phase.topics; track topic.id) {
+                  <div class="relative z-10 flex flex-col py-2 px-3 mx-2 my-0.5 rounded-lg cursor-pointer transition-colors group"
+                        [class.bg-blue-50]="currentTopicId() === topic.id"
+                        [class.dark:bg-blue-900/30]="currentTopicId() === topic.id"
+                        [class.hover:bg-gray-50]="currentTopicId() !== topic.id"
+                        [class.dark:hover:bg-slate-700/50]="currentTopicId() !== topic.id"
+                        (click)="viewTopic(topic.id)">
+                    
+                    <div class="flex items-start">
+                      <!-- indicator dot -->
+                      <div class="w-2.5 h-2.5 rounded-full ml-1 mt-1.5 border-2 border-white dark:border-slate-800 shadow-sm shrink-0"
+                            [class.bg-green-500]="completedTopics()[topic.id]"
+                            [class.bg-gray-300]="!completedTopics()[topic.id] && currentTopicId() !== topic.id"
+                            [class.dark:bg-slate-600]="!completedTopics()[topic.id] && currentTopicId() !== topic.id"
+                            [class.bg-blue-500]="!completedTopics()[topic.id] && currentTopicId() === topic.id">
+                      </div>
+                      
+                      <div class="ml-4 flex-1 flex flex-col gap-1">
+                        <span class="text-sm font-medium leading-snug"
+                              [class.text-green-700]="completedTopics()[topic.id]"
+                              [class.dark:text-green-400]="completedTopics()[topic.id]"
+                              [class.text-gray-900]="currentTopicId() === topic.id && !completedTopics()[topic.id]"
+                              [class.dark:text-white]="currentTopicId() === topic.id && !completedTopics()[topic.id]"
+                              [class.text-gray-600]="currentTopicId() !== topic.id && !completedTopics()[topic.id]"
+                              [class.dark:text-slate-400]="currentTopicId() !== topic.id && !completedTopics()[topic.id]">
+                          {{ topic.title }}
+                        </span>
+                        
+                        <!-- Priority Badge inside sidebar list -->
+                        @if (topic.priority) {
+                          <span class="inline-flex w-fit text-[9px] font-bold px-1.5 py-0.5 rounded uppercase tracking-wider border shadow-sm"
+                                [ngClass]="getPriorityColorClass(topic.priority)">
+                            {{ formatPriority(topic.priority) }}
+                          </span>
+                        }
+                      </div>
+                    </div>
+                  </div>
+                }
+              </div>
+            }
+          </div>
+        }
+      </div>
+      
+      <!-- Sidebar Footer -->
+      <div class="p-4 border-t border-gray-200 dark:border-slate-800 bg-gray-50 dark:bg-slate-900 text-xs text-center text-gray-500 dark:text-slate-400 shrink-0 transition-colors duration-300">
+        &copy; 2026 DevRoadmap.<br> Created by <a href="https://www.linkedin.com/in/guddu-kumar-dev/" target="_blank" class="text-blue-600 dark:text-blue-400 hover:underline font-bold">Guddu Kumar</a>
+      </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="w-full md:flex-1 h-full overflow-y-auto bg-[#fafafa] dark:bg-[#0b1120] transition-colors duration-300 block"
+         [class.max-md:hidden]="currentTopicId() === null">
+      <div class="p-4 sm:p-8 xl:px-24 max-w-6xl mx-auto">
+        
+        <!-- Mobile Back Button -->
+        <button class="md:hidden flex items-center gap-2 text-blue-600 dark:text-blue-400 font-semibold mb-6 hover:underline bg-blue-50 dark:bg-blue-900/30 px-4 py-2 rounded-lg"
+                (click)="viewTopic(null)">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"></path></svg>
+          Back to Topics
+        </button>
+
+        <!-- Top Info Row -->
+        <div class="flex flex-col md:flex-row items-start md:items-stretch gap-4 sm:gap-6 mb-8 sm:mb-12">
+          <!-- Progress Card -->
+          <div class="flex-1 bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-2xl p-6 shadow-sm flex flex-col justify-center w-full transition-colors duration-300">
+            <div class="flex justify-between items-end mb-3">
+              <span class="text-xs font-bold text-gray-500 dark:text-slate-400 tracking-wider">OVERALL PROGRESS</span>
+              <span class="text-blue-700 dark:text-blue-300 font-bold text-sm bg-blue-50 dark:bg-blue-900/30 px-2.5 py-0.5 rounded">{{ progressStats().text }}</span>
+            </div>
+            <div class="w-full bg-gray-100 dark:bg-slate-700 rounded-full h-2.5">
+              <div class="bg-blue-600 h-2.5 rounded-full transition-all duration-500" [style.width.%]="progressStats().pct"></div>
+            </div>
+          </div>
+          
+          <!-- Overview Button -->
+          <button class="bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 text-gray-800 dark:text-white rounded-2xl px-8 py-6 shadow-sm font-semibold text-sm flex items-center justify-center gap-3 hover:bg-gray-50 dark:hover:bg-slate-700/50 transition-colors w-full md:w-auto h-[90px]" (click)="viewTopic(null)">
+            <svg class="w-5 h-5 text-gray-500 dark:text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg> 
+            Roadmap Overview
+          </button>
+        </div>
+
+        <!-- Topic View -->
+        @if (currentTopic()) {
+          <div class="animate-fade-in pb-20">
+            <div class="mb-8">
+              <h3 class="text-xs font-bold text-blue-600 dark:text-blue-400 tracking-widest uppercase flex items-center gap-2 mb-3">
+                <span class="w-6 border-t-[1.5px] border-blue-600 dark:border-blue-400 inline-block"></span>
+                PHASE {{ currentTopic().phase.num }} &rsaquo; {{ currentTopic().phase.title }}
+              </h3>
+              <h2 class="text-[2.75rem] leading-tight font-extrabold text-gray-900 dark:text-white tracking-tight">{{ currentTopic().title }}</h2>
+            </div>
+            
+            <!-- Actions Row -->
+            <div class="flex flex-wrap items-center gap-3 mb-10">
+              <!-- Stars / Priority -->
+              <div class="px-3 py-1.5 rounded-lg text-xs font-bold border uppercase tracking-wide shadow-sm flex items-center"
+                   [ngClass]="getPriorityColorClass(currentTopic().priority)">
+                 {{ formatPriority(currentTopic().priority) }}
+              </div>
+              
+              <!-- Priority badge (Job Ready specific if it's Advanced) -->
+              @if(currentTopic().priority === 'Advanced') {
+                <div class="bg-indigo-50 dark:bg-indigo-900/20 text-indigo-700 dark:text-indigo-400 px-3 py-1.5 rounded-lg text-xs font-bold border border-indigo-100 dark:border-indigo-900/50 uppercase tracking-wide shadow-sm">JOB-READY</div>
+              }
+              
+              <button (click)="openNotes(currentTopic().id)" class="bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 shadow-sm text-gray-700 dark:text-slate-200 px-4 py-1.5 rounded-lg text-sm font-medium hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors">
+                📝 My Notes
+              </button>
+              <button (click)="openReferences(currentTopic().id)" class="bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 shadow-sm text-gray-700 dark:text-slate-200 px-4 py-1.5 rounded-lg text-sm font-medium hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors">
+                🔗 References <span class="bg-gray-100 dark:bg-slate-900 text-gray-600 dark:text-slate-400 rounded px-1.5 py-0.5 text-xs font-bold">{{ userRefs()[currentTopic().id]?.length || 0 }}</span>
+              </button>
+              
+              <div class="flex-1"></div>
+              
+              <button (click)="toggleComplete(currentTopic().id, !completedTopics()[currentTopic().id])" 
+                      class="border px-4 py-2 rounded-lg text-sm font-bold flex items-center gap-2 transition-colors shadow-sm hover:bg-gray-50 dark:hover:bg-slate-700"
+                      [class.border-green-200]="completedTopics()[currentTopic().id]"
+                      [class.dark:border-green-800]="completedTopics()[currentTopic().id]"
+                      [class.bg-green-50]="completedTopics()[currentTopic().id]"
+                      [class.dark:bg-green-900/20]="completedTopics()[currentTopic().id]"
+                      [class.text-green-700]="completedTopics()[currentTopic().id]"
+                      [class.dark:text-green-400]="completedTopics()[currentTopic().id]"
+                      [class.border-gray-200]="!completedTopics()[currentTopic().id]"
+                      [class.dark:border-slate-700]="!completedTopics()[currentTopic().id]"
+                      [class.bg-white]="!completedTopics()[currentTopic().id]"
+                      [class.dark:bg-slate-800]="!completedTopics()[currentTopic().id]"
+                      [class.text-gray-700]="!completedTopics()[currentTopic().id]"
+                      [class.dark:text-slate-200]="!completedTopics()[currentTopic().id]">
+                <div class="w-4 h-4 rounded border flex items-center justify-center bg-white dark:bg-slate-900 transition-colors" 
+                     [class.border-green-500]="completedTopics()[currentTopic().id]" 
+                     [class.border-gray-300]="!completedTopics()[currentTopic().id]"
+                     [class.dark:border-slate-600]="!completedTopics()[currentTopic().id]">
+                  @if(completedTopics()[currentTopic().id]) {
+                     <svg class="w-3 h-3 text-green-600 dark:text-green-400" fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"></path></svg>
+                  }
+                </div>
+                Mark Completed
+              </button>
+            </div>
+
+            <!-- Content Cards -->
+            <div class="space-y-6">
+              
+              @if(currentTopic().theory) {
+                <!-- Theory -->
+                <div class="bg-white dark:bg-slate-800 border border-gray-100 dark:border-slate-700 shadow-sm rounded-2xl overflow-hidden transition-colors duration-300">
+                  <div class="bg-gray-50 dark:bg-slate-900/50 px-6 py-4 border-b border-gray-100 dark:border-slate-700 flex items-center gap-3">
+                    <span class="text-xl">📚</span>
+                    <h3 class="font-bold text-gray-900 dark:text-white text-lg">Core Topics to Master</h3>
+                  </div>
+                  <div class="p-6">
+                    <ul class="space-y-4">
+                      @for(item of currentTopic().theory; track item) {
+                        <li class="flex items-start gap-3">
+                          <div class="mt-1 w-[22px] h-[22px] rounded-full bg-blue-100 dark:bg-blue-900/50 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0">
+                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                          </div>
+                          <span class="text-gray-700 dark:text-slate-300 leading-relaxed text-base">{{ item }}</span>
+                        </li>
+                      }
+                    </ul>
+                  </div>
+                </div>
+              }
+
+              @if(currentTopic().code) {
+                <!-- Example Code -->
+                <div class="bg-[#0f172a] rounded-2xl overflow-hidden shadow-lg border border-gray-800 mt-8">
+                   <div class="px-6 py-3 border-b border-gray-800 flex items-center gap-3 bg-[#1e293b]">
+                      <span class="text-gray-400 text-sm">💻</span>
+                      <h3 class="font-bold text-gray-200 text-sm">Example</h3>
+                   </div>
+                   <div class="p-6 overflow-x-auto custom-scrollbar-dark">
+                     <pre class="text-gray-300 font-mono text-[15px] leading-relaxed whitespace-pre"><code>{{ currentTopic().code }}</code></pre>
+                   </div>
+                </div>
+              }
+              
+              @if(currentTopic().hands) {
+                <!-- Hands on Tasks -->
+                <div class="bg-white dark:bg-slate-800 border border-gray-100 dark:border-slate-700 shadow-sm rounded-2xl overflow-hidden mt-8 transition-colors duration-300">
+                  <div class="bg-gray-50 dark:bg-slate-900/50 px-6 py-4 border-b border-gray-100 dark:border-slate-700 flex items-center gap-3">
+                    <span class="text-xl">🛠️</span>
+                    <h3 class="font-bold text-gray-900 dark:text-white text-lg">Hands-on Tasks</h3>
+                  </div>
+                  <div class="p-6">
+                    <ul class="space-y-4">
+                      @for(item of currentTopic().hands; track item) {
+                        <li class="flex items-start gap-3">
+                          <div class="mt-1 w-[22px] h-[22px] rounded bg-amber-100 dark:bg-amber-900/50 text-amber-600 dark:text-amber-500 flex items-center justify-center shrink-0">
+                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                          </div>
+                          <span class="text-gray-700 dark:text-slate-300 leading-relaxed text-base">{{ item }}</span>
+                        </li>
+                      }
+                    </ul>
+                  </div>
+                </div>
+              }
+
+              @if(currentTopic().interview) {
+                <!-- Interview -->
+                <div class="bg-white dark:bg-slate-800 border border-gray-100 dark:border-slate-700 shadow-sm rounded-2xl overflow-hidden mt-8 transition-colors duration-300">
+                  <div class="bg-gray-50 dark:bg-slate-900/50 px-6 py-4 border-b border-gray-100 dark:border-slate-700 flex items-center gap-3">
+                    <span class="text-xl">🎤</span>
+                    <h3 class="font-bold text-gray-900 dark:text-white text-lg">Interview Questions</h3>
+                  </div>
+                  <div class="p-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      @for(item of currentTopic().interview; track item) {
+                        <div class="bg-purple-50/60 dark:bg-purple-900/20 border border-purple-100 dark:border-purple-900/30 p-5 rounded-xl hover:shadow-md transition-shadow">
+                          <p class="font-medium text-purple-900 dark:text-purple-300 text-[15px] leading-relaxed">{{ item }}</p>
+                        </div>
+                      }
+                    </div>
+                  </div>
+                </div>
+              }
+            </div>
+          </div>
+        } @else {
+          <!-- Roadmap Overview Mode -->
+          <div class="animate-fade-in text-center py-20 bg-white dark:bg-slate-800 border border-gray-100 dark:border-slate-700 shadow-sm rounded-2xl h-[500px] flex flex-col items-center justify-center transition-colors duration-300">
+            <div class="w-20 h-20 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-full flex items-center justify-center mb-6">
+              <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"></path></svg>
+            </div>
+            <h2 class="text-3xl font-extrabold text-gray-900 dark:text-white mb-4">Roadmap Overview</h2>
+            <p class="text-gray-500 dark:text-slate-400 mb-8 max-w-md mx-auto text-lg leading-relaxed">Select a topic from the sidebar on the left to begin learning. You have completed <span class="font-bold text-gray-700 dark:text-gray-300">{{ progressStats().text }}</span> of this roadmap.</p>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modals (Notes & Refs) -->
+@if(isNotesModalOpen() || isRefsModalOpen()) {
+  <div class="fixed inset-0 z-50 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+    <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+      <div class="fixed inset-0 bg-gray-900/60 backdrop-blur-sm transition-opacity" aria-hidden="true" (click)="closeModal()"></div>
+      <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+      
+      <div class="inline-block align-bottom bg-white dark:bg-slate-800 rounded-2xl text-left overflow-hidden shadow-2xl transform transition-all sm:my-8 sm:align-middle sm:max-w-2xl w-full border border-gray-100 dark:border-slate-700">
+        <div class="bg-white dark:bg-slate-800 px-6 pt-6 pb-6">
+          
+          <!-- Notes Modal Content -->
+          @if(isNotesModalOpen()) {
+            <div class="sm:flex sm:items-start">
+              <div class="mt-3 text-center sm:mt-0 sm:text-left w-full">
+                <h3 class="text-xl font-bold text-gray-900 dark:text-white flex items-center gap-2" id="modal-title">📝 My Notes</h3>
+                <div class="mt-4">
+                  <textarea [ngModel]="currentNoteText()" (ngModelChange)="currentNoteText.set($event)" rows="10" class="w-full shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm border border-gray-200 dark:border-slate-700 rounded-xl p-4 text-gray-700 dark:text-white bg-gray-50 dark:bg-slate-900 outline-none" placeholder="Write your notes here..."></textarea>
+                </div>
+              </div>
+            </div>
+            <div class="mt-6 flex flex-row-reverse gap-3">
+              <button type="button" (click)="saveNotes()" class="w-full inline-flex justify-center rounded-xl border border-transparent shadow-sm px-6 py-2.5 bg-blue-600 text-sm font-bold text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:w-auto transition-colors">Save Notes</button>
+              <button type="button" (click)="closeModal()" class="w-full inline-flex justify-center rounded-xl border border-gray-200 dark:border-slate-700 shadow-sm px-6 py-2.5 bg-white dark:bg-slate-800 text-sm font-bold text-gray-700 dark:text-slate-300 hover:bg-gray-50 dark:hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:w-auto transition-colors">Cancel</button>
+              <div class="flex-1"></div>
+              <button type="button" (click)="clearNotes()" class="w-full inline-flex justify-center rounded-xl border border-red-100 dark:border-red-900/50 shadow-sm px-6 py-2.5 bg-red-50 dark:bg-red-900/30 text-sm font-bold text-red-600 dark:text-red-400 hover:bg-red-100 dark:hover:bg-red-900/50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:w-auto transition-colors">Clear All</button>
+            </div>
+          }
+          
+          <!-- Refs Modal Content -->
+          @if(isRefsModalOpen()) {
+            <div class="sm:flex sm:items-start">
+              <div class="mt-3 text-center sm:mt-0 sm:text-left w-full">
+                <h3 class="text-xl font-bold text-gray-900 dark:text-white flex items-center gap-2" id="modal-title">🔗 Resources & References</h3>
+                
+                @if(!refFormVisible()) {
+                  <div class="mt-6 space-y-3">
+                    @for(ref of currentTopicRefs(); track ref.url; let i = $index) {
+                      <div class="bg-gray-50 dark:bg-slate-900/50 p-4 rounded-xl border border-gray-100 dark:border-slate-700 flex justify-between items-start hover:shadow-md transition-shadow">
+                        <div>
+                          <a [href]="ref.url" target="_blank" class="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 font-bold hover:underline">{{ ref.title }}</a>
+                          @if(ref.description) { <p class="text-sm text-gray-600 dark:text-slate-400 mt-1.5">{{ ref.description }}</p> }
+                        </div>
+                        <div class="flex space-x-2 ml-4 shrink-0 bg-white dark:bg-slate-800 rounded-lg shadow-sm border border-gray-200 dark:border-slate-700 p-1">
+                          <button (click)="showReferenceForm(i)" class="text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 p-1 rounded hover:bg-blue-50 dark:hover:bg-blue-900/30"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg></button>
+                          <button (click)="deleteReference(i)" class="text-gray-400 hover:text-red-600 dark:hover:text-red-400 p-1 rounded hover:bg-red-50 dark:hover:bg-red-900/30"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg></button>
+                        </div>
+                      </div>
+                    }
+                    @if(currentTopicRefs().length === 0) {
+                      <p class="text-sm text-gray-500 dark:text-slate-400 italic p-4 text-center bg-gray-50 dark:bg-slate-900/50 rounded-xl border border-dashed border-gray-200 dark:border-slate-700">No resources added yet.</p>
+                    }
+                  </div>
+                  <div class="mt-6 flex justify-center">
+                    <button type="button" (click)="showReferenceForm()" class="inline-flex items-center text-sm font-bold text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30 hover:bg-blue-100 dark:hover:bg-blue-900/50 px-4 py-2 rounded-lg transition-colors">
+                      <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg> Add New Resource
+                    </button>
+                  </div>
+                }
+                
+                @if(refFormVisible()) {
+                  <div class="mt-4 bg-gray-50 dark:bg-slate-900/50 p-5 rounded-xl border border-gray-100 dark:border-slate-700 space-y-4">
+                    <div>
+                      <label class="block text-sm font-bold text-gray-700 dark:text-slate-300 mb-1">Title</label>
+                      <input type="text" [ngModel]="refForm().title" (ngModelChange)="updateRefForm('title', $event)" class="block w-full shadow-sm sm:text-sm border-gray-200 dark:border-slate-700 rounded-lg p-2.5 border focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white dark:bg-slate-800 text-gray-900 dark:text-white outline-none">
+                    </div>
+                    <div>
+                      <label class="block text-sm font-bold text-gray-700 dark:text-slate-300 mb-1">URL</label>
+                      <input type="url" [ngModel]="refForm().url" (ngModelChange)="updateRefForm('url', $event)" class="block w-full shadow-sm sm:text-sm border-gray-200 dark:border-slate-700 rounded-lg p-2.5 border focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white dark:bg-slate-800 text-gray-900 dark:text-white outline-none">
+                    </div>
+                    <div>
+                      <label class="block text-sm font-bold text-gray-700 dark:text-slate-300 mb-1">Description</label>
+                      <textarea [ngModel]="refForm().description" (ngModelChange)="updateRefForm('description', $event)" rows="2" class="block w-full shadow-sm sm:text-sm border-gray-200 dark:border-slate-700 rounded-lg p-2.5 border focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white dark:bg-slate-800 text-gray-900 dark:text-white outline-none"></textarea>
+                    </div>
+                    <div class="flex justify-end gap-3 pt-4 border-t border-gray-200 dark:border-slate-700 mt-2">
+                      <button (click)="hideReferenceForm()" class="px-4 py-2 text-sm text-gray-600 dark:text-slate-300 hover:bg-gray-200 dark:hover:bg-slate-600 bg-gray-100 dark:bg-slate-700 rounded-lg font-bold transition-colors">Cancel</button>
+                      <button (click)="saveReference()" class="px-4 py-2 text-sm bg-blue-600 text-white rounded-lg font-bold hover:bg-blue-700 transition-colors shadow-sm">Save Resource</button>
+                    </div>
+                  </div>
+                }
+              </div>
+            </div>
+            @if(!refFormVisible()) {
+              <div class="mt-6 border-t border-gray-100 dark:border-slate-700 pt-6">
+                <button type="button" (click)="closeModal()" class="w-full inline-flex justify-center rounded-xl border border-gray-200 dark:border-slate-700 shadow-sm px-4 py-2.5 bg-white dark:bg-slate-800 text-base font-bold text-gray-700 dark:text-slate-300 hover:bg-gray-50 dark:hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:w-auto sm:text-sm transition-colors">Close</button>
+              </div>
+            }
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+}
