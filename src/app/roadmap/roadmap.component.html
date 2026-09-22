@@ -177,21 +177,21 @@
         </button>
 
         <!-- Top Info Row -->
-        <div class="flex flex-col md:flex-row items-start md:items-stretch gap-4 sm:gap-6 mb-8 sm:mb-12">
+        <div class="flex flex-col md:flex-row items-start md:items-stretch gap-4 sm:gap-4 mb-6 sm:mb-8">
           <!-- Progress Card -->
-          <div class="flex-1 bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-2xl p-6 shadow-sm flex flex-col justify-center w-full transition-colors duration-300">
-            <div class="flex justify-between items-end mb-3">
-              <span class="text-xs font-bold text-gray-500 dark:text-slate-400 tracking-wider">OVERALL PROGRESS</span>
-              <span class="text-blue-700 dark:text-blue-300 font-bold text-sm bg-blue-50 dark:bg-blue-900/30 px-2.5 py-0.5 rounded">{{ progressStats().text }}</span>
+          <div class="flex-1 bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-xl p-4 shadow-sm flex flex-col justify-center w-full transition-colors duration-300">
+            <div class="flex justify-between items-end mb-2">
+              <span class="text-[10px] font-bold text-gray-500 dark:text-slate-400 tracking-wider">OVERALL PROGRESS</span>
+              <span class="text-blue-700 dark:text-blue-300 font-bold text-xs bg-blue-50 dark:bg-blue-900/30 px-2 py-0.5 rounded">{{ progressStats().text }}</span>
             </div>
-            <div class="w-full bg-gray-100 dark:bg-slate-700 rounded-full h-2.5">
-              <div class="bg-blue-600 h-2.5 rounded-full transition-all duration-500" [style.width.%]="progressStats().pct"></div>
+            <div class="w-full bg-gray-100 dark:bg-slate-700 rounded-full h-1.5">
+              <div class="bg-blue-600 h-1.5 rounded-full transition-all duration-500" [style.width.%]="progressStats().pct"></div>
             </div>
           </div>
           
           <!-- Overview Button -->
-          <button class="bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 text-gray-800 dark:text-white rounded-2xl px-8 py-6 shadow-sm font-semibold text-sm flex items-center justify-center gap-3 hover:bg-gray-50 dark:hover:bg-slate-700/50 transition-colors w-full md:w-auto h-[90px]" (click)="viewTopic(null)">
-            <svg class="w-5 h-5 text-gray-500 dark:text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg> 
+          <button class="bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 text-gray-800 dark:text-white rounded-xl px-5 py-3 shadow-sm font-semibold text-sm flex items-center justify-center gap-2 hover:bg-gray-50 dark:hover:bg-slate-700/50 transition-colors w-full md:w-auto h-auto min-h-[64px]" (click)="viewTopic(null)">
+            <svg class="w-4 h-4 text-gray-500 dark:text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg> 
             Roadmap Overview
           </button>
         </div>
@@ -199,12 +199,12 @@
         <!-- Topic View -->
         @if (currentTopic()) {
           <div class="animate-fade-in pb-20">
-            <div class="mb-8">
-              <h3 class="text-xs font-bold text-blue-600 dark:text-blue-400 tracking-widest uppercase flex items-center gap-2 mb-3">
-                <span class="w-6 border-t-[1.5px] border-blue-600 dark:border-blue-400 inline-block"></span>
+            <div class="mb-6">
+              <h3 class="text-[10px] font-bold text-blue-600 dark:text-blue-400 tracking-widest uppercase flex items-center gap-2 mb-2">
+                <span class="w-4 border-t-[1.5px] border-blue-600 dark:border-blue-400 inline-block"></span>
                 PHASE {{ currentTopic().phase.num }} &rsaquo; {{ currentTopic().phase.title }}
               </h3>
-              <h2 class="text-[2.75rem] leading-tight font-extrabold text-gray-900 dark:text-white tracking-tight">{{ currentTopic().title }}</h2>
+              <h2 class="text-2xl sm:text-3xl leading-tight font-extrabold text-gray-900 dark:text-white tracking-tight">{{ currentTopic().title }}</h2>
             </div>
             
             <!-- Actions Row -->
@@ -255,84 +255,143 @@
               </button>
             </div>
 
-            <!-- Content Cards -->
-            <div class="space-y-6">
+            <!-- Tabbed Content Area -->
+            <div class="bg-white dark:bg-slate-800 border border-gray-100 dark:border-slate-700 shadow-sm rounded-2xl overflow-hidden transition-colors duration-300">
               
-              @if(currentTopic().theory) {
-                <!-- Theory -->
-                <div class="bg-white dark:bg-slate-800 border border-gray-100 dark:border-slate-700 shadow-sm rounded-2xl overflow-hidden transition-colors duration-300">
-                  <div class="bg-gray-50 dark:bg-slate-900/50 px-6 py-4 border-b border-gray-100 dark:border-slate-700 flex items-center gap-3">
-                    <span class="text-xl">📚</span>
-                    <h3 class="font-bold text-gray-900 dark:text-white text-lg">Core Topics to Master</h3>
-                  </div>
-                  <div class="p-6">
-                    <ul class="space-y-4">
+              <!-- Tab Navigation -->
+              <div class="flex overflow-x-auto custom-scrollbar border-b border-gray-100 dark:border-slate-700 bg-gray-50/50 dark:bg-slate-900/30">
+                @if(currentTopic().theory) {
+                  <button (click)="activeTab.set('theory')" 
+                          class="whitespace-nowrap px-6 py-4 text-sm font-bold border-b-[3px] transition-colors flex items-center gap-2"
+                          [class.border-blue-600]="activeTab() === 'theory'"
+                          [class.text-blue-600]="activeTab() === 'theory'"
+                          [class.dark:border-blue-400]="activeTab() === 'theory'"
+                          [class.dark:text-blue-400]="activeTab() === 'theory'"
+                          [class.bg-white]="activeTab() === 'theory'"
+                          [class.dark:bg-slate-800]="activeTab() === 'theory'"
+                          [class.border-transparent]="activeTab() !== 'theory'"
+                          [class.text-gray-600]="activeTab() !== 'theory'"
+                          [class.dark:text-slate-400]="activeTab() !== 'theory'"
+                          [class.hover:bg-gray-100]="activeTab() !== 'theory'"
+                          [class.dark:hover:bg-slate-800/50]="activeTab() !== 'theory'">
+                    📚 Core Topics
+                  </button>
+                }
+                @if(currentTopic().code) {
+                  <button (click)="activeTab.set('code')" 
+                          class="whitespace-nowrap px-6 py-4 text-sm font-bold border-b-[3px] transition-colors flex items-center gap-2"
+                          [class.border-blue-600]="activeTab() === 'code'"
+                          [class.text-blue-600]="activeTab() === 'code'"
+                          [class.dark:border-blue-400]="activeTab() === 'code'"
+                          [class.dark:text-blue-400]="activeTab() === 'code'"
+                          [class.bg-white]="activeTab() === 'code'"
+                          [class.dark:bg-slate-800]="activeTab() === 'code'"
+                          [class.border-transparent]="activeTab() !== 'code'"
+                          [class.text-gray-600]="activeTab() !== 'code'"
+                          [class.dark:text-slate-400]="activeTab() !== 'code'"
+                          [class.hover:bg-gray-100]="activeTab() !== 'code'"
+                          [class.dark:hover:bg-slate-800/50]="activeTab() !== 'code'">
+                    💻 Example Code
+                  </button>
+                }
+                @if(currentTopic().hands) {
+                  <button (click)="activeTab.set('hands')" 
+                          class="whitespace-nowrap px-6 py-4 text-sm font-bold border-b-[3px] transition-colors flex items-center gap-2"
+                          [class.border-blue-600]="activeTab() === 'hands'"
+                          [class.text-blue-600]="activeTab() === 'hands'"
+                          [class.dark:border-blue-400]="activeTab() === 'hands'"
+                          [class.dark:text-blue-400]="activeTab() === 'hands'"
+                          [class.bg-white]="activeTab() === 'hands'"
+                          [class.dark:bg-slate-800]="activeTab() === 'hands'"
+                          [class.border-transparent]="activeTab() !== 'hands'"
+                          [class.text-gray-600]="activeTab() !== 'hands'"
+                          [class.dark:text-slate-400]="activeTab() !== 'hands'"
+                          [class.hover:bg-gray-100]="activeTab() !== 'hands'"
+                          [class.dark:hover:bg-slate-800/50]="activeTab() !== 'hands'">
+                    🛠️ Hands-on Tasks
+                  </button>
+                }
+                @if(currentTopic().interview) {
+                  <button (click)="activeTab.set('interview')" 
+                          class="whitespace-nowrap px-6 py-4 text-sm font-bold border-b-[3px] transition-colors flex items-center gap-2"
+                          [class.border-blue-600]="activeTab() === 'interview'"
+                          [class.text-blue-600]="activeTab() === 'interview'"
+                          [class.dark:border-blue-400]="activeTab() === 'interview'"
+                          [class.dark:text-blue-400]="activeTab() === 'interview'"
+                          [class.bg-white]="activeTab() === 'interview'"
+                          [class.dark:bg-slate-800]="activeTab() === 'interview'"
+                          [class.border-transparent]="activeTab() !== 'interview'"
+                          [class.text-gray-600]="activeTab() !== 'interview'"
+                          [class.dark:text-slate-400]="activeTab() !== 'interview'"
+                          [class.hover:bg-gray-100]="activeTab() !== 'interview'"
+                          [class.dark:hover:bg-slate-800/50]="activeTab() !== 'interview'">
+                    🎤 Interview Questions
+                  </button>
+                }
+              </div>
+
+              <!-- Tab Content -->
+              <div class="p-6 md:p-8 min-h-[400px]">
+                
+                @if(activeTab() === 'theory' && currentTopic().theory) {
+                  <div class="animate-fade-in">
+                    <ul class="space-y-5">
                       @for(item of currentTopic().theory; track item) {
-                        <li class="flex items-start gap-3">
-                          <div class="mt-1 w-[22px] h-[22px] rounded-full bg-blue-100 dark:bg-blue-900/50 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0">
-                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                        <li class="flex items-start gap-4">
+                          <div class="mt-1 w-6 h-6 rounded-full bg-blue-100 dark:bg-blue-900/50 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
                           </div>
-                          <span class="text-gray-700 dark:text-slate-300 leading-relaxed text-base">{{ item }}</span>
+                          <span class="text-gray-700 dark:text-slate-300 leading-relaxed text-lg">{{ item }}</span>
                         </li>
                       }
                     </ul>
                   </div>
-                </div>
-              }
+                }
 
-              @if(currentTopic().code) {
-                <!-- Example Code -->
-                <div class="bg-[#0f172a] rounded-2xl overflow-hidden shadow-lg border border-gray-800 mt-8">
-                   <div class="px-6 py-3 border-b border-gray-800 flex items-center gap-3 bg-[#1e293b]">
-                      <span class="text-gray-400 text-sm">💻</span>
-                      <h3 class="font-bold text-gray-200 text-sm">Example</h3>
-                   </div>
-                   <div class="p-6 overflow-x-auto custom-scrollbar-dark">
-                     <pre class="text-gray-300 font-mono text-[15px] leading-relaxed whitespace-pre"><code>{{ currentTopic().code }}</code></pre>
-                   </div>
-                </div>
-              }
-              
-              @if(currentTopic().hands) {
-                <!-- Hands on Tasks -->
-                <div class="bg-white dark:bg-slate-800 border border-gray-100 dark:border-slate-700 shadow-sm rounded-2xl overflow-hidden mt-8 transition-colors duration-300">
-                  <div class="bg-gray-50 dark:bg-slate-900/50 px-6 py-4 border-b border-gray-100 dark:border-slate-700 flex items-center gap-3">
-                    <span class="text-xl">🛠️</span>
-                    <h3 class="font-bold text-gray-900 dark:text-white text-lg">Hands-on Tasks</h3>
+                @if(activeTab() === 'code' && currentTopic().code) {
+                  <div class="animate-fade-in bg-[#0f172a] rounded-xl overflow-hidden shadow-inner border border-gray-800">
+                     <div class="px-5 py-3 border-b border-gray-800 flex items-center gap-3 bg-[#1e293b]">
+                        <div class="flex gap-2">
+                          <div class="w-3 h-3 rounded-full bg-red-500/80"></div>
+                          <div class="w-3 h-3 rounded-full bg-yellow-500/80"></div>
+                          <div class="w-3 h-3 rounded-full bg-green-500/80"></div>
+                        </div>
+                        <span class="text-gray-400 text-xs font-mono ml-2">example.ts</span>
+                     </div>
+                     <div class="p-6 overflow-x-auto custom-scrollbar-dark">
+                       <pre class="text-gray-300 font-mono text-[15px] leading-relaxed whitespace-pre"><code>{{ currentTopic().code }}</code></pre>
+                     </div>
                   </div>
-                  <div class="p-6">
-                    <ul class="space-y-4">
+                }
+                
+                @if(activeTab() === 'hands' && currentTopic().hands) {
+                  <div class="animate-fade-in">
+                    <ul class="space-y-5">
                       @for(item of currentTopic().hands; track item) {
-                        <li class="flex items-start gap-3">
-                          <div class="mt-1 w-[22px] h-[22px] rounded bg-amber-100 dark:bg-amber-900/50 text-amber-600 dark:text-amber-500 flex items-center justify-center shrink-0">
-                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                        <li class="flex items-start gap-4">
+                          <div class="mt-1 w-6 h-6 rounded bg-amber-100 dark:bg-amber-900/50 text-amber-600 dark:text-amber-500 flex items-center justify-center shrink-0 shadow-sm border border-amber-200 dark:border-amber-700">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
                           </div>
-                          <span class="text-gray-700 dark:text-slate-300 leading-relaxed text-base">{{ item }}</span>
+                          <span class="text-gray-700 dark:text-slate-300 leading-relaxed text-lg">{{ item }}</span>
                         </li>
                       }
                     </ul>
                   </div>
-                </div>
-              }
+                }
 
-              @if(currentTopic().interview) {
-                <!-- Interview -->
-                <div class="bg-white dark:bg-slate-800 border border-gray-100 dark:border-slate-700 shadow-sm rounded-2xl overflow-hidden mt-8 transition-colors duration-300">
-                  <div class="bg-gray-50 dark:bg-slate-900/50 px-6 py-4 border-b border-gray-100 dark:border-slate-700 flex items-center gap-3">
-                    <span class="text-xl">🎤</span>
-                    <h3 class="font-bold text-gray-900 dark:text-white text-lg">Interview Questions</h3>
-                  </div>
-                  <div class="p-6">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                @if(activeTab() === 'interview' && currentTopic().interview) {
+                  <div class="animate-fade-in">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                       @for(item of currentTopic().interview; track item) {
-                        <div class="bg-purple-50/60 dark:bg-purple-900/20 border border-purple-100 dark:border-purple-900/30 p-5 rounded-xl hover:shadow-md transition-shadow">
-                          <p class="font-medium text-purple-900 dark:text-purple-300 text-[15px] leading-relaxed">{{ item }}</p>
+                        <div class="bg-purple-50/60 dark:bg-purple-900/20 border border-purple-100 dark:border-purple-900/40 p-6 rounded-xl hover:shadow-md transition-shadow relative overflow-hidden group">
+                          <div class="absolute top-0 left-0 w-1 h-full bg-purple-400 dark:bg-purple-600 group-hover:bg-purple-500 transition-colors"></div>
+                          <p class="font-medium text-purple-900 dark:text-purple-300 text-base leading-relaxed ml-2">{{ item }}</p>
                         </div>
                       }
                     </div>
                   </div>
-                </div>
-              }
+                }
+              </div>
             </div>
           </div>
         } @else {
@@ -350,8 +409,76 @@
   </div>
 </div>
 
-<!-- Modals (Notes & Refs) -->
-@if(isNotesModalOpen() || isRefsModalOpen()) {
+<!-- Right Drawer for Notes -->
+@if(isNotesModalOpen()) {
+  <div class="fixed inset-0 z-50 overflow-hidden" aria-labelledby="slide-over-title" role="dialog" aria-modal="true">
+    <div class="absolute inset-0 overflow-hidden">
+      <!-- Background overlay -->
+      <div class="absolute inset-0 bg-gray-900/60 backdrop-blur-sm transition-opacity" aria-hidden="true" (click)="closeModal()"></div>
+
+      <div class="pointer-events-none fixed inset-y-0 right-0 flex max-w-full transition-all duration-300"
+           [class.pl-10]="!isNotesFullScreen()" [class.pl-0]="isNotesFullScreen()">
+        <div class="pointer-events-auto w-screen transform transition-all ease-in-out duration-300 translate-x-0 bg-white dark:bg-slate-800 shadow-2xl border-l border-gray-100 dark:border-slate-700"
+             [class.max-w-[80vw]]="!isNotesFullScreen()" [class.max-w-full]="isNotesFullScreen()">
+          <div class="flex h-full flex-col overflow-y-scroll bg-white dark:bg-slate-800">
+            <!-- Header -->
+            <div class="px-6 py-6 border-b border-gray-100 dark:border-slate-700 flex items-center justify-between">
+              <h3 class="text-xl font-bold text-gray-900 dark:text-white flex items-center gap-2" id="slide-over-title">📝 My Notes</h3>
+              <div class="flex items-center gap-3">
+                <button (click)="isNotesFullScreen.set(!isNotesFullScreen())" class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition-colors p-1" title="Toggle Fullscreen">
+                  @if(isNotesFullScreen()) {
+                    <!-- Shrink arrows -->
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14H4v-2h6V6h2v8zM14 10h6v2h-6v6h-2v-8z"></path></svg>
+                  } @else {
+                    <!-- Expand arrows -->
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"></path></svg>
+                  }
+                </button>
+                <button (click)="isNoteEditMode.set(!isNoteEditMode())" class="text-sm font-semibold text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/30 px-3 py-1.5 rounded-lg transition-colors border border-blue-200 dark:border-blue-800">
+                  {{ isNoteEditMode() ? 'View Mode' : 'Edit Mode' }}
+                </button>
+                <button type="button" class="text-gray-400 hover:text-gray-500 dark:hover:text-gray-300 focus:outline-none" (click)="closeModal()">
+                  <span class="sr-only">Close panel</span>
+                  <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- Content -->
+            <div class="relative flex-1 px-6 py-6">
+              @if(isNoteEditMode()) {
+                <quill-editor [ngModel]="currentNoteText()" (ngModelChange)="currentNoteText.set($event)" 
+                              [styles]="{height: 'calc(100vh - 280px)'}"
+                              class="w-full text-gray-900 dark:text-white rounded-xl"></quill-editor>
+              } @else {
+                <div class="ql-snow">
+                  <div class="ql-editor text-gray-900 dark:text-white" [innerHTML]="currentNoteText()"></div>
+                </div>
+                @if(!currentNoteText().trim()) {
+                  <div class="text-center py-10 text-gray-500 dark:text-slate-400 italic">No notes added yet. Click Edit Mode to start writing.</div>
+                }
+              }
+            </div>
+
+            <!-- Footer -->
+            <div class="px-6 py-4 border-t border-gray-100 dark:border-slate-700 bg-gray-50 dark:bg-slate-900/50">
+              <div class="flex justify-end gap-3">
+                <button type="button" (click)="clearNotes()" class="inline-flex justify-center rounded-xl border border-red-100 dark:border-red-900/50 shadow-sm px-4 py-2 bg-red-50 dark:bg-red-900/30 text-sm font-bold text-red-600 dark:text-red-400 hover:bg-red-100 dark:hover:bg-red-900/50 transition-colors">Clear All</button>
+                <button type="button" (click)="closeModal()" class="inline-flex justify-center rounded-xl border border-gray-200 dark:border-slate-700 shadow-sm px-4 py-2 bg-white dark:bg-slate-800 text-sm font-bold text-gray-700 dark:text-slate-300 hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors">Cancel</button>
+                <button type="button" (click)="saveNotes()" class="inline-flex justify-center rounded-xl border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-sm font-bold text-white hover:bg-blue-700 transition-colors">Save Notes</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+}
+
+<!-- Modal for Refs -->
+@if(isRefsModalOpen()) {
   <div class="fixed inset-0 z-50 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
     <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
       <div class="fixed inset-0 bg-gray-900/60 backdrop-blur-sm transition-opacity" aria-hidden="true" (click)="closeModal()"></div>
@@ -360,82 +487,62 @@
       <div class="inline-block align-bottom bg-white dark:bg-slate-800 rounded-2xl text-left overflow-hidden shadow-2xl transform transition-all sm:my-8 sm:align-middle sm:max-w-2xl w-full border border-gray-100 dark:border-slate-700">
         <div class="bg-white dark:bg-slate-800 px-6 pt-6 pb-6">
           
-          <!-- Notes Modal Content -->
-          @if(isNotesModalOpen()) {
-            <div class="sm:flex sm:items-start">
-              <div class="mt-3 text-center sm:mt-0 sm:text-left w-full">
-                <h3 class="text-xl font-bold text-gray-900 dark:text-white flex items-center gap-2" id="modal-title">📝 My Notes</h3>
-                <div class="mt-4">
-                  <textarea [ngModel]="currentNoteText()" (ngModelChange)="currentNoteText.set($event)" rows="10" class="w-full shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm border border-gray-200 dark:border-slate-700 rounded-xl p-4 text-gray-700 dark:text-white bg-gray-50 dark:bg-slate-900 outline-none" placeholder="Write your notes here..."></textarea>
-                </div>
-              </div>
-            </div>
-            <div class="mt-6 flex flex-row-reverse gap-3">
-              <button type="button" (click)="saveNotes()" class="w-full inline-flex justify-center rounded-xl border border-transparent shadow-sm px-6 py-2.5 bg-blue-600 text-sm font-bold text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:w-auto transition-colors">Save Notes</button>
-              <button type="button" (click)="closeModal()" class="w-full inline-flex justify-center rounded-xl border border-gray-200 dark:border-slate-700 shadow-sm px-6 py-2.5 bg-white dark:bg-slate-800 text-sm font-bold text-gray-700 dark:text-slate-300 hover:bg-gray-50 dark:hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:w-auto transition-colors">Cancel</button>
-              <div class="flex-1"></div>
-              <button type="button" (click)="clearNotes()" class="w-full inline-flex justify-center rounded-xl border border-red-100 dark:border-red-900/50 shadow-sm px-6 py-2.5 bg-red-50 dark:bg-red-900/30 text-sm font-bold text-red-600 dark:text-red-400 hover:bg-red-100 dark:hover:bg-red-900/50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:w-auto transition-colors">Clear All</button>
-            </div>
-          }
-          
           <!-- Refs Modal Content -->
-          @if(isRefsModalOpen()) {
-            <div class="sm:flex sm:items-start">
-              <div class="mt-3 text-center sm:mt-0 sm:text-left w-full">
-                <h3 class="text-xl font-bold text-gray-900 dark:text-white flex items-center gap-2" id="modal-title">🔗 Resources & References</h3>
-                
-                @if(!refFormVisible()) {
-                  <div class="mt-6 space-y-3">
-                    @for(ref of currentTopicRefs(); track ref.url; let i = $index) {
-                      <div class="bg-gray-50 dark:bg-slate-900/50 p-4 rounded-xl border border-gray-100 dark:border-slate-700 flex justify-between items-start hover:shadow-md transition-shadow">
-                        <div>
-                          <a [href]="ref.url" target="_blank" class="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 font-bold hover:underline">{{ ref.title }}</a>
-                          @if(ref.description) { <p class="text-sm text-gray-600 dark:text-slate-400 mt-1.5">{{ ref.description }}</p> }
-                        </div>
-                        <div class="flex space-x-2 ml-4 shrink-0 bg-white dark:bg-slate-800 rounded-lg shadow-sm border border-gray-200 dark:border-slate-700 p-1">
-                          <button (click)="showReferenceForm(i)" class="text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 p-1 rounded hover:bg-blue-50 dark:hover:bg-blue-900/30"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg></button>
-                          <button (click)="deleteReference(i)" class="text-gray-400 hover:text-red-600 dark:hover:text-red-400 p-1 rounded hover:bg-red-50 dark:hover:bg-red-900/30"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg></button>
-                        </div>
+          <div class="sm:flex sm:items-start">
+            <div class="mt-3 text-center sm:mt-0 sm:text-left w-full">
+              <h3 class="text-xl font-bold text-gray-900 dark:text-white flex items-center gap-2" id="modal-title">🔗 Resources & References</h3>
+              
+              @if(!refFormVisible()) {
+                <div class="mt-6 space-y-3">
+                  @for(ref of currentTopicRefs(); track ref.url; let i = $index) {
+                    <div class="bg-gray-50 dark:bg-slate-900/50 p-4 rounded-xl border border-gray-100 dark:border-slate-700 flex justify-between items-start hover:shadow-md transition-shadow">
+                      <div>
+                        <a [href]="ref.url" target="_blank" class="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 font-bold hover:underline">{{ ref.title }}</a>
+                        @if(ref.description) { <p class="text-sm text-gray-600 dark:text-slate-400 mt-1.5">{{ ref.description }}</p> }
                       </div>
-                    }
-                    @if(currentTopicRefs().length === 0) {
-                      <p class="text-sm text-gray-500 dark:text-slate-400 italic p-4 text-center bg-gray-50 dark:bg-slate-900/50 rounded-xl border border-dashed border-gray-200 dark:border-slate-700">No resources added yet.</p>
-                    }
+                      <div class="flex space-x-2 ml-4 shrink-0 bg-white dark:bg-slate-800 rounded-lg shadow-sm border border-gray-200 dark:border-slate-700 p-1">
+                        <button (click)="showReferenceForm(i)" class="text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 p-1 rounded hover:bg-blue-50 dark:hover:bg-blue-900/30"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg></button>
+                        <button (click)="deleteReference(i)" class="text-gray-400 hover:text-red-600 dark:hover:text-red-400 p-1 rounded hover:bg-red-50 dark:hover:bg-red-900/30"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg></button>
+                      </div>
+                    </div>
+                  }
+                  @if(currentTopicRefs().length === 0) {
+                    <p class="text-sm text-gray-500 dark:text-slate-400 italic p-4 text-center bg-gray-50 dark:bg-slate-900/50 rounded-xl border border-dashed border-gray-200 dark:border-slate-700">No resources added yet.</p>
+                  }
+                </div>
+                <div class="mt-6 flex justify-center">
+                  <button type="button" (click)="showReferenceForm()" class="inline-flex items-center text-sm font-bold text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30 hover:bg-blue-100 dark:hover:bg-blue-900/50 px-4 py-2 rounded-lg transition-colors">
+                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg> Add New Resource
+                  </button>
+                </div>
+              }
+              
+              @if(refFormVisible()) {
+                <div class="mt-4 bg-gray-50 dark:bg-slate-900/50 p-5 rounded-xl border border-gray-100 dark:border-slate-700 space-y-4">
+                  <div>
+                    <label class="block text-sm font-bold text-gray-700 dark:text-slate-300 mb-1">Title</label>
+                    <input type="text" [ngModel]="refForm().title" (ngModelChange)="updateRefForm('title', $event)" class="block w-full shadow-sm sm:text-sm border-gray-200 dark:border-slate-700 rounded-lg p-2.5 border focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white dark:bg-slate-800 text-gray-900 dark:text-white outline-none">
                   </div>
-                  <div class="mt-6 flex justify-center">
-                    <button type="button" (click)="showReferenceForm()" class="inline-flex items-center text-sm font-bold text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30 hover:bg-blue-100 dark:hover:bg-blue-900/50 px-4 py-2 rounded-lg transition-colors">
-                      <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg> Add New Resource
-                    </button>
+                  <div>
+                    <label class="block text-sm font-bold text-gray-700 dark:text-slate-300 mb-1">URL</label>
+                    <input type="url" [ngModel]="refForm().url" (ngModelChange)="updateRefForm('url', $event)" class="block w-full shadow-sm sm:text-sm border-gray-200 dark:border-slate-700 rounded-lg p-2.5 border focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white dark:bg-slate-800 text-gray-900 dark:text-white outline-none">
                   </div>
-                }
-                
-                @if(refFormVisible()) {
-                  <div class="mt-4 bg-gray-50 dark:bg-slate-900/50 p-5 rounded-xl border border-gray-100 dark:border-slate-700 space-y-4">
-                    <div>
-                      <label class="block text-sm font-bold text-gray-700 dark:text-slate-300 mb-1">Title</label>
-                      <input type="text" [ngModel]="refForm().title" (ngModelChange)="updateRefForm('title', $event)" class="block w-full shadow-sm sm:text-sm border-gray-200 dark:border-slate-700 rounded-lg p-2.5 border focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white dark:bg-slate-800 text-gray-900 dark:text-white outline-none">
-                    </div>
-                    <div>
-                      <label class="block text-sm font-bold text-gray-700 dark:text-slate-300 mb-1">URL</label>
-                      <input type="url" [ngModel]="refForm().url" (ngModelChange)="updateRefForm('url', $event)" class="block w-full shadow-sm sm:text-sm border-gray-200 dark:border-slate-700 rounded-lg p-2.5 border focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white dark:bg-slate-800 text-gray-900 dark:text-white outline-none">
-                    </div>
-                    <div>
-                      <label class="block text-sm font-bold text-gray-700 dark:text-slate-300 mb-1">Description</label>
-                      <textarea [ngModel]="refForm().description" (ngModelChange)="updateRefForm('description', $event)" rows="2" class="block w-full shadow-sm sm:text-sm border-gray-200 dark:border-slate-700 rounded-lg p-2.5 border focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white dark:bg-slate-800 text-gray-900 dark:text-white outline-none"></textarea>
-                    </div>
-                    <div class="flex justify-end gap-3 pt-4 border-t border-gray-200 dark:border-slate-700 mt-2">
-                      <button (click)="hideReferenceForm()" class="px-4 py-2 text-sm text-gray-600 dark:text-slate-300 hover:bg-gray-200 dark:hover:bg-slate-600 bg-gray-100 dark:bg-slate-700 rounded-lg font-bold transition-colors">Cancel</button>
-                      <button (click)="saveReference()" class="px-4 py-2 text-sm bg-blue-600 text-white rounded-lg font-bold hover:bg-blue-700 transition-colors shadow-sm">Save Resource</button>
-                    </div>
+                  <div>
+                    <label class="block text-sm font-bold text-gray-700 dark:text-slate-300 mb-1">Description</label>
+                    <textarea [ngModel]="refForm().description" (ngModelChange)="updateRefForm('description', $event)" rows="2" class="block w-full shadow-sm sm:text-sm border-gray-200 dark:border-slate-700 rounded-lg p-2.5 border focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white dark:bg-slate-800 text-gray-900 dark:text-white outline-none"></textarea>
                   </div>
-                }
-              </div>
+                  <div class="flex justify-end gap-3 pt-4 border-t border-gray-200 dark:border-slate-700 mt-2">
+                    <button (click)="hideReferenceForm()" class="px-4 py-2 text-sm text-gray-600 dark:text-slate-300 hover:bg-gray-200 dark:hover:bg-slate-600 bg-gray-100 dark:bg-slate-700 rounded-lg font-bold transition-colors">Cancel</button>
+                    <button (click)="saveReference()" class="px-4 py-2 text-sm bg-blue-600 text-white rounded-lg font-bold hover:bg-blue-700 transition-colors shadow-sm">Save Resource</button>
+                  </div>
+                </div>
+              }
             </div>
-            @if(!refFormVisible()) {
-              <div class="mt-6 border-t border-gray-100 dark:border-slate-700 pt-6">
-                <button type="button" (click)="closeModal()" class="w-full inline-flex justify-center rounded-xl border border-gray-200 dark:border-slate-700 shadow-sm px-4 py-2.5 bg-white dark:bg-slate-800 text-base font-bold text-gray-700 dark:text-slate-300 hover:bg-gray-50 dark:hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:w-auto sm:text-sm transition-colors">Close</button>
-              </div>
-            }
+          </div>
+          @if(!refFormVisible()) {
+            <div class="mt-6 border-t border-gray-100 dark:border-slate-700 pt-6">
+              <button type="button" (click)="closeModal()" class="w-full inline-flex justify-center rounded-xl border border-gray-200 dark:border-slate-700 shadow-sm px-4 py-2.5 bg-white dark:bg-slate-800 text-base font-bold text-gray-700 dark:text-slate-300 hover:bg-gray-50 dark:hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:w-auto sm:text-sm transition-colors">Close</button>
+            </div>
           }
         </div>
       </div>

@@ -4,11 +4,12 @@ import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ThemeService } from '../theme.service';
+import { QuillModule } from 'ngx-quill';
 
 @Component({
   selector: 'app-roadmap',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink],
+  imports: [CommonModule, FormsModule, RouterLink, QuillModule],
   templateUrl: './roadmap.component.html'
 })
 export class RoadmapComponent implements OnInit {
@@ -36,6 +37,8 @@ export class RoadmapComponent implements OnInit {
 
   // --- Modals ---
   isNotesModalOpen = signal(false);
+  isNotesFullScreen = signal(false);
+  isNoteEditMode = signal(false);
   isRefsModalOpen = signal(false);
   refFormVisible = signal(false);
   editRefIndex = signal(-1);
@@ -43,6 +46,9 @@ export class RoadmapComponent implements OnInit {
   currentNoteText = signal('');
   noteTopicId = signal<string | null>(null);
   refTopicId = signal<string | null>(null);
+
+  // --- Tabs ---
+  activeTab = signal<'theory' | 'code' | 'hands' | 'interview'>('theory');
 
   // --- Computed State ---
   allTopics = computed(() => {
@@ -222,6 +228,7 @@ export class RoadmapComponent implements OnInit {
   
   viewTopic(topicId: string | null) {
     this.currentTopicId.set(topicId);
+    this.activeTab.set('theory');
     if (topicId) {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
@@ -230,7 +237,9 @@ export class RoadmapComponent implements OnInit {
   // Modals - Notes
   openNotes(topicId: string) {
     this.noteTopicId.set(topicId);
-    this.currentNoteText.set(this.userNotes()[topicId] || '');
+    const existingNote = this.userNotes()[topicId] || '';
+    this.currentNoteText.set(existingNote);
+    this.isNoteEditMode.set(!existingNote.trim());
     this.isNotesModalOpen.set(true);
   }
 
@@ -351,5 +360,6 @@ export class RoadmapComponent implements OnInit {
   closeModal() {
     this.isNotesModalOpen.set(false);
     this.isRefsModalOpen.set(false);
+    this.isNotesFullScreen.set(false);
   }
 }

@@ -1,0 +1,469 @@
+{
+  "roadmap": [
+    {
+      "id": "phase1",
+      "num": "1",
+      "title": "Core RAG Architecture",
+      "goal": "Understand the complete RAG pipeline and the role of each LangChain component.",
+      "topics": [
+        {
+          "id": "rag-architecture",
+          "title": "Core RAG Architecture",
+          "priority": "Basic",
+          "theory": [
+            "RAG = Retrieve → Augment → Generate",
+            "Document Loaders ingest PDFs, S3, Notion and URLs.",
+            "Text Splitters break documents into chunks.",
+            "Embeddings convert text into vectors.",
+            "Vector Stores store and search embeddings.",
+            "Retrievers fetch relevant top-k chunks.",
+            "Prompts combine questions with retrieved context.",
+            "LLMs generate the final answer.",
+            "Output Parsers convert output into structured data."
+          ],
+          "code": "RAG = Retrieve → Augment → Generate\n\n┌──────────────────────┐\n│      Documents       │\n└──────────┬───────────┘\n           ↓\n┌──────────────────────┐\n│   Document Loader    │\n│ PDFs / S3 / URLs     │\n└──────────┬───────────┘\n           ↓\n┌──────────────────────┐\n│    Text Splitter     │\n│      → Chunks        │\n└──────────┬───────────┘\n           ↓\n┌──────────────────────┐\n│      Embeddings      │\n│   Text → Vectors     │\n└──────────┬───────────┘\n           ↓\n┌──────────────────────┐\n│     Vector Store     │\n│   Store + Search     │\n└──────────┬───────────┘\n           ↓\n┌──────────────────────┐\n│      Retriever       │\n│    Fetch Top-K       │\n└──────────┬───────────┘\n           ↓\n┌──────────────────────┐\n│   Prompt + Context   │\n└──────────┬───────────┘\n           ↓\n┌──────────────────────┐\n│         LLM          │\n│   Generate Answer    │\n└──────────┬───────────┘\n           ↓\n┌──────────────────────┐\n│        Answer        │\n└──────────────────────┘",
+          "hands": [
+            "Build a basic RAG pipeline from document loading to answer generation.",
+            "Create a pipeline using a document loader, text splitter, embeddings, vector store, retriever and LLM."
+          ],
+          "interview": [
+          "Can you explain the end-to-end architecture of a RAG system?",
+          "What are the core components of RAG?",
+          "Walk me through what happens when a document is added to a RAG system.",
+          "How do document loaders, text splitters, embeddings, vector stores, retrievers, and LLMs work together?",
+          "Explain the RAG pipeline from document ingestion to generating the final answer.",
+          "Why do we need embeddings in RAG?",
+          "What is the role of a vector database/vector store?",
+          "What does a retriever do in a RAG system?",
+          "Why do we split documents into chunks before creating embeddings?",
+          "What happens if the retriever returns irrelevant chunks?",
+          "How would you improve the retrieval quality of a RAG application?",
+          "Why can't we just give the entire document to the LLM instead of using RAG?"
+        ]
+
+        },
+        {
+          "id": "rag-document-processing",
+          "title": "Document Loading, Chunking & Embeddings",
+          "priority": "Basic",
+          "theory": [
+            "Document Loaders ingest source data into Document objects.",
+            "Text Splitters break large documents into manageable chunks.",
+            "RecursiveCharacterTextSplitter is commonly used for recursive chunking.",
+            "Embeddings represent text as numerical vectors.",
+            "Chunk size and overlap affect retrieval quality."
+          ],
+          "code": "from langchain_text_splitters import RecursiveCharacterTextSplitter\n\nsplitter = RecursiveCharacterTextSplitter(\n    chunk_size=1000,\n    chunk_overlap=200\n)\n\nchunks = splitter.split_documents(documents)",
+          "hands": [
+            "Load a PDF and convert it into Document objects.",
+            "Experiment with different chunk sizes and chunk overlaps.",
+            "Generate embeddings for the document chunks."
+          ],
+          "interview": [
+            "Why is chunking required in RAG?",
+            "What happens if chunks are too large?",
+            "What happens if chunks are too small?",
+            "What is chunk overlap?",
+            "How do embeddings help RAG?"
+          ]
+        },
+        {
+          "id": "rag-vector-store-retriever",
+          "title": "Vector Stores & Retrievers",
+          "priority": "Basic",
+          "theory": [
+            "Vector Stores store embeddings and support similarity search.",
+            "Common vector stores include Pinecone, FAISS and Qdrant.",
+            "Retrievers provide a standard interface for fetching relevant documents.",
+            "similarity_search() can retrieve documents based on vector similarity.",
+            "Retriever.invoke(query) executes retrieval through the Runnable interface."
+          ],
+          "code": "vectorstore.add_documents(chunks)\n\nretriever = vectorstore.as_retriever(\n    search_kwargs={\"k\": 5}\n)\n\ndocs = retriever.invoke(query)",
+          "hands": [
+            "Create a vector store and index document embeddings.",
+            "Configure a retriever with different top-k values.",
+            "Test similarity search with different user queries."
+          ],
+          "interview": [
+            "What is a vector store?",
+            "What is the difference between a vector store and a retriever?",
+            "What does top-k mean?",
+            "How does similarity search work?"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "phase2",
+      "num": "2",
+      "title": "LangChain Abstractions & LCEL",
+      "goal": "Understand LangChain Runnable abstractions and compose RAG pipelines using LCEL.",
+      "topics": [
+        {
+          "id": "langchain-abstractions",
+          "title": "LangChain Abstraction Layers",
+          "priority": "Intermediate",
+          "theory": [
+            "LangChain provides standardized interfaces for RAG components.",
+            "Retrievers implement the Runnable interface.",
+            "ChatPromptTemplate dynamically injects context and question variables.",
+            "llm.invoke() provides a unified interface across LLM providers.",
+            "Output Parsers convert raw outputs into structured JSON or Pydantic objects.",
+            "Abstraction layers allow retrieval backends and LLM providers to be replaced without rewriting business logic."
+          ],
+          "code": "retriever.invoke(query)\n\nprompt = ChatPromptTemplate.from_template(\n    \"Context: {context}\\nQuestion: {question}\"\n)\n\nresponse = llm.invoke(prompt_value)",
+          "hands": [
+            "Create a RAG pipeline using ChatPromptTemplate.",
+            "Replace one LLM provider with another without changing the complete application.",
+            "Add an output parser to return structured data."
+          ],
+          "interview": [
+            "What are LangChain abstractions?",
+            "What is the Runnable interface?",
+            "Why are standardized interfaces useful?",
+            "How can LangChain reduce provider coupling?"
+          ]
+        },
+        {
+          "id": "lcel",
+          "title": "LCEL & Runnable Composition",
+          "priority": "Intermediate",
+          "theory": [
+            "LCEL stands for LangChain Expression Language.",
+            "LCEL uses the pipe operator | to compose Runnables.",
+            "Every Runnable can support invoke, ainvoke, stream, astream and batch.",
+            "LCEL provides composability and standardized execution.",
+            "RunnableParallel executes independent branches in parallel.",
+            "RunnablePassthrough passes input through without modification."
+          ],
+          "code": "chain = (\n    retriever\n    | prompt\n    | llm\n    | parser\n)\n\nresult = chain.invoke(query)\n\nasync for chunk in chain.astream(query):\n    print(chunk)",
+          "hands": [
+            "Build a complete RAG chain using LCEL.",
+            "Add streaming using astream().",
+            "Use RunnableParallel for independent operations.",
+            "Use RunnablePassthrough to preserve the original question."
+          ],
+          "interview": [
+            "What is LCEL?",
+            "Why does LCEL use the pipe operator?",
+            "What is the Runnable protocol?",
+            "What is RunnableParallel?",
+            "What is the difference between invoke and astream?"
+          ]
+        },
+        {
+          "id": "lcel-execution",
+          "title": "Runnable Execution APIs",
+          "priority": "Intermediate",
+          "theory": [
+            "invoke() executes a Runnable synchronously.",
+            "ainvoke() executes a Runnable asynchronously.",
+            "stream() returns incremental output.",
+            "astream() provides asynchronous streaming.",
+            "batch() executes multiple inputs.",
+            "Streaming improves perceived time-to-first-token."
+          ],
+          "code": "chain.invoke(input)\nchain.ainvoke(input)\nchain.stream(input)\nchain.astream(input)\nchain.batch(inputs)",
+          "hands": [
+            "Implement synchronous and asynchronous RAG execution.",
+            "Add token streaming to an existing RAG chain.",
+            "Process multiple questions using batch()."
+          ],
+          "interview": [
+            "invoke vs ainvoke?",
+            "stream vs astream?",
+            "When would you use batch()?",
+            "Does streaming reduce retrieval latency?"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "phase3",
+      "num": "3",
+      "title": "Production RAG & Framework Tradeoffs",
+      "goal": "Understand production limitations and decide when to use LangChain versus custom SDK implementations.",
+      "topics": [
+        {
+          "id": "production-limitations",
+          "title": "Production Scale Limitations",
+          "priority": "Advanced",
+          "theory": [
+            "LangChain is useful for rapid prototyping and integrations.",
+            "Wrapper objects can introduce additional latency.",
+            "Rapid API changes can create long-term maintenance challenges.",
+            "Deep abstraction layers can make debugging harder.",
+            "Large dependency footprints can increase application complexity.",
+            "Framework constraints can reduce low-level control."
+          ],
+          "code": "Prototype\n   ↓\nLangChain\n   ↓\nProduction Hot Path\n   ↓\nMeasure Latency\n   ↓\nUse Custom Code Where Necessary",
+          "hands": [
+            "Measure latency of a LangChain pipeline.",
+            "Identify framework overhead in a hot-path operation.",
+            "Replace a performance-critical LangChain section with direct SDK calls."
+          ],
+          "interview": [
+            "What are LangChain production limitations?",
+            "Can LangChain introduce latency?",
+            "Why can debugging LangChain applications be difficult?",
+            "When would you avoid LangChain?"
+          ]
+        },
+        {
+          "id": "custom-vs-langchain",
+          "title": "LangChain vs Custom SDK",
+          "priority": "Advanced",
+          "theory": [
+            "LangChain provides fast development and standardized integrations.",
+            "Custom SDK implementations provide maximum control.",
+            "Direct SDK calls can provide more precise token control.",
+            "Custom pipelines can be useful for highly customized retrieval logic.",
+            "Latency-sensitive hot paths may benefit from reduced framework abstraction.",
+            "The decision depends on productivity, performance, stability and control requirements."
+          ],
+          "code": "LangChain:\nretriever | prompt | llm | parser\n\nCustom SDK:\nretrieve()\n  ↓\nformat_prompt()\n  ↓\nllm_client.generate()\n  ↓\nparse_response()",
+          "hands": [
+            "Implement the same RAG workflow using LangChain and direct SDK calls.",
+            "Compare latency, token usage and implementation complexity.",
+            "Identify which parts of a production system should remain framework-based."
+          ],
+          "interview": [
+            "LangChain or custom SDK?",
+            "When should you use direct SDK calls?",
+            "How would you optimize a LangChain hot path?",
+            "What are the main framework tradeoffs?"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "phase4",
+      "num": "4",
+      "title": "Multi-Step & Conversational RAG",
+      "goal": "Build RAG systems that can decompose complex questions and maintain conversational context.",
+      "topics": [
+        {
+          "id": "multi-hop-rag",
+          "title": "Multi-Step & Multi-Hop RAG",
+          "priority": "Advanced",
+          "theory": [
+            "Multi-step reasoning decomposes complex questions into sub-questions.",
+            "Each sub-question can execute a separate retrieval operation.",
+            "Retrieved chunks can be deduplicated before synthesis.",
+            "The final LLM combines retrieved evidence into a cohesive answer.",
+            "Modern implementations commonly use LCEL and LangGraph instead of subclassing legacy Chain."
+          ],
+          "code": "sub_questions = llm.invoke(question)\n\ndocs = [\n    retriever.invoke(q)\n    for q in sub_questions\n]\n\nanswer = llm.invoke(\n    synthesis_prompt(docs)\n)",
+          "hands": [
+            "Build a question decomposition pipeline.",
+            "Retrieve documents for multiple sub-questions.",
+            "Deduplicate retrieved chunks before final synthesis."
+          ],
+          "interview": [
+            "What is multi-hop RAG?",
+            "Why decompose complex questions?",
+            "How do you combine results from multiple retrieval operations?",
+            "When would you use LangGraph for multi-step RAG?"
+          ]
+        },
+        {
+          "id": "conversational-rag",
+          "title": "Conversational RAG & Memory",
+          "priority": "Advanced",
+          "theory": [
+            "Conversational RAG maintains context across user turns.",
+            "Follow-up questions may need query reformulation before retrieval.",
+            "Buffer Memory keeps the full conversation history.",
+            "Window Memory keeps the last K turns.",
+            "Summary Memory summarizes older conversation history.",
+            "Production systems should persist history in external stores such as Redis or PostgreSQL."
+          ],
+          "code": "Follow-up:\n\"What is the price?\"\n\nQuery Reformulation:\n\"What is the price of Pro plan?\"\n\nretriever.invoke(reformulated_query)",
+          "hands": [
+            "Build conversational RAG with chat history.",
+            "Implement query reformulation for ambiguous follow-up questions.",
+            "Persist conversation history in Redis or PostgreSQL."
+          ],
+          "interview": [
+            "Why is memory required in conversational RAG?",
+            "Buffer vs Window memory?",
+            "What is query reformulation?",
+            "Why should production chat history be persisted externally?"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "phase5",
+      "num": "5",
+      "title": "Streaming & Hybrid Retrieval",
+      "goal": "Implement production-friendly streaming and improve retrieval using hybrid search and reranking.",
+      "topics": [
+        {
+          "id": "streaming-rag",
+          "title": "Streaming Responses",
+          "priority": "Advanced",
+          "theory": [
+            "Streaming sends generated tokens progressively to the client.",
+            "Streaming improves perceived time-to-first-token latency.",
+            "Retrieval generally completes before generation starts streaming.",
+            "FastAPI can expose streaming responses using Server-Sent Events.",
+            "The UI can display retrieval status before LLM token streaming begins."
+          ],
+          "code": "async for chunk in chain.astream(input):\n    yield chunk\n\n# FastAPI concept\nStreamingResponse(\n    generator(),\n    media_type=\"text/event-stream\"\n)",
+          "hands": [
+            "Implement astream() in a RAG pipeline.",
+            "Create a FastAPI streaming endpoint.",
+            "Send a retrieval status event before streaming LLM output."
+          ],
+          "interview": [
+            "What is streaming in RAG?",
+            "How does streaming improve UX?",
+            "Does streaming reduce retrieval latency?",
+            "How would you implement RAG streaming with FastAPI?"
+          ]
+        },
+        {
+          "id": "hybrid-search",
+          "title": "Hybrid Search",
+          "priority": "Advanced",
+          "theory": [
+            "Dense embeddings capture semantic meaning.",
+            "Sparse search such as BM25 captures exact keywords.",
+            "Hybrid search combines dense and sparse retrieval.",
+            "Hybrid retrieval can improve retrieval coverage.",
+            "EnsembleRetriever can combine BM25Retriever and VectorStoreRetriever."
+          ],
+          "code": "ensemble_retriever = EnsembleRetriever(\n    retrievers=[bm25_retriever, vector_retriever],\n    weights=[0.5, 0.5]\n)\n\ndocs = ensemble_retriever.invoke(query)",
+          "hands": [
+            "Implement BM25 retrieval.",
+            "Implement vector retrieval.",
+            "Combine BM25 and vector retrieval using EnsembleRetriever.",
+            "Experiment with different retrieval weights."
+          ],
+          "interview": [
+            "Vector search vs BM25?",
+            "Why use hybrid search?",
+            "What is EnsembleRetriever?",
+            "When is keyword search better than semantic search?"
+          ]
+        },
+        {
+          "id": "reranking",
+          "title": "Reranking & Contextual Compression",
+          "priority": "Advanced",
+          "theory": [
+            "A retriever finds candidate documents.",
+            "A reranker re-scores candidate chunks for relevance.",
+            "Cross-encoder models can be used for reranking.",
+            "Cohere Rerank and HuggingFace CrossEncoder can be used for reranking.",
+            "ContextualCompressionRetriever can wrap a retriever and compress or rerank retrieved content.",
+            "Reranking improves precision after initial retrieval."
+          ],
+          "code": "retriever\n   ↓\nCandidate Documents\n   ↓\nCross-Encoder Reranker\n   ↓\nTop-K Relevant Chunks\n   ↓\nLLM",
+          "hands": [
+            "Add a reranker after vector retrieval.",
+            "Compare retrieval results before and after reranking.",
+            "Configure ContextualCompressionRetriever."
+          ],
+          "interview": [
+            "Retriever vs reranker?",
+            "Why do we need reranking?",
+            "What is a cross-encoder?",
+            "What is ContextualCompressionRetriever?"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "phase6",
+      "num": "6",
+      "title": "LangGraph State & Production RAG",
+      "goal": "Use LangGraph for stateful workflows, retries, branching and self-correcting RAG.",
+      "topics": [
+        {
+          "id": "langgraph-basics",
+          "title": "LangGraph State Graph",
+          "priority": "Advanced",
+          "theory": [
+            "LangGraph models stateful workflows as graphs.",
+            "A State Graph contains shared state and processing nodes.",
+            "Nodes represent individual processing steps.",
+            "Edges connect workflow steps.",
+            "Conditional edges support decision-based routing.",
+            "LangGraph supports workflows that require cycles and state."
+          ],
+          "code": "State\n  ↓\nRetrieve Node\n  ↓\nGrade Documents Node\n  ↓\nConditional Edge\n  ├── Relevant → Generate\n  └── Irrelevant → Rewrite Query\n                         ↓\n                      Retrieve",
+          "hands": [
+            "Create a simple LangGraph State Graph.",
+            "Create nodes for retrieval, grading and generation.",
+            "Add conditional routing between nodes."
+          ],
+          "interview": [
+            "What is LangGraph?",
+            "Why use LangGraph instead of a simple LCEL chain?",
+            "What is a State Graph?",
+            "What are nodes and edges?"
+          ]
+        },
+        {
+          "id": "self-correcting-rag",
+          "title": "Self-Correction RAG",
+          "priority": "Advanced",
+          "theory": [
+            "Agentic RAG can evaluate retrieved documents before generation.",
+            "If documents are irrelevant, the system can rewrite the query.",
+            "The rewritten query can trigger another retrieval attempt.",
+            "LangGraph is suitable for cyclic self-correction workflows.",
+            "Checkpointing can persist workflow state.",
+            "Human-in-the-loop workflows can use persisted state for approvals."
+          ],
+          "code": "Retrieve\n   ↓\nGrade Docs\n   ↓\nRelevant?\n ┌─┴────┐\nYes    No\n ↓      ↓\nGenerate Rewrite Query\n          ↓\n       Retrieve",
+          "hands": [
+            "Build a self-correcting RAG workflow.",
+            "Add document grading before generation.",
+            "Implement query rewriting when retrieved documents are irrelevant.",
+            "Add checkpointing to the workflow."
+          ],
+          "interview": [
+            "How would you implement self-correcting RAG?",
+            "Why are loops difficult with simple DAG pipelines?",
+            "When would you use LangGraph?",
+            "What is state checkpointing?",
+            "How can LangGraph support human-in-the-loop workflows?"
+          ]
+        },
+        {
+          "id": "production-rag-blueprint",
+          "title": "Production RAG Architecture Blueprint",
+          "priority": "Advanced",
+          "theory": [
+            "Use LCEL for modern Runnable-based composition.",
+            "Use LangGraph for state machines, self-correction loops and multi-agent routing.",
+            "Use hybrid search when both semantic and exact keyword retrieval are important.",
+            "Use reranking to improve retrieval precision.",
+            "Store chat history in external databases such as Redis or PostgreSQL.",
+            "Use custom SDK calls for performance-critical or highly customized paths."
+          ],
+          "code": "User Query\n    ↓\nQuery Reformulation\n    ↓\nHybrid Retrieval\n ┌──┴─────────┐\n ↓            ↓\nVector       BM25\n └──────┬─────┘\n        ↓\n    Reranker\n        ↓\n    Top-K Context\n        ↓\n       LCEL\n        ↓\n   Prompt → LLM → Parser\n        ↓\n      Answer\n\nLangGraph → State / Loops / Self-Correction",
+          "hands": [
+            "Build an end-to-end production-style RAG application.",
+            "Combine hybrid retrieval, reranking, LCEL and conversational memory.",
+            "Add streaming responses.",
+            "Add LangGraph-based self-correction.",
+            "Persist conversation history in Redis or PostgreSQL."
+          ],
+          "interview": [
+            "Design a production RAG architecture.",
+            "When would you use LCEL versus LangGraph?",
+            "How would you improve RAG retrieval quality?",
+            "How would you reduce RAG latency?",
+            "How would you implement conversational memory?",
+            "How would you handle self-correction in RAG?",
+            "When would you replace LangChain with custom SDK code?"
+          ]
+        }
+      ]
+    }
+  ]
+}
